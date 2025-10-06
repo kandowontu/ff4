@@ -459,13 +459,13 @@ RumbleRead:
 
 	dey			;decrease y (we do this so that we dont need an unused first entry for position "0" in every table)
 
-	stz RumbleTimer				;make sure there's no timer waiting from a flat rumble
+	stz RumbleStrength				;make sure there's no timer waiting from a flat rumble
 
 	lda [RumblePointer],y				;load the value
 	cmp #$FE				;if its not FE, we store the actual rumble value from the table at continuerumb2
 	bne continuerumb2		
 	stz RumblePosition		;if it IS fe, we zero the position pointer
-	stz RumbleStrength		;we zero the strength
+	stz RumbleTimer		;we zero the strength
 	bra continue		;and we proceed to turn off the motors
 
 continuerumb2:				;if it wasn't fe, we:
@@ -483,13 +483,13 @@ continuerumb3:				;if not, continuing here...
 
 
 RegularRumble:			;flat rumble read
-    LDA RumbleTimer			;read timer
+    LDA RumbleStrength			;read timer
 	BEQ rumbleOff		;if 0, no rumble
-	DEC RumbleTimer			;otherwise, decrease timer by 1
+	DEC RumbleStrength			;otherwise, decrease timer by 1
     BRA continue		;continue
 
 rumbleOff:
-	STZ RumbleStrength		;set rumble strength to 0
+	STZ RumbleTimer		;set rumble strength to 0
 
 continue:
 	lda #$00
