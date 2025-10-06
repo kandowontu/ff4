@@ -77,12 +77,16 @@ InitCharProp_ext:
 ; [ reset ]
 
 Reset:
-@8000:  sei
+@8000:  
+		jml hi
+hi:
+		sei
         clc
         xce
         longi
         shorta
-        stz     hMEMSEL
+        lda #1
+		sta hMEMSEL
         stz     hMDMAEN
         stz     hHDMAEN
         lda     #$8f
@@ -614,7 +618,7 @@ LoadSubMap:
         iny
         cpy     #$0400
         bne     @843a
-        lda     #$00
+        lda     #0
         pha
         plb
         jsr     InitBG1Tilemap
@@ -982,10 +986,10 @@ InitInterrupts:
 @89ed:  lda     #$5c                    ; jml
         sta     JmpNMI
         sta     JmpIRQ
-        ldx     #FieldNMI
+        ldx     #FieldNMI&$FFFF
         stx     JmpNMI+1
         stz     JmpNMI+3
-        ldx     #FieldIRQ
+        ldx     #FieldIRQ&$FFFF
         stx     JmpIRQ+1
         stz     JmpIRQ+3
         rts
@@ -1513,7 +1517,7 @@ TfrLavaGfx:
 ; [ transfer overworld water graphics from vram ]
 
 LoadWaterGfx:
-@8f69:  lda     #$80
+@8f69:  lda     #0
         sta     $2115
         ldx     #$2000
         stx     $2116
@@ -1992,7 +1996,10 @@ UnusedAsl:
 ; [ field nmi ]
 
 FieldNMI:
-@92a3:  php
+@92a3:  
+		jml nmihi
+nmihi:
+		php
         longa
         pha
         phx
@@ -2210,6 +2217,8 @@ FieldNMI:
 ; [ field irq ]
 
 FieldIRQ:
+		jml irqhi
+irqhi:
 @947e:  php
         longa
         pha
