@@ -22,7 +22,6 @@ SwordRumblePointer:
 	.byte	<SwordRumble, >SwordRumble
 
 ShurikenRumble:
-	.byte	$00, $00, $00, $00, $00, $FF, $FF, $FF, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
 	.byte   $F0, $F0, $F0, $00, $00, $00, $0F, $0F, $0F, $00, $00, $00, $F0, $F0, $F0, $00, $00, $00, $0F, $0F, $0F, $00, $00, $00, $F0, $F0, $F0, $00, $00, $00, $0F, $0F, $0F, $00, $00, $00  
 	.byte   $F0, $F0, $F0, $00, $00, $00, $0F, $0F, $0F, $00, $00, $00, $F0, $F0, $F0, $00, $00, $00, $0F, $0F, $0F, $00, $00, $00, $F0, $F0, $F0, $00, $00, $00, $0F, $0F, $0F, $00, $00, $00  
 	.byte   $F0, $F0, $F0, $00, $00, $00, $0F, $0F, $0F, $00, $00, $00, $F0, $F0, $F0, $00, $00, $00, $0F, $0F, $0F, $00, $00, $00, $F0, $F0, $F0, $00, $00, $00, $FE
@@ -699,7 +698,6 @@ WeaponAnimTbl:
 ; [ weapon animation $06: shuriken ]
 
 WeaponAnim_06:
-		jsl		ShurikenRumbleCode
 @d1a2:  stz     $f233
         lda     $4e
         bne     @d1ae
@@ -1392,6 +1390,7 @@ _02d6ec:
 ArrowShurikenAnim:
 @d702:  ldx     #8                      ; wait 8 frames before first hit
         stz     $52
+		jsl		ShurikenRumbleCode
 @d707:  phx
         jsr     WaitFrame
         plx
