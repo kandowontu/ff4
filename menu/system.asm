@@ -452,10 +452,8 @@ RumbleRead:
 	shorta
 	
 	
-	lda $FC
-	beq RegularRumble
-	
 	ldy $FC
+	beq RegularRumble
 	
 	dey						;decrease y
 	lda [$FD],y				;load the value
