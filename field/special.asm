@@ -2791,6 +2791,7 @@ Special_0c:
 ; [ special effect $08: bomb ring 2 ]
 
 Special_08:
+		SetRumble $FF, $FF
 @d8ad:  lda     #$51
         jsr     PlaySfx
         lda     #$60
@@ -2867,6 +2868,7 @@ Special_08:
         jmp     @d8ba
 @d94b:  lda     #$00
         jsr     PlaySfx
+		SetRumble 0, 0
         jmp     WaitVblankEvent
 
 ; ------------------------------------------------------------------------------
@@ -2918,6 +2920,7 @@ _00d97f:
 ; [ special effect $02: bomb ring 1 ]
 
 Special_02:
+	;	SetRumble $FF, 180
 @d999:  stz     $ad
         ldx     #0
         stx     $06fb

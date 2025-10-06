@@ -163,6 +163,7 @@ FlashScreenBlue:
 FlashScreenWhite:
 @eec5:  lda     #$e0        ; white
 _eec7:  sta     $ef88       ; set flash color components
+		SetRumble $FF, 12
         lda     #$1f
         sta     $f433
         sta     $f435

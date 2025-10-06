@@ -498,6 +498,8 @@ continuerumb3:				;if not, continuing here...
 RegularRumble:			;flat rumble read
     LDA RumbleTimer			;read timer
 	BEQ rumbleOff		;if 0, no rumble
+	cmp #$FF
+	beq continue		;if timer is FF, its always on
 	DEC RumbleTimer			;otherwise, decrease timer by 1
     BRA continue		;continue
 
