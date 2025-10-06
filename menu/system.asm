@@ -456,7 +456,7 @@ RumbleRead:
 	beq RegularRumble	;if no table position, check for a flat set rumble rate
 
 						;otherwise...
-
+reloop:
 	dey			;decrease y (we do this so that we dont need an unused first entry for position "0" in every table)
 
 	stz RumbleTimer				;make sure there's no timer waiting from a flat rumble
@@ -472,7 +472,7 @@ continuerumb2:				;if it wasn't fe, we:
 	cmp #$EF				;check if its EF. if its not EF, go to continuerumb3
 	bne	continuerumb3		
 	ldy #$01					;if it IS EF, set the pointer back to 1 and start the process over again
-	bra continue
+	bra reloop
 
 continuerumb3:				;if not, continuing here...
 	sta	RumbleStrength		;store the strength
