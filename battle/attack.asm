@@ -14,14 +14,14 @@
 ; [ action type 2: do attack ]
 
 TestRumble:
-		.byte $FF, $FF, $FF, $FF, $AA, $F0, $F0, $F0, $F0, $F0, $0F,  $0F,  $0F,  $0F,  $0F,  $0F,  $0F,  $0F, $FE
+		.byte $AA, $FF, $FF, $FF, $AA, $F0, $F0, $F0, $F0, $F0, $0F,  $0F,  $0F,  $0F,  $0F,  $0F,  $0F,  $0F, $FE
 
 TestRumblePointer:
 		.byte <TestRumble, >TestRumble
 
 
 DoAttack:
-		SetRumble $88, 5
+		SetRumbleTable TestRumblePointer
 @ad57: 
 
 		lda     #$14        ; battle graphics $14: update monster rows
