@@ -15,9 +15,6 @@
 
 .list off
 
-RumbleTime		:= $03F0
-RumbleStrength	:= $03F1
-
 ; [ ppu registers ]
 
 hINIDISP        := $2100
