@@ -1670,6 +1670,7 @@ _00edf6:
 ; [ event command $d0: shake screen ]
 
 EventCmd_d0:
+		SetRumble $FF, 10
 @ee1c:  lda     $e3
         eor     #$01
         sta     $e3
@@ -1680,6 +1681,7 @@ EventCmd_d0:
 ; [ event command $d1: flash screen ]
 
 EventCmd_d1:
+		SetRumble $FF, 10
 @ee25:  lda     #$02
         sta     $79
 @ee29:  inc     $c4
