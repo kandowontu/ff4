@@ -48,7 +48,6 @@
 .endmacro
 
 
-
 .mac SetRumble strength, time
         .if .asize = 8
                 lda #strength
@@ -103,7 +102,6 @@
 				plb
 		.endif
 .endmac
-
 ; ------------------------------------------------------------------------------
 
 ; [ set the size of accumulator/index registers ]
