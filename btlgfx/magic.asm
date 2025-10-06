@@ -114,6 +114,7 @@ PreMagicAnim1:
         stz     $38e2
         lda     $34c2
         sta     $f485
+		SetRumble $AA, 25
         lda     $04
         jsr     ExecAnimScript
         pla
