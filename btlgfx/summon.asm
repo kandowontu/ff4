@@ -742,19 +742,7 @@ _01f627:
 ; unused
 
 _01f657:
-@f657:  jsr     _01f6b8
-        clr_ax
-@f65c:  lda     #$08
-        jsr     IncPolarAngle_near
-        lda     $f3ac
-        jsr     IncPolarRadius_near
-        inx
-        cpx     #8
-        bne     @f65c
-        lda     $f1b3
-        cmp     $f3ad
-        bne     @f657
-        rts
+@f657: 
 
 ; ------------------------------------------------------------------------------
 
@@ -1739,18 +1727,7 @@ SummonExit:
 ; unused
 
 _01fdc1:
-@fdc1:  ldx     #8
-@fdc4:  jsr     WaitFrame_near
-        dec     $f321
-        dec     $f321
-        lda     $f326
-        clc
-        adc     #$04
-        sta     $f326
-        dex
-        bne     @fdc4
-        stz     $f326
-        rts
+@fdc1:  
 
 ; ------------------------------------------------------------------------------
 
@@ -1759,18 +1736,8 @@ _01fdc1:
 ; unused
 
 _01fddd:
-@fddd:  ldx     #8
-@fde0:  jsr     WaitFrame_near
-        inc     $f321
-        inc     $f321
-        lda     $f326
-        clc
-        adc     #$04
-        sta     $f326
-        dex
-        bne     @fde0
-        stz     $f326
-        rts
+@fddd: 
+@fde0: 
 
 ; ------------------------------------------------------------------------------
 

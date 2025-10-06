@@ -206,7 +206,7 @@ SpecialAnim_ac:
 ; [ unused special animation ]
 
 UnusedSpecialAnim:
-@ef06:  rts
+@ef06:  
 
 ; ------------------------------------------------------------------------------
 

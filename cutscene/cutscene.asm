@@ -779,11 +779,7 @@ HDMATbl:
         .byte   $00
 
 ; BG1VOFS and BG2HOFS (unused)
-        .byte   $f0
-        .word   $3b19
-        .byte   $f0
-        .word   $3bf9
-        .byte   $00
+
 
 ; ------------------------------------------------------------------------------
 
@@ -1342,7 +1338,7 @@ _13df57:
 ; *** bug *** unused, but should be rti
 
 CutsceneIRQ:
-@e057:  rtl
+@e057:  
 
 ; ------------------------------------------------------------------------------
 
@@ -1448,20 +1444,7 @@ TfrSprites:
 ; unused
 
 MultHW:
-@e0f3:  phx
-        lda     $18
-        sta     f:hWRMPYA
-        lda     $1a
-        sta     f:hWRMPYB
-        phb
-        clr_a
-        pha
-        plb
-        ldx     hRDMPYL
-        stx     $1c
-        plb
-        plx
-        rts
+@e0f3:  
 
 ; ------------------------------------------------------------------------------
 

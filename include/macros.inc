@@ -47,6 +47,64 @@
         tax
 .endmacro
 
+.mac SetRumble strength, time
+        .if .asize = 8
+                lda #strength
+				sta RumbleStrengthLong
+				lda #time
+				sta RumbleTimerLong
+        .else
+                shorta
+                lda #strength
+				sta RumbleStrengthLong
+				lda #time
+				sta RumbleTimerLong
+				longa
+        .endif	
+.endmac
+
+
+.mac SetRumbleTable table
+        .if .asize = 8
+				phb
+				lda #(table>>16)&$FF
+				pha
+				plb
+                lda #1
+				sta $7E00FC
+				ldx #0
+				lda table,x
+				sta $7E00FD				
+				inx
+				lda table,x
+				sta $7E00FE
+				lda #(table>>16)&$FF
+				sta $7E00FF
+				plb
+		.else
+				phb
+				shorta
+				lda #(table>>16)&$FF
+				pha
+				plb
+                lda #1
+				sta $7E00FC
+				ldx #0
+				lda table,x
+				sta $7E00FD				
+				inx
+				lda table,x
+				sta $7E00FE
+				lda #(table>>16)&$FF
+				sta $7E00FF
+				longa
+				plb
+		.endif
+.endmac
+
+
+
+
 ; ------------------------------------------------------------------------------
 
 ; [ set the size of accumulator/index registers ]

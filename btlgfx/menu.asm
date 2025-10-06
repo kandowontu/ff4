@@ -74,22 +74,7 @@ DrawLeftMsgWindow:
 ; unused
 
 DrawCenterMsgWindow:
-@9332:  jsr     ClearMsgTiles
-        ldx     #$dae6
-        stx     $ef5a
-        ldx     #$000b                  ; (11,0)
-        stx     $ef56
-        ldx     #$040a                  ; 10x4
-        stx     $ef58
-        jsr     DrawMsgWindow
-        lda     #$20
-        sta     $ef55
-        lda     #$20
-        sta     $ef54
-        ldx     #$db3e
-        stx     $ef52
-        jsr     DrawText
-        jmp     OpenMsgWindow
+@9332: 
 
 ; ------------------------------------------------------------------------------
 
@@ -635,7 +620,7 @@ UpdateMagicList:
 ; ------------------------------------------------------------------------------
 
 ; unused
-@96f9:  rts
+@96f9:  
 
 ; ------------------------------------------------------------------------------
 
@@ -752,7 +737,7 @@ TfrMPWindow:
 ; ------------------------------------------------------------------------------
 
 UnusedMenuUpdate:
-@97a5:  rts
+@97a5:  
 
 ; ------------------------------------------------------------------------------
 
@@ -2177,7 +2162,7 @@ DrawHPText:
 
 ; pointers to character hp text buffers (unused)
 CharHPTextBufPtrs:
-@a1be:  .word   $0024,$006c,$0000,$0090,$0048
+@a1be:  
 
 ; character display order
 CharOrderTbl:
@@ -2876,7 +2861,7 @@ TextCmd_01:
 ; [ escape code $00: string terminator (unused) ]
 
 TextCmd_00:
-@a64e:  rts
+@a64e:  
 
 ; ------------------------------------------------------------------------------
 
@@ -3053,12 +3038,7 @@ DrawCharVar:
 ; unused
 
 ClearHexToDecBuf:
-@a725:  lda     #$ff
-        sta     $180c
-        sta     $180d
-        sta     $180e
-        sta     $180f
-        rts
+@a725:  
 
 ; ------------------------------------------------------------------------------
 
@@ -3681,10 +3661,7 @@ OpenNameWindow:
 ; unused
 
 CloseNameWindow:
-@aa71:  lda     #$01
-        trb     $4a
-        lda     #$01
-        jmp     OpenCloseWindow
+@aa71:  
 
 ; ------------------------------------------------------------------------------
 
