@@ -28,7 +28,7 @@ def_config BUGFIX_MISC_MENU,0
 def_config BUGFIX_REV1,0
 def_config BUGFIX_SYLPH_EFFECT,0
 def_config BUGFIX_WORLD_BATTLE,0
-def_config BYTE_PERFECT,1
+def_config BYTE_PERFECT,0
 def_config DEBUG,0
 def_config EASY_VERSION,0
 def_config LANG_EN,0
@@ -36,6 +36,13 @@ def_config NO_RAND_BATTLES,0
 def_config ROM_VERSION,0
 def_config SIMPLE_CONFIG,0
 def_config SKIP_INTRO,0
+
+RumbleStrengthLong = $7E0520
+RumbleTimerLong = $7E0521
+RumbleStrength = $0520
+RumbleTimer = $0521
+RumblePosition = $FC
+RumblePointer = $FD
 
 .if LANG_EN
 .define LANG_SUFFIX "en"

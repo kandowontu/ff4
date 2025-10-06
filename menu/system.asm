@@ -97,9 +97,7 @@ UpdateCtrl:
         bne     @fd74
         pld
         sta     $02         ; set mapped controller 2 buttons
-        lda     f:$00011f
-        sta     $00         ; set mapped controller 1 buttons
-        shorta
+		jsl	RumbleRead
         ply
         plx
         plb
@@ -444,3 +442,137 @@ MagicMultiTarget:
 @fff2:  .byte   1,1,1,1,0,0,0,1,0,0,1,1,1,1
 
 ; ------------------------------------------------------------------------------
+
+.segment "field_code2"
+
+RumbleRead:
+        lda     f:$00011f
+        sta     $00         ; set mapped controller 1 buttons
+        shorta
+
+	php					;push current cpu registers
+	sep #$30			;a/x/y 8bit
+
+	phb					;push db register
+	lda #$7e			;load #$7E into A
+	pha					;push A
+	plb					;pull from stack (#$7e) and put it in db register
+	
+	phd					;push D register
+	longa				;16bit A set
+	lda #0				;load #$0000 into A
+	tcd					;Set D register to be the value of 16-bit A (#$0000)
+	shorta				;8bit A set
+	
+	
+	ldy RumblePosition	;load table position into y
+	beq RegularRumble	;if no table position, check for a flat set rumble rate
+
+						;otherwise...
+reloop:
+	dey			;decrease y (we do this so that we dont need an unused first entry for position "0" in every table)
+
+	stz RumbleTimer				;make sure there's no timer waiting from a flat rumble
+
+	lda [RumblePointer],y				;load the value
+	cmp #$FE				;if its not FE, we store the actual rumble value from the table at continuerumb2
+	bne continuerumb2		
+	stz RumblePosition		;if it IS fe, we zero the position pointer
+	stz RumbleStrength		;we zero the strength
+	bra continue		;and we proceed to turn off the motors
+
+continuerumb2:				;if it wasn't fe, we:
+	cmp #$EF				;check if its EF. if its not EF, go to continuerumb3
+	bne	continuerumb3		
+	ldy #$01					;if it IS EF, set the pointer back to 1 and start the process over again
+	bra reloop
+
+continuerumb3:				;if not, continuing here...
+	sta	RumbleStrength		;store the strength
+	iny				;undo the dey from earlier
+	iny				;increase it one more time
+	sty RumblePosition			;store the new pointer position
+	bra continue	;skip the flat reading stuff
+
+
+RegularRumble:			;flat rumble read
+    LDA RumbleTimer			;read timer
+	BEQ rumbleOff		;if 0, no rumble
+	DEC RumbleTimer			;otherwise, decrease timer by 1
+    BRA continue		;continue
+
+rumbleOff:
+	STZ RumbleStrength		;set rumble strength to 0
+
+continue:
+	lda #$00
+	pha				;db 0
+	plb
+	
+    ; HACK: apparently this is needed to work on hardware?
+    LDA #$01 
+	STA $4016
+    NOP
+    STZ $4016
+    NOP
+    ; Read 16 Controller Bits
+    LDA #$0F
+
+readJoy2:
+    ; Controller I
+    BIT $4016
+    DEC A
+	BPL readJoy2
+
+    ; Write 01110010 to the Controller Port
+    LDA #$40
+    STZ $4201
+	BIT $4016  ; 0
+    STA $4201
+	BIT $4016 ; 1
+    BIT $4016          ; 1 (just strobing works: the IO port already has 1)
+    BIT $4016          ; 1
+    STZ $4201
+	BIT $4016  ; 0
+    BIT $4016          ; 0
+    STA $4201
+	BIT $4016 ; 1
+    STZ $4201
+	BIT $4016  ; 0
+
+    ; Now we write the rumble intensity: rrrrllll (right and left motors)
+    ;LDA #$FF			;test
+    LDA RumbleStrengthLong			;load rumble strength
+	LSR ; -7654321, C <- 0
+    STA $4201
+	BIT $4016     ; bit7
+    ROL                    ; 76543210
+    STA $4201
+	BIT $4016     ; bit6
+    ASL                    ; 6543210-
+    STA $4201
+	BIT $4016     ; bit5
+    ASL                    ; 543210--
+    STA $4201
+	BIT $4016     ; bit4
+    ASL                    ; 43210---
+    STA $4201
+	BIT $4016     ; bit3
+    ASL                    ; 3210----
+    STA $4201
+	BIT $4016     ; bit2
+    ASL                    ; 210-----
+    STA $4201
+	BIT $4016     ; bit1
+    ASL                    ; 10------
+    STA $4201
+	BIT $4016     ; bit0
+	LDA #$FF
+    STA $4201
+
+	pld				;pull d
+	plb				;pull db
+	plp				;pull cpu flags
+
+    RTL			
+

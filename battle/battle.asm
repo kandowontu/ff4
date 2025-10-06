@@ -407,7 +407,7 @@ InitBattle:
 ; [ init ram ]
 
 InitRAM:
-@8235:  ldx     #$007f
+@8235:  ldx     #$007b
 @8238:  stz     $80,x       ; clear $80-$ff
         dex
         bpl     @8238
