@@ -1446,6 +1446,7 @@ UpdateWindowColor_far:
 ; [ cursor sound effect ]
 
 CursorSfx:
+		SetRumble $33, 2
 @874e:  lda     #$11        ; system sound effect $11
 ; fallthrough
 
@@ -1463,6 +1464,7 @@ PlaySysSfx:
 ; [ error sound effect ]
 
 ErrorSfx:
+		SetRumble $66, 8
 @8758:  lda     #$12        ; system sound effect $12
         bra     PlaySysSfx
 

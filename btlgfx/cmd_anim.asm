@@ -1172,6 +1172,7 @@ SetAttackerPose:
 ; [ play command sound effect ]
 
 CmdSfx:
+		SetRumble $33, 2
 @c802:  pha
         lda     $34c2
         sta     $f485

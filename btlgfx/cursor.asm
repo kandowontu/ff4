@@ -1848,6 +1848,7 @@ CursorMoveSfx:
         rts
 
 CursorMoveSfx2:
+		SetRumble $33, 2
 @b913:  lda     #$14        ; system sound effect $14
         sta     $f416
         rts
@@ -1857,6 +1858,7 @@ CursorMoveSfx2:
 ; [ play error sound effect ]
 
 ErrorSfx:
+		SetRumble $66, 8
 @b919:  lda     #$12        ; system sound effect $12
         sta     $f416
         rts
@@ -1866,6 +1868,7 @@ ErrorSfx:
 ; [ play cancel/confirm sound effect ]
 
 CancelConfirmSfx:
+		SetRumble $66, 8
 @b91f:  lda     #$13        ; system sound effect $13
         sta     $f416
         rts
