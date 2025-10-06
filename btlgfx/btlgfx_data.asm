@@ -1209,7 +1209,7 @@ TargetAllText:
 
 ; ミス (miss) *** unused ***
 MissText:
-@fd4c:  .byte   $e9,$d6,$00
+@fd4c:  
 
 _16fd50:
 @fd50:  .byte   $80,$00,$00,$3f
@@ -1500,7 +1500,7 @@ _16fff6:
 
 ; unused partial tile at the end of this block of graphics
 .if BYTE_PERFECT
-        .byte   $ff,$00,$81,$00,$81,$00,$99,$00,$99,$00,$81,$00,$81,$00,$ff,$00
+      ;  .byte   $ff,$00,$81,$00,$81,$00,$99,$00,$99,$00,$81,$00,$81,$00,$ff,$00
 .endif
 
 .segment "weapon_gfx"

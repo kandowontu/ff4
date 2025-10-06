@@ -102,8 +102,11 @@ UpdateCtrl:
         shorta
         ply
         plx
+		jsl		RumbleRead
         plb
         rtl
+
+
 
 ; ------------------------------------------------------------------------------
 
@@ -113,24 +116,10 @@ UpdateCtrl:
 ; +X: dp offset for this register
 
 ReadCtrl:
-@fd90:  lda     $16b8                   ; multi-controller flag
-        and     $40                     ; in-battle flag
-        beq     @fdb4                   ; branch unless both flags are set
-        lda     f:$001822               ; selected character
-        sta     $43
-        phy
-        ldy     $43
-        lda     $16b9,y                 ; controller for this character (0 or 2)
-        ply
-        sta     $43
-        longa
-        tya
-        clc
-        adc     $43
-        tay
-        shorta
-        lda     a:$0000,y
-        bra     @fdba
+@fd90:  ;lda     $16b8                   ; multi-controller flag
+        ;and     $40                     ; in-battle flag
+        bra     @fdb4                   ; branch unless both flags are set
+
 @fdb4:  lda     a:$0000,y               ; combine input from both controllers
         ora     a:$0002,y
 @fdba:  beq     @fdc0                   ; branch if no buttons pressed
@@ -444,3 +433,132 @@ MagicMultiTarget:
 @fff2:  .byte   1,1,1,1,0,0,0,1,0,0,1,1,1,1
 
 ; ------------------------------------------------------------------------------
+.segment "unused"
+.segment "field_code2"
+
+RumbleRead:
+	php
+	sep #$30
+
+	phb
+	lda #$7e			;db 7e
+	pha
+	plb
+	
+	phd
+	longa
+	lda #0
+	tcd
+	shorta
+	
+	
+	lda $FC
+	beq RegularRumble
+	
+	ldy $FC
+	
+	dey						;decrease y
+	lda [$FD],y				;load the value
+	cmp #$FE				;if its not FE, we store the actual rumble value from the table at continuerumb2
+	bne continuerumb2		
+	stz $FC		;if it IS fe, we zero the position pointer
+	stz $0521		;we zero the strength
+	bra continuerumb4		;and we proceed to turn off the motors
+;	rtl
+continuerumb2:				;if it wasn't fe, we:
+	cmp #$EF				;check if its EF. if its not EF, go to continuerumb3
+	bne	continuerumb3		
+	ldy #$01					;if it IS EF, set the pointer back to 1 and start the process over again
+	bra continue
+continuerumb3:				;if not, continuing here...
+	sta	$0521		;store the strength
+	iny
+	iny
+	sty $FC			;increase pointer position
+	
+continuerumb4:	
+	bra continue
+
+
+RegularRumble:	
+    LDA $0520
+	BEQ rumbleOff
+    SEC
+	SBC #$01
+	STA $0520
+    BRA continue
+
+rumbleOff:
+    LDA #0
+	STA $0521	;21
+
+continue:
+    ; HACK: apparently this is needed to work on hardware?
+	lda #$00
+	pha				;db 0
+	plb
+	
+    LDA #$01 
+	STA $4016
+    NOP
+    STZ $4016
+    NOP
+    ; Read 16 Controller Bits
+    LDA #$0F
+
+readJoy2:
+    ; Controller I
+    BIT $4016
+    DEC A
+	BPL readJoy2
+
+    ; Write 01110010 to the Controller Port
+    LDA #$40
+    STZ $4201
+	BIT $4016  ; 0
+    STA $4201
+	BIT $4016 ; 1
+    BIT $4016          ; 1 (just strobing works: the IO port already has 1)
+    BIT $4016          ; 1
+    STZ $4201
+	BIT $4016  ; 0
+    BIT $4016          ; 0
+    STA $4201
+	BIT $4016 ; 1
+    STZ $4201
+	BIT $4016  ; 0
+
+    ; Now we write the rumble intensity: rrrrllll (right and left motors)
+    ;LDA $02FE
+    LDA $7E0521
+	LSR ; -7654321, C <- 0
+    STA $4201
+	BIT $4016     ; bit7
+    ROL                    ; 76543210
+    STA $4201
+	BIT $4016     ; bit6
+    ASL                    ; 6543210-
+    STA $4201
+	BIT $4016     ; bit5
+    ASL                    ; 543210--
+    STA $4201
+	BIT $4016     ; bit4
+    ASL                    ; 43210---
+    STA $4201
+	BIT $4016     ; bit3
+    ASL                    ; 3210----
+    STA $4201
+	BIT $4016     ; bit2
+    ASL                    ; 210-----
+    STA $4201
+	BIT $4016     ; bit1
+    ASL                    ; 10------
+    STA $4201
+	BIT $4016     ; bit0
+	LDA #$FF
+    STA $4201
+	pld
+	plb
+	plp
+    RTL			;;141 bytes
+

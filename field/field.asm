@@ -58,67 +58,6 @@ field_dp:
 
 ; ------------------------------------------------------------------------------
 
-.segment "unused"
-.a8
-.i16
-
-.if SKIP_INTRO
-DebugInit:
-        lda     #$fa            ; give key to tower of babil
-        sta     $1440
-        lda     #1
-        sta     $1441
-        phk
-        per     @1-1
-        pea     .loword($ffbe)
-        jml     InitNewGame
-@1:     phk
-        per     @2-1
-        pea     .loword($ffbe)
-        jml     InitCharProp
-@2:     jsl     InitSpellLists
-        lda     #0
-        sta     $1700       ; overworld
-        sta     $171b       ; hovercraft world
-        sta     $171f       ; enterprise world
-        sta     $1722       ; falcon world
-        sta     $1726       ; big whale world
-        lda     #1
-        sta     $1718       ; show hovercraft
-        sta     $171c       ; show enterprise
-        sta     $1720       ; show falcon
-        sta     $1724       ; show big whale
-        lda     #101
-        sta     $1706
-        sta     $1719
-        sta     $171d
-        sta     $1721
-        inc
-        sta     $1725
-        lda     #158
-        sta     $1707
-        sta     $1726
-        inc
-        sta     $171a
-        inc
-        sta     $171e
-        inc
-        sta     $1722
-        ldx     #50000          ; give gil
-        stx     $16a0
-        lda     #$36            ; give hook
-        phk
-        per     @3-1
-        pea     .loword($ffbe)
-        jml     SetEventSwitch
-@3:     lda     #$30            ; open tunnel to underground
-        phk
-        per     @4-1
-        pea     .loword($ffbe)
-        jml     SetEventSwitch
-@4:     rtl
-.endif
-
 ; ------------------------------------------------------------------------------
 
 .segment "field_code_ext"
@@ -2041,12 +1980,12 @@ WipeIn:
 ; unused
 
 UnusedAsl:
-@929c:  asl
-@929d:  asl
-@929e:  asl
-@929f:  asl
-@92a0:  asl2
-        rts
+@929c:  
+@929d:  
+@929e:  
+@929f:  
+@92a0:  
+        
 
 ; ------------------------------------------------------------------------------
 
@@ -2986,91 +2925,7 @@ InitSpellLists:
 
 DrawPos:
 
-.if LANG_EN .or DEBUG
-    @PosX := $1706
-    @PosY := $1707
-    @MapID := $1702
-.else
-    @PosX := $86
-    @PosY := $87
-    @MapID := $88
-.endif
 
-@c276:  lda     #$80
-        sta     $2115
-        ldx     #$2882
-        stx     $2116
-        lda     @PosX
-        lsr4
-        cmp     #10
-        bcc     @c291
-        clc
-        adc     #$38
-        jmp     @c293
-@c291:  ora     #$80
-@c293:  sta     $2118
-        lda     #$20
-        sta     $2119
-        lda     @PosX
-        and     #$0f
-        cmp     #10
-        bcc     @c2a9
-        clc
-        adc     #$38
-        jmp     @c2ab
-@c2a9:  ora     #$80
-@c2ab:  sta     $2118
-        lda     #$20
-        sta     $2119
-        stz     $2118
-        stz     $2119
-        lda     @PosY
-        lsr4
-        cmp     #10
-        bcc     @c2c9
-        clc
-        adc     #$38
-        jmp     @c2cb
-@c2c9:  ora     #$80
-@c2cb:  sta     $2118
-        lda     #$20
-        sta     $2119
-        lda     @PosY
-        and     #$0f
-        cmp     #10
-        bcc     @c2e1
-        clc
-        adc     #$38
-        jmp     @c2e3
-@c2e1:  ora     #$80
-@c2e3:  sta     $2118
-        lda     #$20
-        sta     $2119
-        ldx     #$28c2
-        stx     $2116
-        lda     @MapID
-        lsr4
-        cmp     #10
-        bcc     @c301
-        clc
-        adc     #$38
-        jmp     @c303
-@c301:  ora     #$80
-@c303:  sta     $2118
-        lda     #$20
-        sta     $2119
-        lda     @MapID
-        and     #$0f
-        cmp     #10
-        bcc     @c319
-        clc
-        adc     #$38
-        jmp     @c31b
-@c319:  ora     #$80
-@c31b:  sta     $2118
-        lda     #$20
-        sta     $2119
-        rtl
 
 ; ------------------------------------------------------------------------------
 
