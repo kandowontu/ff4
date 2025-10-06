@@ -437,24 +437,25 @@ MagicMultiTarget:
 .segment "field_code2"
 
 RumbleRead:
-	php
-	sep #$30
+	php					;push current cpu registers
+	sep #$30			;a/x/y 8bit
+	phy					;push y
 
-	phb
-	lda #$7e			;db 7e
-	pha
-	plb
+	phb					;push db register
+	lda #$7e			;load #$7E into A
+	pha					;push A
+	plb					;pull from stack (#$7e) and put it in db register
 	
-	phd
-	longa
-	lda #0
-	tcd
-	shorta
+	phd					;push D register
+	longa				;16bit A set
+	lda #0				;load #$0000 into A
+	tcd					;Set D register to be the value of 16-bit A (#$0000)
+	shorta				;8bit A set
 	
 	
-	ldy $FC
-	beq RegularRumble
-	
+	ldy $FC				;load table pointer into y
+	beq RegularRumble	;if no table pointer, check for a flat set rumble rate
+						;otherwise...
 	dey						;decrease y
 	lda [$FD],y				;load the value
 	cmp #$FE				;if its not FE, we store the actual rumble value from the table at continuerumb2
@@ -462,38 +463,39 @@ RumbleRead:
 	stz $FC		;if it IS fe, we zero the position pointer
 	stz $0521		;we zero the strength
 	bra continue		;and we proceed to turn off the motors
-;	rtl
+
 continuerumb2:				;if it wasn't fe, we:
 	cmp #$EF				;check if its EF. if its not EF, go to continuerumb3
 	bne	continuerumb3		
 	ldy #$01					;if it IS EF, set the pointer back to 1 and start the process over again
 	bra continue
+
 continuerumb3:				;if not, continuing here...
 	sta	$0521		;store the strength
 	iny
 	iny
 	sty $FC			;increase pointer position
-	bra continue
+	bra continue	;skip the flat reading stuff
 
 
-RegularRumble:	
-    LDA $0520
-	BEQ rumbleOff
+RegularRumble:			;flat rumble read
+    LDA $0520			;read timer
+	BEQ rumbleOff		;if 0, no rumble
     SEC
 	SBC #$01
-	STA $0520
-    BRA continue
+	STA $0520			;otherwise, decrease timer by 1
+    BRA continue		;continue
 
 rumbleOff:
-    LDA #0
-	STA $0521	;21
+    LDA #0			;if no rumble
+	STA $0521		;set rumble strength to 0
 
 continue:
-    ; HACK: apparently this is needed to work on hardware?
 	lda #$00
 	pha				;db 0
 	plb
 	
+    ; HACK: apparently this is needed to work on hardware?
     LDA #$01 
 	STA $4016
     NOP
@@ -525,8 +527,8 @@ readJoy2:
 	BIT $4016  ; 0
 
     ; Now we write the rumble intensity: rrrrllll (right and left motors)
-    ;LDA $02FE
-    LDA $7E0521
+    ;LDA #$FF			;test
+    LDA $7E0521			;load rumble strength
 	LSR ; -7654321, C <- 0
     STA $4201
 	BIT $4016     ; bit7
@@ -553,8 +555,11 @@ readJoy2:
 	BIT $4016     ; bit0
 	LDA #$FF
     STA $4201
-	pld
-	plb
-	plp
-    RTL			;;141 bytes
+
+	pld				;pull d
+	plb				;pull db
+	ply				;pull y
+	plp				;pull cpu flags
+
+    RTL			
 
