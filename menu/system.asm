@@ -471,23 +471,20 @@ continuerumb2:				;if it wasn't fe, we:
 
 continuerumb3:				;if not, continuing here...
 	sta	$0521		;store the strength
-	iny
-	iny
-	sty $FC			;increase pointer position
+	iny				;undo the dey from earlier
+	iny				;increase it one more time
+	sty $FC			;store the new pointer position
 	bra continue	;skip the flat reading stuff
 
 
 RegularRumble:			;flat rumble read
     LDA $0520			;read timer
 	BEQ rumbleOff		;if 0, no rumble
-    SEC
-	SBC #$01
-	STA $0520			;otherwise, decrease timer by 1
+	DEC $0520			;otherwise, decrease timer by 1
     BRA continue		;continue
 
 rumbleOff:
-    LDA #0			;if no rumble
-	STA $0521		;set rumble strength to 0
+	STZ $0521		;set rumble strength to 0
 
 continue:
 	lda #$00
