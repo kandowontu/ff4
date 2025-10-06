@@ -13,6 +13,33 @@
 
 ; [ weapon animation $0a: whip ]
 
+.segment "menu_code"
+
+SwordRumble:
+	.byte	$00, $00, $00, $00, $88, $88, $99, $99, $AA, $BB, $FF, $FF, $00, $00, $00, $00, $00, $00, $00, $88, $88, $99, $99, $AA, $BB, $FF, $FF, $FE
+	
+SwordRumblePointer:
+	.byte	<SwordRumble, >SwordRumble
+
+ShurikenRumble:
+	.byte	$00, $00, $00, $00, $00, $FF, $FF, $FF, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+	.byte   $F0, $F0, $F0, $00, $00, $00, $0F, $0F, $0F, $00, $00, $00, $F0, $F0, $F0, $00, $00, $00, $0F, $0F, $0F, $00, $00, $00, $F0, $F0, $F0, $00, $00, $00, $0F, $0F, $0F, $00, $00, $00  
+	.byte   $F0, $F0, $F0, $00, $00, $00, $0F, $0F, $0F, $00, $00, $00, $F0, $F0, $F0, $00, $00, $00, $0F, $0F, $0F, $00, $00, $00, $F0, $F0, $F0, $00, $00, $00, $0F, $0F, $0F, $00, $00, $00  
+	.byte   $F0, $F0, $F0, $00, $00, $00, $0F, $0F, $0F, $00, $00, $00, $F0, $F0, $F0, $00, $00, $00, $0F, $0F, $0F, $00, $00, $00, $F0, $F0, $F0, $00, $00, $00, $FE
+
+ShurikenRumblePointer:
+	.byte	<ShurikenRumble, >ShurikenRumble
+
+SwordRumbleStuff:
+	SetRumbleTable	SwordRumblePointer
+	rtl
+
+ShurikenRumbleCode:
+	SetRumbleTable	ShurikenRumblePointer
+	rtl
+
+.segment "btlgfx_code"
+
 WeaponAnim_0a:
 @cd42:  lda     #1
         sta     $f233
@@ -23,6 +50,7 @@ WeaponAnim_0a:
 ; [ weapon animation $01: sword ]
 
 WeaponAnim_01:
+		jsl		SwordRumbleStuff
 @cd49:  stz     $f233
 _cd4c:  lda     $4e
         bne     @cd53
@@ -34,6 +62,7 @@ _cd4c:  lda     $4e
 ; [ weapon animation $0b: hammer ]
 
 WeaponAnim_0b:
+		jsl		SwordRumbleStuff
 @cd56:  lda     #$2c
         bra     _cd5c
 
@@ -42,6 +71,7 @@ WeaponAnim_0b:
 ; [ weapon animation $02: rod ]
 
 WeaponAnim_02:
+		jsl		SwordRumbleStuff
 @cd5a:  lda     #$0b
 _cd5c:  sta     $f4a0
         stz     $f233
@@ -669,6 +699,7 @@ WeaponAnimTbl:
 ; [ weapon animation $06: shuriken ]
 
 WeaponAnim_06:
+		jsl		ShurikenRumbleCode
 @d1a2:  stz     $f233
         lda     $4e
         bne     @d1ae
