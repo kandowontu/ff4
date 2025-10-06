@@ -1803,7 +1803,11 @@ UpdateShakeMonstersOnly:
 ; unused
 
 _02f5c3:
-@f5c3:  
+@f5c3:  lda     $1813
+        and     #$07
+        tax
+        jsr     UpdateShakeMonstersAndBG
+        rtl
 
 ; ------------------------------------------------------------------------------
 

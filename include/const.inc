@@ -28,7 +28,7 @@ def_config BUGFIX_MISC_MENU,0
 def_config BUGFIX_REV1,0
 def_config BUGFIX_SYLPH_EFFECT,0
 def_config BUGFIX_WORLD_BATTLE,0
-def_config BYTE_PERFECT,1
+def_config BYTE_PERFECT,0
 def_config DEBUG,0
 def_config EASY_VERSION,0
 def_config LANG_EN,0

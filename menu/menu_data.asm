@@ -221,16 +221,16 @@ ItemLabelPosText:
 
 ; *** this is unused ***
 RecoverHPPosText:
-@dd07:
+@dd07:  def_ptxt 10,1,{RECOVER_HP_STR,0}
 
 ItemWhomPosText:
-@dd14: 
+@dd14:  def_ptxt 10,1,{ITEM_WHOM_STR,0}
 
 CantUseHerePosText:
-@dd20: 
+@dd20:  def_ptxt 10,1,{CANT_USE_HERE_STR,0}
 
 NothingHerePosText:
-@dd2d:  
+@dd2d:  def_ptxt 10,1,{NOTHING_HERE_STR,0}
 
 ; character select windows for item use
 ItemCharSelectWindowLeft:
@@ -326,7 +326,7 @@ EquipWindow:
 @ddc6:  def_ptxt EQUIP_PTXT_X,9,{EQUIP_SLOT5_STR,0}
 
 ; "もちものがいっぱいです" (inventory full) *** this is unused ***
-@ddcb:  
+@ddcb:  def_ptxt 4,5,{INVENTORY_FULL_STR,0}
 
 ; item must be equipped with both hands
 EquipTwoHandWindow:
@@ -468,7 +468,7 @@ NewGamePosText:
 
 ; *** unused (carried over from ff3j-style load menu) ***
 LoadBattleSpeedPosText:
-@dfd2:  
+@dfd2:  def_ptxt 20,1,{BATTLE_SPEED_STR,0}
 
 LoadMsgWindow:
 @dfdc:  def_window 22,0,7,8
@@ -537,11 +537,11 @@ NamingwayMsg2PosText:
 
 ; *** unused ***
 NamingwayMsg3PosText:
-@e089:  
+@e089:  def_ptxt 7,1,{NAMINGWAY_MSG3_STR,0}
 
 ; *** unused ***
 NamingwayMsg4PosText:
-@e09c:  
+@e09c:  def_ptxt 7,1,{NAMINGWAY_MSG4_STR,0}
 
 NamingwayChoiceText:
 @e0ac:  .byte   NAMINGWAY_CHOICE_STR,0
@@ -623,7 +623,7 @@ ConfigMainWindow:
 @dda7:  def_ptxt 5,14,{SOUND_STR,1}
 @ddaf:  def_ptxt 15,14,{STEREO_MONO_STR,0}
 BtnMapWindow: ; *** unused ***
-@ddbd:  
+@ddbd:  def_window 0,7,28,12
 
 .else
 
@@ -664,7 +664,7 @@ BtnList2Text:
 
 ; alternate multi-controller window *** unused ***
 ; see https://tcrf.net/File:Ffiv_25thguide_mockups3.png
-@e25f:  
+@e25f:  def_window 1,8,27,6
 
 MultiCtrlWindow:
 @e263:  def_window 5,7,20,11

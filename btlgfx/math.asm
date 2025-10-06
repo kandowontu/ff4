@@ -74,7 +74,16 @@ SetPolarRadius:
 ; unused
 
 IncPolarRadius:
-@e76d:  
+@e76d:  pha
+        clc
+        adc     $f1b3,x
+        sta     $f1b3,x
+        pla
+        clc
+        adc     $f1f3,x
+        sta     $f1f3,x
+        rts
+
 ; ------------------------------------------------------------------------------
 
 ; [ calculate polar y coordinate ]
@@ -93,7 +102,11 @@ CalcPolarY:
 ; unused
 
 CalcPolarX:
-@e78a:  
+@e78a:  lda     $f1f3,x
+        asl
+        sta     $28
+        lda     $f173,x
+        jmp     CalcSine
 
 ; ------------------------------------------------------------------------------
 
