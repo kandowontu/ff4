@@ -494,6 +494,7 @@ ShowItemWindow:
 ; [ play cursor sound effect ]
 
 PlayCursorSfx:
+		SetRumble $33, 2
 @b073:  lda     #$11        ; system sound effect $11
         sta     $1e00
         jsl     ExecSound_ext
