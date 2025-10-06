@@ -1163,7 +1163,8 @@ EndBattle:
 ; ran away
 @870f:  and     #$40
         beq     @8728
-        lda     #$13        ; battle graphics $13: party runs away
+        SetRumble $88, 20
+		lda     #$13        ; battle graphics $13: party runs away
         jsr     ExecBtlGfx
         jsr     ClearWinStatus
         jsr     RestoreCharProp

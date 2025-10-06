@@ -483,6 +483,7 @@ UpdateMenu:
         lda     $d0
         cmp     #$ff
         beq     @a4c7       ; return if character is invalid
+		SetRumble $FF, 10
         jsr     UpdateEnabledItems
         jsr     UpdateEnabledCmds
         ldx     $a6
