@@ -100,9 +100,9 @@ UpdateCtrl:
         lda     f:$00011f
         sta     $00         ; set mapped controller 1 buttons
         shorta
+		jsl		RumbleRead
         ply
         plx
-		jsl		RumbleRead
         plb
         rtl
 
@@ -439,7 +439,6 @@ MagicMultiTarget:
 RumbleRead:
 	php					;push current cpu registers
 	sep #$30			;a/x/y 8bit
-	phy					;push y
 
 	phb					;push db register
 	lda #$7e			;load #$7E into A
@@ -558,7 +557,6 @@ readJoy2:
 
 	pld				;pull d
 	plb				;pull db
-	ply				;pull y
 	plp				;pull cpu flags
 
     RTL			
