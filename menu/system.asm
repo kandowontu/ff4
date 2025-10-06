@@ -97,10 +97,7 @@ UpdateCtrl:
         bne     @fd74
         pld
         sta     $02         ; set mapped controller 2 buttons
-        lda     f:$00011f
-        sta     $00         ; set mapped controller 1 buttons
-        shorta
-		jsl		RumbleRead
+		jsl	RumbleRead
         ply
         plx
         plb
@@ -433,10 +430,14 @@ MagicMultiTarget:
 @fff2:  .byte   1,1,1,1,0,0,0,1,0,0,1,1,1,1
 
 ; ------------------------------------------------------------------------------
-.segment "unused"
+
 .segment "field_code2"
 
 RumbleRead:
+        lda     f:$00011f
+        sta     $00         ; set mapped controller 1 buttons
+        shorta
+
 	php					;push current cpu registers
 	sep #$30			;a/x/y 8bit
 
