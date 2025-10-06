@@ -452,20 +452,15 @@ RumbleRead:
 	shorta				;8bit A set
 	
 	
-	ldy RumblePosition	;load table position into y
-	beq RegularRumble	;if no table position, check for a flat set rumble rate
-
+	ldy $FC				;load table pointer into y
+	beq RegularRumble	;if no table pointer, check for a flat set rumble rate
 						;otherwise...
-
-	dey			;decrease y (we do this so that we dont need an unused first entry for position "0" in every table)
-
-	stz RumbleStrength				;make sure there's no timer waiting from a flat rumble
-
-	lda [RumblePointer],y				;load the value
+	dey						;decrease y (we do this so that we dont need an unused first entry for position "0" in every table)
+	lda [$FD],y				;load the value
 	cmp #$FE				;if its not FE, we store the actual rumble value from the table at continuerumb2
 	bne continuerumb2		
-	stz RumblePosition		;if it IS fe, we zero the position pointer
-	stz RumbleTimer		;we zero the strength
+	stz $FC		;if it IS fe, we zero the position pointer
+	stz $0521		;we zero the strength
 	bra continue		;and we proceed to turn off the motors
 
 continuerumb2:				;if it wasn't fe, we:
@@ -475,21 +470,21 @@ continuerumb2:				;if it wasn't fe, we:
 	bra continue
 
 continuerumb3:				;if not, continuing here...
-	sta	RumbleStrength		;store the strength
+	sta	$0521		;store the strength
 	iny				;undo the dey from earlier
 	iny				;increase it one more time
-	sty RumblePosition			;store the new pointer position
+	sty $FC			;store the new pointer position
 	bra continue	;skip the flat reading stuff
 
 
 RegularRumble:			;flat rumble read
-    LDA RumbleStrength			;read timer
+    LDA $0520			;read timer
 	BEQ rumbleOff		;if 0, no rumble
-	DEC RumbleStrength			;otherwise, decrease timer by 1
+	DEC $0520			;otherwise, decrease timer by 1
     BRA continue		;continue
 
 rumbleOff:
-	STZ RumbleTimer		;set rumble strength to 0
+	STZ $0521		;set rumble strength to 0
 
 continue:
 	lda #$00
@@ -529,7 +524,7 @@ readJoy2:
 
     ; Now we write the rumble intensity: rrrrllll (right and left motors)
     ;LDA #$FF			;test
-    LDA RumbleStrengthLong			;load rumble strength
+    LDA $7E0521			;load rumble strength
 	LSR ; -7654321, C <- 0
     STA $4201
 	BIT $4016     ; bit7
