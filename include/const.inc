@@ -37,6 +37,13 @@ def_config ROM_VERSION,0
 def_config SIMPLE_CONFIG,0
 def_config SKIP_INTRO,0
 
+RumbleStrengthLong = $7E0520
+RumbleTimerLong = $7E0521
+RumbleStrength = $0520
+RumbleTimer = $0521
+RumblePosition = $FC
+RumblePointer = $FD
+
 .if LANG_EN
 .define LANG_SUFFIX "en"
 .else
