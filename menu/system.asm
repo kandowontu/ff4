@@ -455,7 +455,7 @@ RumbleRead:
 	ldy $FC				;load table pointer into y
 	beq RegularRumble	;if no table pointer, check for a flat set rumble rate
 						;otherwise...
-	dey						;decrease y
+	dey						;decrease y (we do this so that we dont need an unused first entry for position "0" in every table)
 	lda [$FD],y				;load the value
 	cmp #$FE				;if its not FE, we store the actual rumble value from the table at continuerumb2
 	bne continuerumb2		
