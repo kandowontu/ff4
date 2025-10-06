@@ -13,6 +13,28 @@
 
 ; [  ]
 
+.segment "menu_code"
+
+
+NukeRumble:
+	.byte	$00, $00, $00, $00, $11, $22, $33, $44, $55, $66, $77, $88, $99, $AA, $BB, $CC, $DD, $EE, $FF
+	.byte   $00, $00, $00, $00, $11, $22, $33, $44, $55, $66, $77, $88, $99, $AA, $BB, $CC, $DD, $EE, $FF
+	.byte   $00, $00, $00, $00, $11, $22, $33, $44, $55, $66, $77, $88, $99, $AA, $BB, $CC, $DD, $EE, $FF
+	.byte   $00, $00, $00, $00, $11, $22, $33, $44, $55, $66, $77, $88, $99, $AA, $BB, $CC, $DD, $EE, $FF
+	.byte   $00, $00, $00, $00, $11, $22, $33, $44, $55, $66, $77, $88, $99, $AA, $BB, $CC, $DD, $EE, $FF
+	.byte   $00, $00, $00, $00, $11, $22, $33, $44, $55, $66, $77, $88, $99, $AA, $BB, $CC, $DD, $EE, $FF
+	.byte   $00, $00, $00, $00, $11, $22, $33, $44, $55, $66, $77, $88, $99, $AA, $BB, $CC, $DD, $EE, $FF, $FE
+
+NukeRumblePointer:
+	.byte	<NukeRumble, >NukeRumble
+
+SetNukeRumble:
+	SetRumbleTable	NukeRumblePointer
+	rtl
+
+
+.segment "btlgfx_code"
+
 _02e9f3:
 @e9f3:  pha
         lda     #$20
@@ -531,6 +553,7 @@ _02ed35:
 ; [ magic animation $21: nuke ]
 
 MagicAnim_21:
+		jsl		SetNukeRumble
 @ed47:  lda     $34c5
         beq     @ed56
         jsr     _02ed35

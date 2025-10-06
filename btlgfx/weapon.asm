@@ -50,7 +50,6 @@ WeaponAnim_0a:
 ; [ weapon animation $01: sword ]
 
 WeaponAnim_01:
-		jsl		SwordRumbleStuff
 @cd49:  stz     $f233
 _cd4c:  lda     $4e
         bne     @cd53
@@ -341,6 +340,7 @@ SwordWhipAnimRight:
 ; [ sword/whip animation ]
 
 SwordWhipAnim:
+		jsl		SwordRumbleStuff
 @cef6:  sta     $f0cf
         jsr     GetAttackerCharSpritePtr
         stz     $efcd,x
@@ -1176,6 +1176,7 @@ _d553:  clr_a
 ; [ weapon animation $05: unarmed ]
 
 WeaponAnim_05:
+		
 @d55d:  lda     $4e
         bne     @d581
         lda     $50
@@ -1495,6 +1496,7 @@ WeaponAnim_00:
 ; [ weapon animation $03: claw ]
 
 WeaponAnim_03:
+		jsl		SwordRumbleStuff
 @d7b4:  lda     $4e
         and     #$01
         sta     $00

@@ -934,31 +934,7 @@ Mult16:
 ; unused
 
 Mult16_2:
-@85a7:  phx
-        longa
-        pha
-        clr_a
-        sta     $24
-        sta     $20
-        sta     $22
-        ldx     #$0010
-@85b5:  lsr     $1c
-        bcc     @85c6
-        clc
-        lda     $20
-        adc     $1e
-        sta     $20
-        lda     $22
-        adc     $24
-        sta     $22
-@85c6:  asl     $1e
-        rol     $24
-        dex
-        bne     @85b5
-        pla
-        shorta
-        plx
-        rts
+
 
 ; ------------------------------------------------------------------------------
 
