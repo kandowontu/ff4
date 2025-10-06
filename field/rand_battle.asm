@@ -13,6 +13,15 @@
 
 .pushseg
 
+.segment "world_data"
+
+BattleRumble:
+	.byte $55, $55, $66, $66, $77, $77, $88, $88, $99, $99, $AA, $AA, $BB, $BB, $CC, $CC, $DD, $DD, $EE, $EE, $FF, $FF, $00, $00, $00, $00, $00, $00, $55, $55, $66, $66, $77, $77, $88, $88, $99, $99, $FE
+
+BattleRumblePointer:
+	.byte <BattleRumble, >BattleRumble
+
+
 .segment "rand_battle"
 
 ; 0e/c300
@@ -299,7 +308,9 @@ GetBattleBG:
 ;   6: 16/256 (6.25%)
 ;   7: 4/256  (1.56%)
 
+
 ChooseRandBattle:
+		SetRumbleTable BattleRumblePointer
 @8cf0:  sta     $3d
         stz     $3e
         asl     $3d
