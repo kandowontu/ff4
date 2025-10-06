@@ -13,6 +13,32 @@
 
 ; [ weapon animation $0a: whip ]
 
+.segment "menu_code"
+
+SwordRumble:
+	.byte	$00, $00, $00, $00, $88, $88, $99, $99, $AA, $BB, $FF, $FF, $00, $00, $00, $00, $00, $00, $00, $88, $88, $99, $99, $AA, $BB, $FF, $FF, $FE
+	
+SwordRumblePointer:
+	.byte	<SwordRumble, >SwordRumble
+
+ShurikenRumble:
+	.byte   $F0, $F0, $F0, $00, $00, $00, $0F, $0F, $0F, $00, $00, $00, $F0, $F0, $F0, $00, $00, $00, $0F, $0F, $0F, $00, $00, $00, $F0, $F0, $F0, $00, $00, $00, $0F, $0F, $0F, $00, $00, $00  
+	.byte   $F0, $F0, $F0, $00, $00, $00, $0F, $0F, $0F, $00, $00, $00, $F0, $F0, $F0, $00, $00, $00, $0F, $0F, $0F, $00, $00, $00, $F0, $F0, $F0, $00, $00, $00, $0F, $0F, $0F, $00, $00, $00  
+	.byte   $F0, $F0, $F0, $00, $00, $00, $0F, $0F, $0F, $00, $00, $00, $F0, $F0, $F0, $00, $00, $00, $0F, $0F, $0F, $00, $00, $00, $F0, $F0, $F0, $00, $00, $00, $FE
+
+ShurikenRumblePointer:
+	.byte	<ShurikenRumble, >ShurikenRumble
+
+SwordRumbleStuff:
+	SetRumbleTable	SwordRumblePointer
+	rtl
+
+ShurikenRumbleCode:
+	SetRumbleTable	ShurikenRumblePointer
+	rtl
+
+.segment "btlgfx_code"
+
 WeaponAnim_0a:
 @cd42:  lda     #1
         sta     $f233
@@ -34,6 +60,7 @@ _cd4c:  lda     $4e
 ; [ weapon animation $0b: hammer ]
 
 WeaponAnim_0b:
+		jsl		SwordRumbleStuff
 @cd56:  lda     #$2c
         bra     _cd5c
 
@@ -42,6 +69,7 @@ WeaponAnim_0b:
 ; [ weapon animation $02: rod ]
 
 WeaponAnim_02:
+		jsl		SwordRumbleStuff
 @cd5a:  lda     #$0b
 _cd5c:  sta     $f4a0
         stz     $f233
@@ -311,6 +339,7 @@ SwordWhipAnimRight:
 ; [ sword/whip animation ]
 
 SwordWhipAnim:
+		jsl		SwordRumbleStuff
 @cef6:  sta     $f0cf
         jsr     GetAttackerCharSpritePtr
         stz     $efcd,x
@@ -1145,6 +1174,7 @@ _d553:  clr_a
 ; [ weapon animation $05: unarmed ]
 
 WeaponAnim_05:
+		
 @d55d:  lda     $4e
         bne     @d581
         lda     $50
@@ -1360,6 +1390,7 @@ _02d6ec:
 ArrowShurikenAnim:
 @d702:  ldx     #8                      ; wait 8 frames before first hit
         stz     $52
+		jsl		ShurikenRumbleCode
 @d707:  phx
         jsr     WaitFrame
         plx
@@ -1464,6 +1495,7 @@ WeaponAnim_00:
 ; [ weapon animation $03: claw ]
 
 WeaponAnim_03:
+		jsl		SwordRumbleStuff
 @d7b4:  lda     $4e
         and     #$01
         sta     $00
