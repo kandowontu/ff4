@@ -463,7 +463,7 @@ RumbleRead:
 	bne continuerumb2		
 	stz $FC		;if it IS fe, we zero the position pointer
 	stz $0521		;we zero the strength
-	bra continuerumb4		;and we proceed to turn off the motors
+	bra continue		;and we proceed to turn off the motors
 ;	rtl
 continuerumb2:				;if it wasn't fe, we:
 	cmp #$EF				;check if its EF. if its not EF, go to continuerumb3
@@ -475,8 +475,6 @@ continuerumb3:				;if not, continuing here...
 	iny
 	iny
 	sty $FC			;increase pointer position
-	
-continuerumb4:	
 	bra continue
 
 
