@@ -30,7 +30,7 @@
 .i16
 
 ; *** unused ***
-@8000:  
+@8000:  nop3
 
 ExecBtlGfx_ext:
 @8003:  jmp     ExecBtlGfx_far
@@ -262,7 +262,9 @@ UpdateInventoryItemText:
 ; unused ???, draw spell name ???
 
 UpdateMagicListName:
-
+@8160:  ldx     $00
+        stx     $1816
+        jmp     DrawMagicListName
 
 ; ------------------------------------------------------------------------------
 
@@ -932,7 +934,31 @@ Mult16:
 ; unused
 
 Mult16_2:
-
+@85a7:  phx
+        longa
+        pha
+        clr_a
+        sta     $24
+        sta     $20
+        sta     $22
+        ldx     #$0010
+@85b5:  lsr     $1c
+        bcc     @85c6
+        clc
+        lda     $20
+        adc     $1e
+        sta     $20
+        lda     $22
+        adc     $24
+        sta     $22
+@85c6:  asl     $1e
+        rol     $24
+        dex
+        bne     @85b5
+        pla
+        shorta
+        plx
+        rts
 
 ; ------------------------------------------------------------------------------
 
@@ -1020,7 +1046,33 @@ Tfr3bppGfx:
 ; *** unused ***
 
 Tfr3bppGfx2:
-
+@8642:  phb
+        pha
+        plb
+        sty     hVMADDL
+        stx     $10
+        ldy     #0
+@864d:  longa
+        pha
+        ldx     #8
+@8653:  lda     ($10),y
+        sta     hVMDATAL
+        iny2
+        dex
+        bne     @8653
+        ldx     #8
+        pla
+        shorta
+@8663:  lda     ($10),y
+        sta     hVMDATAL
+        stz     hVMDATAH
+        iny
+        dex
+        bne     @8663
+        dec     $0e
+        bne     @864d
+        plb
+        rts
 
 ; ------------------------------------------------------------------------------
 
@@ -2020,7 +2072,8 @@ ExecGfxScript:
         bra     @bf82
 
 ; $e8-$ef: unused
-@bf6a:  
+@bf6a:  jsr     UnusedGfxScriptCmd2
+        bra     @bf82
 
 ; $a9-$bf: special animation
 @bf6f:  jsr     DoSpecialAnim_near
@@ -2178,13 +2231,13 @@ GfxScriptCmdTbl:
         .addr   UnusedGfxScriptCmd2
         .addr   GfxScriptCmd_f7
         .addr   GfxScriptCmd_f8
-;        .addr   UnusedGfxScriptCmd2
-;        .addr   UnusedGfxScriptCmd1
-;        .addr   UnusedGfxScriptCmd1
-;        .addr   UnusedGfxScriptCmd1
-;        .addr   UnusedGfxScriptCmd1
-;        .addr   UnusedGfxScriptCmd1
-;        .addr   UnusedGfxScriptCmd1
+        .addr   UnusedGfxScriptCmd2
+        .addr   UnusedGfxScriptCmd1
+        .addr   UnusedGfxScriptCmd1
+        .addr   UnusedGfxScriptCmd1
+        .addr   UnusedGfxScriptCmd1
+        .addr   UnusedGfxScriptCmd1
+        .addr   UnusedGfxScriptCmd1
 
 ; ------------------------------------------------------------------------------
 
@@ -2203,10 +2256,10 @@ GfxScriptCmd_f7:
 ; [ unused graphics script commands ]
 
 UnusedGfxScriptCmd2:
-@c8e9:  
+@c8e9:  jsr     GetNextGfxScriptByte
 
 UnusedGfxScriptCmd1:
-@c8ec:  
+@c8ec:  rts
 
 ; ------------------------------------------------------------------------------
 
@@ -2502,14 +2555,46 @@ ShowMsg_04:
 ; [ message type 0: attacker name (unused) ]
 
 ShowMsg_00:
-
+@cade:  lda     $34c2
+        bmi     @caea       ; branch if monster attacker
+        lda     #$02        ; character name
+        sta     $74fd
+        bra     @caef
+@caea:  lda     #$0c        ; monster name
+        sta     $74fd
+@caef:  lda     $48         ; target id
+        sta     $74fe
+        stz     $74ff
+        jmp     DrawLeftMsgWindow
 
 ; ------------------------------------------------------------------------------
 
 ; [ message type 1: target name (unused) ]
 
 ShowMsg_01:
-
+@cafa:  lda     $34c4
+        and     #$40
+        beq     @cb12                   ; branch if not multi-target
+        clr_ax
+@cb03:  lda     f:TargetAllText,x       ; ぜんぶ (all)
+        sta     $74fd,x
+        inx
+        cpx     #4
+        bne     @cb03
+        bra     @cb2f
+@cb12:  lda     $34c4
+        bmi     @cb1e       ; branch if monster target
+        lda     #$02        ; character name
+        sta     $74fd
+        bra     @cb23
+@cb1e:  lda     #$0c        ; monster name
+        sta     $74fd
+@cb23:  lda     $49         ; target id
+        tax
+        lda     $29bd,x     ; monster type
+        sta     $74fe
+        stz     $74ff
+@cb2f:  jmp     DrawCenterMsgWindow
 
 ; ------------------------------------------------------------------------------
 
@@ -3831,8 +3916,7 @@ ShakeMonster:
         sta     $f406
         shorta0
         inc     $4e
-        SetRumble $99, 5
-		lda     $4e
+        lda     $4e
         cmp     #$40
         bne     @f98a
         clr_ax

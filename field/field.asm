@@ -58,6 +58,67 @@ field_dp:
 
 ; ------------------------------------------------------------------------------
 
+.segment "unused"
+.a8
+.i16
+
+.if SKIP_INTRO
+DebugInit:
+        lda     #$fa            ; give key to tower of babil
+        sta     $1440
+        lda     #1
+        sta     $1441
+        phk
+        per     @1-1
+        pea     .loword($ffbe)
+        jml     InitNewGame
+@1:     phk
+        per     @2-1
+        pea     .loword($ffbe)
+        jml     InitCharProp
+@2:     jsl     InitSpellLists
+        lda     #0
+        sta     $1700       ; overworld
+        sta     $171b       ; hovercraft world
+        sta     $171f       ; enterprise world
+        sta     $1722       ; falcon world
+        sta     $1726       ; big whale world
+        lda     #1
+        sta     $1718       ; show hovercraft
+        sta     $171c       ; show enterprise
+        sta     $1720       ; show falcon
+        sta     $1724       ; show big whale
+        lda     #101
+        sta     $1706
+        sta     $1719
+        sta     $171d
+        sta     $1721
+        inc
+        sta     $1725
+        lda     #158
+        sta     $1707
+        sta     $1726
+        inc
+        sta     $171a
+        inc
+        sta     $171e
+        inc
+        sta     $1722
+        ldx     #50000          ; give gil
+        stx     $16a0
+        lda     #$36            ; give hook
+        phk
+        per     @3-1
+        pea     .loword($ffbe)
+        jml     SetEventSwitch
+@3:     lda     #$30            ; open tunnel to underground
+        phk
+        per     @4-1
+        pea     .loword($ffbe)
+        jml     SetEventSwitch
+@4:     rtl
+.endif
+
 ; ------------------------------------------------------------------------------
 
 .segment "field_code_ext"
@@ -1980,12 +2041,12 @@ WipeIn:
 ; unused
 
 UnusedAsl:
-@929c:  
-@929d:  
-@929e:  
-@929f:  
-@92a0:  
-        
+@929c:  asl
+@929d:  asl
+@929e:  asl
+@929f:  asl
+@92a0:  asl2
+        rts
 
 ; ------------------------------------------------------------------------------
 

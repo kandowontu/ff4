@@ -407,7 +407,7 @@ InitBattle:
 ; [ init ram ]
 
 InitRAM:
-@8235:  ldx     #$007B
+@8235:  ldx     #$007b
 @8238:  stz     $80,x       ; clear $80-$ff
         dex
         bpl     @8238
@@ -810,7 +810,13 @@ Add16:
 ; unused
 
 Sub16:
-
+@84fc:  longa
+        sec
+        lda     $395e
+        sbc     $3960
+        sta     $3962
+        shorta0
+        rts
 
 ; ------------------------------------------------------------------------------
 

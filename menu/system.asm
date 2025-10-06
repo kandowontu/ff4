@@ -103,8 +103,6 @@ UpdateCtrl:
         plb
         rtl
 
-
-
 ; ------------------------------------------------------------------------------
 
 ; [ read controller register ]
@@ -113,10 +111,24 @@ UpdateCtrl:
 ; +X: dp offset for this register
 
 ReadCtrl:
-@fd90:  ;lda     $16b8                   ; multi-controller flag
-        ;and     $40                     ; in-battle flag
-        bra     @fdb4                   ; branch unless both flags are set
-
+@fd90:  lda     $16b8                   ; multi-controller flag
+        and     $40                     ; in-battle flag
+        beq     @fdb4                   ; branch unless both flags are set
+        lda     f:$001822               ; selected character
+        sta     $43
+        phy
+        ldy     $43
+        lda     $16b9,y                 ; controller for this character (0 or 2)
+        ply
+        sta     $43
+        longa
+        tya
+        clc
+        adc     $43
+        tay
+        shorta
+        lda     a:$0000,y
+        bra     @fdba
 @fdb4:  lda     a:$0000,y               ; combine input from both controllers
         ora     a:$0002,y
 @fdba:  beq     @fdc0                   ; branch if no buttons pressed

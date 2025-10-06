@@ -160,7 +160,7 @@ InitMainMenu:
 
 ; *** unused ***
 Battle:
-@805a:  
+@805a:  jml     Battle_ext
 
 ; ------------------------------------------------------------------------------
 
@@ -2575,7 +2575,18 @@ GetDakuten:
 ; unused, maybe portraits were on a background layer at sound point?
 
 _018e51:
-@8e51:  
+@8e51:  ldx     #4
+        longa
+@8e56:  lda     #$0100
+        sta     a:$0000,y
+        sta     a:$0002,y
+        sta     a:$0004,y
+        sta     a:$0006,y
+        jsr     NextRowY
+        dex
+        bne     @8e56
+        shorta
+        rts
 
 ; ------------------------------------------------------------------------------
 
@@ -3046,7 +3057,26 @@ CharSpriteYTbl:
 ; unused
 
 _019195:
-
+@9195:  ldx     $41         ; zero
+        longa
+        lda     #5
+        sta     $45
+        ldy     $41         ; zero
+@91a0:  lda     f:_0191c4,x
+        clc
+        adc     $1a71
+        sta     $fe02,y
+        sta     $fe16,y
+        tya
+        lsr2
+        sta     $fe00,y
+        sta     $fe14,y
+        iny4
+        inx2
+        dec     $45
+        bne     @91a0
+        shorta
+        rts
 
 ; ------------------------------------------------------------------------------
 
@@ -3660,6 +3690,8 @@ UpdatePortraitPos:
         jsr     DrawPortrait
         dec     $d2
         rts
+
+; ------------------------------------------------------------------------------
 
 ; [ get character status byte 1 ]
 

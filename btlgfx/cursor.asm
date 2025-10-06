@@ -2342,7 +2342,8 @@ DrawMenuCursors:
 ; unused
 
 ShowListArrowUp:
-@bc3a:  
+@bc3a:  stz     $ef83
+        rts
 
 ; ------------------------------------------------------------------------------
 
@@ -2351,7 +2352,8 @@ ShowListArrowUp:
 ; unused
 
 ShowListArrowDown:
-@bc3e: 
+@bc3e:  stz     $ef84
+        rts
 
 ; ------------------------------------------------------------------------------
 
@@ -2433,7 +2435,10 @@ HideMenuCursor2:
 ; unused
 
 ShowMenuCursorBoth:
-@bc78: 
+@bc78:  stz     $ef69
+        stz     $ef6a
+        stz     $ef73
+        rts
 
 ; ------------------------------------------------------------------------------
 
