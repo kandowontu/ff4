@@ -235,6 +235,17 @@ MageRumblePointer:
 SetMageRumble:
 	SetRumbleTable	MageRumblePointer
 	rtl
+	
+	
+DrainRumble:
+	.byte	$11, $11, $11, $11, $22, $22, $22, $22, $33, $33, $33, $33, $44, $44, $44, $44, $44, $55, $55, $55, $55, $66, $66, $66, $66, $77, $77, $77, $77, $88, $88, $00, $00, $00, $00, $00, $00, $00, $AA, $AA, $AA, $AA, $AA, $AA, $AA, $AA, $FE
+	
+DrainRumblePointer:
+	.byte	<DrainRumble, >DrainRumble
+
+SetDrainRumble:
+	SetRumbleTable	DrainRumblePointer
+	rtl
 
 
 
@@ -935,6 +946,7 @@ MagicAnim_1d:
 ; [ magic animation $06: drain, etc. ]
 
 MagicAnim_06:
+		jsl		SetDrainRumble
 @ee09:  lda     $34c5
         beq     @ee13
         jsl     DrainAnim
