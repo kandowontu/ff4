@@ -601,6 +601,7 @@ _02c46d:
 ; [ command animation $1e: jump 2 ]
 
 CmdAnim_1e:
+		SetRumble $88, 15
 @c476:  lda     $34c2
         bpl     @c494
 
