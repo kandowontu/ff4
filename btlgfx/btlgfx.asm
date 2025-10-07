@@ -1917,6 +1917,9 @@ _02be56:
 ; [ restore graphics after magic animation ]
 
 AfterMagicAnim:
+		;lda #0
+		;sta RumbleTimerLong
+
 @be8b:  jsr     ResetAnimSpritesLarge
         lda     $f35a
         beq     @beaa
@@ -2725,21 +2728,6 @@ GfxScriptCmd_f3:
 
 ; [  ]
 
-_02cc3c:
-@cc3c:  jsr     TfrLeftMonsterTiles
-        stz     $4e
-@cc41:  jsr     WaitFrame
-        lda     $4e
-        and     #1
-        jsr     SwapMonsterScreen
-        inc     a:$004e
-        lda     a:$004e
-        cmp     #$60
-        bne     @cc41
-        jsr     TfrRightMonsterTiles
-        lda     #1
-        jsr     SwapMonsterScreen
-        rtl
 
 ; ------------------------------------------------------------------------------
 

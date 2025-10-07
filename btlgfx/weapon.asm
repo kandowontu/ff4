@@ -725,7 +725,7 @@ WeaponAnim_06:
         sta     $f113
         lda     $f044,y
         sta     $f114
-        jsr     CalcTrajectory
+        jsl     CalcTrajectory_far
         jsr     ResetAnimSpritesLarge
         stz     $52
 @d1eb:  jsr     WaitFrame
@@ -737,7 +737,7 @@ WeaponAnim_06:
         clc
         adc     #$80
         sta     $f0c6
-        jsr     UpdateTrajectory
+        jsl     UpdateTrajectory_far
         bcs     @d221
         lda     $f118
         clc
@@ -813,7 +813,7 @@ ThrowAnim2:
         sec
         sbc     #$08
         sta     $f114
-        jsr     CalcTrajectory
+        jsl     CalcTrajectory_far
         jsr     ResetAnimSpritesLarge
         stz     $52
         lda     #$7c
@@ -828,7 +828,7 @@ ThrowAnim2:
         stx     $f113
         lda     #$08
         sta     $f115
-        jsr     CalcTrajectory
+        jsl     CalcTrajectory_far
         jsr     _02d2c7
         jmp     ResetAnimSpritesLarge
 
@@ -870,7 +870,7 @@ _d2d1:  jsl     _02c3e1
         bra     @d305
 @d301:  lda     f:_16fd70,x
 @d305:  sta     $f0c8
-        jsr     UpdateTrajectory
+        jsl     UpdateTrajectory_far
         bcs     @d342
         jsl     _02c404
         lda     $f118
@@ -1029,10 +1029,10 @@ HarpAnim:
         sbc     #$08
         lda     $f044,y
         sta     $f114
-        jsr     CalcTrajectory
+        jsl     CalcTrajectory_far
         lda     $f0cf
         beq     @d448
-        jsr     UpdateTrajectory
+        jsl     UpdateTrajectory_far
 @d448:  jsr     ResetAnimSpritesLarge
         jsr     InitPolarAngle
         lda     #$08
@@ -1086,7 +1086,7 @@ HarpAnim:
         adc     $f0cf
         sta     $f0ca
         dec     $54
-        jsr     UpdateTrajectory
+        jsl     UpdateTrajectory_far
         bcs     @d4f9
         lda     $f118
         clc
@@ -1240,12 +1240,12 @@ BowAnim:
         sbc     #$08
         lda     $f044,y
         sta     $f114                   ; final y position
-        jsr     CalcTrajectory
+        jsl     CalcTrajectory_far
         lda     #$16
         jsr     PlaySfx
         lda     $f0cf
         beq     @d5e8
-        jsr     UpdateTrajectory
+        jsl     UpdateTrajectory_far
 @d5e8:  jsr     ResetAnimSpritesLarge
 @d5eb:  jsr     WaitFrame
         inc     $52
@@ -1296,7 +1296,7 @@ BowAnim:
         adc     $f0cf
         sta     $f0ca
         dec     $54
-        jsr     UpdateTrajectory
+        jsl     UpdateTrajectory_far
         bcs     @d689
         lda     $f118
         clc

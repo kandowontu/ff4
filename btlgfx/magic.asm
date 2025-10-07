@@ -15,7 +15,201 @@
 
 .segment "menu_code"
 
+; [ calculate trajectory (far) ]
 
+CalcTrajectory_far:
+@e7bc:  jsr     CalcTrajectory
+        rtl
+
+; ------------------------------------------------------------------------------
+
+; [ calculate trajectory ]
+
+; calculates a vector trajectory from one point to another
+
+Div16x:
+@852b:  phx
+        longa
+        pha
+        stz     $2a
+        stz     $2c
+        lda     $26
+        beq     @8557
+        lda     $28
+        beq     @8557
+        ldx     #$0010
+@853e:  rol     $26
+        rol     $2c
+        sec
+        lda     $2c
+        sbc     $28
+        sta     $2c
+        bcs     @8552
+        lda     $2c
+        adc     $28
+        sta     $2c
+        clc
+@8552:  rol     $2a
+        dex
+        bne     @853e
+@8557:  pla
+        shorta
+        plx
+        rts
+
+CalcTrajectory:
+@e7c0:  stz     $f120
+        ldx     $f111                   ; initial x position
+        stx     $f118
+        stz     $f116
+        stz     $f117
+        stz     $f11b
+        stz     $f11c
+        stz     $f11a
+        lda     $f112                   ; initial y position
+        cmp     $f114                   ; final y position
+        beq     @e810
+        bcc     @e7f9
+; move in -y direction
+        dec     $f117
+        lda     $f112
+        sec
+        sbc     $f114
+        sta     $f11b
+        lsr
+        clc
+        adc     $f114
+        sta     $f11f
+        bra     @e810
+; move in +y direction
+@e7f9:  inc     $f117
+        lda     $f114
+        sec
+        sbc     $f112
+        sta     $f11b
+        lsr
+        clc
+        adc     $f112
+        sta     $f11f
+        bra     @e810
+@e810:  lda     $f111
+        cmp     $f113
+        beq     @e846
+        bcc     @e831
+; move in -x direction
+        dec     $f116
+        lda     $f111
+        sec
+        sbc     $f113
+        sta     $f11c
+        lsr
+        clc
+        adc     $f113
+        sta     $f11e
+        bra     @e846
+; move in +x direction
+@e831:  inc     $f116
+        lda     $f113
+        sec
+        sbc     $f111
+        sta     $f11c
+        lsr
+        clc
+        adc     $f111
+        sta     $f11e
+@e846:  lda     $f11c
+        tax
+        stx     $26
+        lda     $f115                   ; divide by trajectory speed
+        tax
+        stx     $28
+        jsr     Div16x
+        lda     $2a
+        inc
+        sta     $f11d
+        rts
+
+_02cc3c:
+@cc3c:  jsr     TfrLeftMonsterTiles
+        stz     $4e
+@cc41:  jsr     WaitFrame
+        lda     $4e
+        and     #1
+        jsr     SwapMonsterScreen
+        inc     a:$004e
+        lda     a:$004e
+        cmp     #$60
+        bne     @cc41
+        jsr     TfrRightMonsterTiles
+        lda     #1
+        jsr     SwapMonsterScreen
+        rtl
+
+; [ update vector trajectory (far) ]
+
+UpdateTrajectory_far:
+@e85c:  jsr     UpdateTrajectory
+        rtl
+
+; ------------------------------------------------------------------------------
+
+; [ update vector trajectory ]
+
+UpdateTrajectory:
+@e860:  stz     $f121
+        stz     $f122
+        lda     $f115
+        sta     $00
+@e86b:  lda     $f118
+        clc
+        adc     $f116
+        sta     $f118
+        lda     $f11a
+        clc
+        adc     $f11b
+        sta     $f11a
+@e87f:  cmp     $f11c
+        bcc     @e8cb
+        lda     $f117
+        bmi     @e898
+        longa
+        lda     $00
+        pha
+        lda     $f117
+        and     #$00ff
+        sta     $00
+        bra     @e8a5
+@e898:  longa
+        lda     $00
+        pha
+        lda     $f117
+        ora     #$ff00
+        sta     $00
+@e8a5:  lda     $f121
+        clc
+        adc     $00
+        sta     $f121
+        pla
+        sta     $00
+        shorta0
+        lda     $f119
+        clc
+        adc     $f117
+        sta     $f119
+        lda     $f11a
+        sec
+        sbc     $f11c
+        sta     $f11a
+        jmp     @e87f
+@e8cb:  dec     $00
+        bne     @e86b
+        dec     $f11d
+        bne     @e8d6
+        sec
+        rts
+@e8d6:  clc
+        rts
+		
 NukeRumble:
 	.byte	$00, $00, $00, $00, $11, $22, $33, $44, $55, $66, $77, $88, $99, $AA, $BB, $CC, $DD, $EE, $FF
 	.byte   $00, $00, $00, $00, $11, $22, $33, $44, $55, $66, $77, $88, $99, $AA, $BB, $CC, $DD, $EE, $FF
@@ -30,6 +224,44 @@ NukeRumblePointer:
 
 SetNukeRumble:
 	SetRumbleTable	NukeRumblePointer
+	rtl
+	
+MageRumble:
+	.byte	$FF, $FF, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+	.byte	$00, $00, $00, $00, $11, $22, $33, $44, $55, $66, $77, $88, $99, $AA, $BB, $CC, $DD, $EE, $FF
+	.byte	$00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+	.byte   $00, $00, $00, $00, $11, $22, $33, $44, $55, $66, $77, $88, $99, $AA, $BB, $CC, $DD, $EE, $FF, $FF
+	.byte   $00, $00, $00, $00, $11, $22, $33, $44, $55, $66, $77, $88, $99, $AA, $BB, $CC, $DD, $EE, $FF, $FF, $FF, $FF, $FE
+
+MageRumblePointer:
+	.byte	<MageRumble, >MageRumble
+
+SetMageRumble:
+	SetRumbleTable	MageRumblePointer
+	rtl
+
+ChocoboRumble:
+	.byte	$00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00 
+	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00
+	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00
+	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00
+	.byte	$55, $55, $77, $77, $99, $99, $99, $FE
+
+
+ChocoboRumblePointer:
+	.byte	<ChocoboRumble, >ChocoboRumble
+
+SetChocoboRumble:
+	SetRumbleTable	ChocoboRumblePointer
+	rtl
+
+SummonRumble1:
+	SetRumble $77, 85
+	rtl
+
+NeverEndingRumble77:
+	SetRumble $77, $FF
 	rtl
 
 
@@ -114,6 +346,7 @@ PreMagicAnim1:
         stz     $38e2
         lda     $34c2
         sta     $f485
+		SetRumble $AA, 25
         lda     $04
         jsr     ExecAnimScript
         pla
@@ -454,6 +687,7 @@ MagicAnim_24:
 ; [ attack animation $26: odin attack ]
 
 MagicAnim_26:
+		
 @eca4:  jsr     _02c46d
         jsl     _01fcb6
         rts
@@ -735,6 +969,7 @@ _02ee31:
 ; [ magic animation $0a: goblin (imp) ]
 
 MagicAnim_0a:
+		jsl	SetChocoboRumble
 @ee5e:  ldy     #$e380
         jsr     _02ee31
         jsl     GoblinAnim
@@ -746,6 +981,7 @@ MagicAnim_0a:
 
 MagicAnim_0b:
 @ee6b:  jsl     BombAnim
+		SetRumble $FF, 30
         stz     $f2a0
         stz     $00
         lda     #$06
@@ -775,6 +1011,7 @@ MagicAnim_0c:
 ; [ magic animation $0d: mindflayer (mage) ]
 
 MagicAnim_0d:
+		jsl		SetMageRumble
 @ee9d:  jsl     CockatriceAnim
         jmp     AfterMagicAnim
 
@@ -783,6 +1020,7 @@ MagicAnim_0d:
 ; [ magic animation $0e: chocobo ]
 
 MagicAnim_0e:
+		jsl	SetChocoboRumble
 @eea4:  ldy     #$e3e0
         jsr     _02ee31
         ldx     $f321
@@ -803,7 +1041,7 @@ MagicAnim_0e:
         sec
         sbc     #$10
         sta     $f114
-        jsr     CalcTrajectory
+        jsl     CalcTrajectory_far
         jsr     _02eef4
         jsl     ChocoboAnim
         plx
@@ -812,7 +1050,7 @@ MagicAnim_0e:
         stx     $f111
         lda     #$08
         sta     $f115
-        jsr     CalcTrajectory
+        jsl     CalcTrajectory_far
         jsr     _02eef4
         jmp     AfterMagicAnim
 
@@ -820,7 +1058,7 @@ MagicAnim_0e:
 
 _02eef4:
 @eef4:  jsr     WaitFrame
-        jsr     UpdateTrajectory
+        jsl     UpdateTrajectory_far
         bcs     @ef05
         ldx     $f118
         stx     $f321
@@ -832,7 +1070,10 @@ _02eef4:
 ; [ magic animation $0f: shiva ]
 
 MagicAnim_0f:
+		jsl		NeverEndingRumble77
 @ef06:  jsl     ShivaAnim
+		lda #0
+		sta RumbleTimerLong
         jmp     AfterMagicAnim
 
 ; ------------------------------------------------------------------------------
@@ -840,18 +1081,20 @@ MagicAnim_0f:
 ; [ magic animation $10: ramuh (indra) ]
 
 MagicAnim_10:
+		jsl		SummonRumble1
 @ef0d:  jsl     RamuhAnim
         jmp     AfterMagicAnim
 
 ; ------------------------------------------------------------------------------
 
-; [ magic animation $11: many ??? ]
+; [ magic animation $11: ifrit ]
 
 MagicAnim_11:
 @ef14:  lda     #$05
         sta     $f2d0
         lda     #$08
         sta     $f326
+		jsl		SummonRumble1
         jsr     MagicAnim_00
         jsl     IfritAnim
         jmp     AfterMagicAnim
@@ -861,6 +1104,7 @@ MagicAnim_11:
 ; [ magic animation $12: titan ]
 
 MagicAnim_12:
+		jsl		SummonRumble1
 @ef28:  jsl     TitanAnim
         jmp     AfterMagicAnim
 
@@ -869,6 +1113,7 @@ MagicAnim_12:
 ; [ magic animation $13: mist dragon ]
 
 MagicAnim_13:
+		SetRumble $44, 120
 @ef2f:  jsl     MistDrgnAnim
         jmp     AfterMagicAnim
 
@@ -898,6 +1143,7 @@ MagicAnim_14:
         cpy     #5
         bne     @ef4f
         stz     $02
+		SetRumble	$44, 110
         lda     #$3d
         jsr     ExecAnimScript
         lda     #$00
@@ -908,6 +1154,7 @@ MagicAnim_14:
 ; [ magic animation $15: odin (summon) ]
 
 MagicAnim_15:
+		SetRumble $AA, 40
 @ef72:  jsl     OdinSummonAnim
         jmp     AfterMagicAnim
 
@@ -916,7 +1163,10 @@ MagicAnim_15:
 ; [ magic animation $16: leviathan ]
 
 MagicAnim_16:
+		jsl		NeverEndingRumble77
 @ef79:  jsl     LeviathanAnim
+		lda #0
+		sta RumbleTimerLong
         jmp     AfterMagicAnim
 
 ; ------------------------------------------------------------------------------
@@ -936,6 +1186,8 @@ MagicAnim_19:
 
 MagicAnim_1a:
 @ef8a:  jsl     BahamutAnim
+		lda #0
+		sta RumbleTimerLong
         jmp     AfterMagicAnim
 
 ; ------------------------------------------------------------------------------
@@ -1406,6 +1658,7 @@ MagicAnim_1b:
 ; [ magic animation $00: default ]
 
 MagicAnim_00:
+		SetRumble $55, 25
 @f30d:  stz     $f2a0
 
 _02f310:

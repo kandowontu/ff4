@@ -204,7 +204,7 @@ CmdAnim_16:
         sta     $f114
         lda     #$08
         sta     $f115
-        jsr     CalcTrajectory
+        jsl     CalcTrajectory_far
         lda     $f11c
         lsr3
         tax
@@ -224,7 +224,7 @@ CmdAnim_16:
         jsr     PlaySfx
 @c1a8:  jsr     WaitFrame
         inc     $f137
-        jsr     UpdateTrajectory
+        jsl     UpdateTrajectory_far
         bcs     @c222
         dec     $f139
         bmi     @c1c5
@@ -441,7 +441,7 @@ CmdAnim_0e:
         sta     $f112
         lda     #$08
         sta     $f115
-        jsr     CalcTrajectory
+        jsl     CalcTrajectory_far
         lda     #$01
         jsr     _02c2c6
         jsr     _02f4f8
@@ -482,7 +482,7 @@ CmdAnim_0e:
         sta     $f114
         lda     #$08
         sta     $f115
-        jsr     CalcTrajectory
+        jsl     CalcTrajectory_far
         clr_a
         sta     $f481
         sta     $f42e
@@ -501,7 +501,7 @@ CmdAnim_0e:
 
 _02c3c7:
 @c3c7:  jsr     WaitFrame
-        jsr     UpdateTrajectory
+        jsl     UpdateTrajectory_far
         bcs     @c3e0
         jsr     GetAttackerCharSpritePtr
         lda     $f118
@@ -565,7 +565,7 @@ _02c404:
 _02c433:
 @c433:  jsl     _02c3e1
 @c437:  jsr     WaitFrame
-        jsr     UpdateTrajectory
+        jsl     UpdateTrajectory_far
         bcs     @c45d
         jsl     _02c404
         jsr     GetAttackerCharSpritePtr
@@ -688,7 +688,7 @@ CmdAnim_1e:
         sta     $f114
         lda     #$08
         sta     $f115
-        jsr     CalcTrajectory
+        jsl     CalcTrajectory_far
         lda     #$28
         jsr     PlaySfx
         jsr     _02c433
@@ -1172,9 +1172,9 @@ SetAttackerPose:
 ; [ play command sound effect ]
 
 CmdSfx:
+		pha
 		SetRumble $33, 2
-@c802:  pha
-        lda     $34c2
+@c802:  lda     $34c2
         sta     $f485
         pla
         jmp     PlaySfx
