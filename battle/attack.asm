@@ -14,7 +14,7 @@
 ; [ action type 2: do attack ]
 
 DoAttack:
-		SetRumble $88, 5
+;		SetRumble $88, 5
 @ad57:  lda     #$14        ; battle graphics $14: update monster rows
         jsr     ExecBtlGfx
         ldx     #$0280
