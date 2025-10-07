@@ -585,7 +585,7 @@ MagicAnim_24:
 ; [ attack animation $26: odin attack ]
 
 MagicAnim_26:
-		SetRumble $AA, 40
+		
 @eca4:  jsr     _02c46d
         jsl     _01fcb6
         rts
@@ -1040,6 +1040,7 @@ MagicAnim_14:
 ; [ magic animation $15: odin (summon) ]
 
 MagicAnim_15:
+		SetRumble $AA, 40
 @ef72:  jsl     OdinSummonAnim
         jmp     AfterMagicAnim
 
