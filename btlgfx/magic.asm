@@ -16,6 +16,23 @@
 .segment "menu_code"
 
 
+_02cc3c:
+@cc3c:  jsr     TfrLeftMonsterTiles
+        stz     $4e
+@cc41:  jsr     WaitFrame
+        lda     $4e
+        and     #1
+        jsr     SwapMonsterScreen
+        inc     a:$004e
+        lda     a:$004e
+        cmp     #$60
+        bne     @cc41
+        jsr     TfrRightMonsterTiles
+        lda     #1
+        jsr     SwapMonsterScreen
+        rtl
+
+
 NukeRumble:
 	.byte	$00, $00, $00, $00, $11, $22, $33, $44, $55, $66, $77, $88, $99, $AA, $BB, $CC, $DD, $EE, $FF
 	.byte   $00, $00, $00, $00, $11, $22, $33, $44, $55, $66, $77, $88, $99, $AA, $BB, $CC, $DD, $EE, $FF

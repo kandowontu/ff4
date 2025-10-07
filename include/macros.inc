@@ -50,16 +50,24 @@
 
 .mac SetRumble strength, time
         .if .asize = 8
+				lda RumbleTimerLong
+				cmp #time
+				bpl :+
                 lda #strength
 				sta RumbleStrengthLong
 				lda #time
 				sta RumbleTimerLong
+			:
         .else
                 shorta
-                lda #strength
+				lda RumbleTimerLong
+				cmp #time
+				bpl :+
+				lda #strength
 				sta RumbleStrengthLong
 				lda #time
 				sta RumbleTimerLong
+			:
 				longa
         .endif	
 .endmac
