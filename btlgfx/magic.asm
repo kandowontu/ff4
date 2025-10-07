@@ -1195,6 +1195,7 @@ MagicAnim_1a:
 ; [ magic animation $07: quake ]
 
 MagicAnim_07:
+		jsl		SummonRumble1
 @ef91:  lda     $34c5
         beq     @efaa
         ldx     #$80b0
