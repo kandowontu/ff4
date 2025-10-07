@@ -195,6 +195,10 @@ UpdateTrajectory:
 @e8d6:  clc
         rts
 		
+MeteoRumble:
+	.byte	$00, $00, $00, $00, $11, $22, $33, $44, $55, $66, $77, $88, $99, $AA, $BB, $CC, $DD, $EE, $FF
+	.byte	$00, $00, $00, $00, $11, $22, $33, $44, $55, $66, $77, $88, $99, $AA, $BB, $CC, $DD, $EE, $FF
+	;fall through
 NukeRumble:
 	.byte	$00, $00, $00, $00, $11, $22, $33, $44, $55, $66, $77, $88, $99, $AA, $BB, $CC, $DD, $EE, $FF
 	.byte   $00, $00, $00, $00, $11, $22, $33, $44, $55, $66, $77, $88, $99, $AA, $BB, $CC, $DD, $EE, $FF
@@ -209,6 +213,13 @@ NukeRumblePointer:
 
 SetNukeRumble:
 	SetRumbleTable	NukeRumblePointer
+	rtl
+	
+MeteoRumblePointer:
+	.byte	<MeteoRumble, >MeteoRumble
+
+SetMeteoRumble:
+	SetRumbleTable	MeteoRumblePointer
 	rtl
 	
 MageRumble:
@@ -1180,7 +1191,7 @@ MagicAnim_1a:
 ; [ magic animation $07: quake ]
 
 MagicAnim_07:
-		jsl		SummonRumble1
+		SetRumble $77, 120
 @ef91:  lda     $34c5
         beq     @efaa
         ldx     #$80b0
@@ -1223,6 +1234,7 @@ MagicAnim_04:
 MagicAnim_05:
 @efc0:  lda     #$e4                    ; sprite tile id
 _efc2:  sta     $f133
+		jsl		SetMeteoRumble
         lda     $34c5
         bne     @efcb
         rts
