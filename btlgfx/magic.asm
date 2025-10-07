@@ -162,6 +162,22 @@ SetNukeRumble:
 	SetRumbleTable	NukeRumblePointer
 	rtl
 
+ChocoboRumble:
+	.byte	$00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00 
+	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00
+	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00
+	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00
+	.byte	$55, $55, $77, $77, $99, $99, $99, $FE
+
+
+ChocoboRumblePointer:
+	.byte	<ChocoboRumble, >ChocoboRumble
+
+SetChocoboRumble:
+	SetRumbleTable	ChocoboRumblePointer
+	rtl
+
 SummonRumble1:
 	SetRumble $77, 85
 	rtl
@@ -923,6 +939,7 @@ MagicAnim_0d:
 ; [ magic animation $0e: chocobo ]
 
 MagicAnim_0e:
+		jsl	SetChocoboRumble
 @eea4:  ldy     #$e3e0
         jsr     _02ee31
         ldx     $f321
@@ -989,7 +1006,7 @@ MagicAnim_10:
 
 ; ------------------------------------------------------------------------------
 
-; [ magic animation $11: many ??? ]
+; [ magic animation $11: ifrit ]
 
 MagicAnim_11:
 @ef14:  lda     #$05
