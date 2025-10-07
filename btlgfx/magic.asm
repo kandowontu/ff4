@@ -13,7 +13,7 @@
 
 ; [  ]
 
-.segment "menu_code"
+.segment "unused"
 
 ; [ calculate trajectory (far) ]
 
@@ -236,6 +236,24 @@ SetMageRumble:
 	SetRumbleTable	MageRumblePointer
 	rtl
 
+
+
+Fire3Rumble:
+	.byte	$50, $50, $80, $80, $B0, $B0, $F0, $F0, $05, $05, $08, $08, $0B, $0B, $0F, $0F
+	.byte	$50, $50, $80, $80, $B0, $B0, $F0, $F0, $05, $05, $08, $08, $0B, $0B, $0F, $0F
+	.byte	$50, $50, $80, $80, $B0, $B0, $F0, $F0, $05, $05, $08, $08, $0B, $0B, $0F, $0F
+	.byte	$50, $50, $80, $80, $B0, $B0, $F0, $F0, $05, $05, $08, $08, $0B, $0B, $0F, $0F
+	.byte	$50, $50, $80, $80, $B0, $B0, $F0, $F0, $05, $05, $08, $08, $0B, $0B, $0F, $0F
+	.byte	$50, $50, $80, $80, $B0, $B0, $F0, $F0, $05, $05, $08, $08, $0B, $0B, $0F, $0F
+	.byte   $AA, $AA, $AA, $AA, $BB, $BB, $BB, $BB, $CC, $CC, $CC, $CC, $DD, $DD, $DD, $DD, $EE, $EE, $EE, $EE, $FF, $FF, $FF, $FF, $FE
+	
+Fire3RumblePointer:
+	.byte	<Fire3Rumble, >Fire3Rumble
+
+SetFire3Rumble:
+	SetRumbleTable	Fire3RumblePointer
+	rtl
+	
 ChocoboRumble:
 	.byte	$00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
 	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00 
@@ -262,6 +280,8 @@ NeverEndingRumble77:
 
 
 .segment "btlgfx_code"
+
+; [  ]
 
 _02e9f3:
 @e9f3:  pha
@@ -711,6 +731,7 @@ MagicAnim_28:
 ; [ magic animation $23: fire 3 ]
 
 MagicAnim_23:
+		jsl		SetFire3Rumble
 @ecc9:  jsr     _02f2f3
         lda     #$03
         sta     $f2a0
