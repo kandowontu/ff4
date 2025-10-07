@@ -15,6 +15,119 @@
 
 .segment "menu_code"
 
+; [ calculate trajectory (far) ]
+
+CalcTrajectory_far:
+@e7bc:  jsr     CalcTrajectory
+        rtl
+
+; ------------------------------------------------------------------------------
+
+; [ calculate trajectory ]
+
+; calculates a vector trajectory from one point to another
+
+Div16x:
+@852b:  phx
+        longa
+        pha
+        stz     $2a
+        stz     $2c
+        lda     $26
+        beq     @8557
+        lda     $28
+        beq     @8557
+        ldx     #$0010
+@853e:  rol     $26
+        rol     $2c
+        sec
+        lda     $2c
+        sbc     $28
+        sta     $2c
+        bcs     @8552
+        lda     $2c
+        adc     $28
+        sta     $2c
+        clc
+@8552:  rol     $2a
+        dex
+        bne     @853e
+@8557:  pla
+        shorta
+        plx
+        rts
+
+CalcTrajectory:
+@e7c0:  stz     $f120
+        ldx     $f111                   ; initial x position
+        stx     $f118
+        stz     $f116
+        stz     $f117
+        stz     $f11b
+        stz     $f11c
+        stz     $f11a
+        lda     $f112                   ; initial y position
+        cmp     $f114                   ; final y position
+        beq     @e810
+        bcc     @e7f9
+; move in -y direction
+        dec     $f117
+        lda     $f112
+        sec
+        sbc     $f114
+        sta     $f11b
+        lsr
+        clc
+        adc     $f114
+        sta     $f11f
+        bra     @e810
+; move in +y direction
+@e7f9:  inc     $f117
+        lda     $f114
+        sec
+        sbc     $f112
+        sta     $f11b
+        lsr
+        clc
+        adc     $f112
+        sta     $f11f
+        bra     @e810
+@e810:  lda     $f111
+        cmp     $f113
+        beq     @e846
+        bcc     @e831
+; move in -x direction
+        dec     $f116
+        lda     $f111
+        sec
+        sbc     $f113
+        sta     $f11c
+        lsr
+        clc
+        adc     $f113
+        sta     $f11e
+        bra     @e846
+; move in +x direction
+@e831:  inc     $f116
+        lda     $f113
+        sec
+        sbc     $f111
+        sta     $f11c
+        lsr
+        clc
+        adc     $f111
+        sta     $f11e
+@e846:  lda     $f11c
+        tax
+        stx     $26
+        lda     $f115                   ; divide by trajectory speed
+        tax
+        stx     $28
+        jsr     Div16x
+        lda     $2a
+        inc
+        sta     $f11d
+        rts
 
 _02cc3c:
 @cc3c:  jsr     TfrLeftMonsterTiles
@@ -472,6 +585,7 @@ MagicAnim_24:
 ; [ attack animation $26: odin attack ]
 
 MagicAnim_26:
+		SetRumble $AA, 40
 @eca4:  jsr     _02c46d
         jsl     _01fcb6
         rts
@@ -821,7 +935,7 @@ MagicAnim_0e:
         sec
         sbc     #$10
         sta     $f114
-        jsr     CalcTrajectory
+        jsl     CalcTrajectory_far
         jsr     _02eef4
         jsl     ChocoboAnim
         plx
@@ -830,7 +944,7 @@ MagicAnim_0e:
         stx     $f111
         lda     #$08
         sta     $f115
-        jsr     CalcTrajectory
+        jsl     CalcTrajectory_far
         jsr     _02eef4
         jmp     AfterMagicAnim
 

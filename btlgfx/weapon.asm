@@ -725,7 +725,7 @@ WeaponAnim_06:
         sta     $f113
         lda     $f044,y
         sta     $f114
-        jsr     CalcTrajectory
+        jsl     CalcTrajectory_far
         jsr     ResetAnimSpritesLarge
         stz     $52
 @d1eb:  jsr     WaitFrame
@@ -813,7 +813,7 @@ ThrowAnim2:
         sec
         sbc     #$08
         sta     $f114
-        jsr     CalcTrajectory
+        jsl     CalcTrajectory_far
         jsr     ResetAnimSpritesLarge
         stz     $52
         lda     #$7c
@@ -828,7 +828,7 @@ ThrowAnim2:
         stx     $f113
         lda     #$08
         sta     $f115
-        jsr     CalcTrajectory
+        jsl     CalcTrajectory_far
         jsr     _02d2c7
         jmp     ResetAnimSpritesLarge
 
@@ -1029,7 +1029,7 @@ HarpAnim:
         sbc     #$08
         lda     $f044,y
         sta     $f114
-        jsr     CalcTrajectory
+        jsl     CalcTrajectory_far
         lda     $f0cf
         beq     @d448
         jsr     UpdateTrajectory
@@ -1240,7 +1240,7 @@ BowAnim:
         sbc     #$08
         lda     $f044,y
         sta     $f114                   ; final y position
-        jsr     CalcTrajectory
+        jsl     CalcTrajectory_far
         lda     #$16
         jsr     PlaySfx
         lda     $f0cf

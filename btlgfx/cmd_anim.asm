@@ -204,7 +204,7 @@ CmdAnim_16:
         sta     $f114
         lda     #$08
         sta     $f115
-        jsr     CalcTrajectory
+        jsl     CalcTrajectory_far
         lda     $f11c
         lsr3
         tax
@@ -441,7 +441,7 @@ CmdAnim_0e:
         sta     $f112
         lda     #$08
         sta     $f115
-        jsr     CalcTrajectory
+        jsl     CalcTrajectory_far
         lda     #$01
         jsr     _02c2c6
         jsr     _02f4f8
@@ -482,7 +482,7 @@ CmdAnim_0e:
         sta     $f114
         lda     #$08
         sta     $f115
-        jsr     CalcTrajectory
+        jsl     CalcTrajectory_far
         clr_a
         sta     $f481
         sta     $f42e
@@ -688,7 +688,7 @@ CmdAnim_1e:
         sta     $f114
         lda     #$08
         sta     $f115
-        jsr     CalcTrajectory
+        jsl     CalcTrajectory_far
         lda     #$28
         jsr     PlaySfx
         jsr     _02c433
