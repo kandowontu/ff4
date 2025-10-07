@@ -145,7 +145,71 @@ _02cc3c:
         jsr     SwapMonsterScreen
         rtl
 
+; [ update vector trajectory (far) ]
 
+UpdateTrajectory_far:
+@e85c:  jsr     UpdateTrajectory
+        rtl
+
+; ------------------------------------------------------------------------------
+
+; [ update vector trajectory ]
+
+UpdateTrajectory:
+@e860:  stz     $f121
+        stz     $f122
+        lda     $f115
+        sta     $00
+@e86b:  lda     $f118
+        clc
+        adc     $f116
+        sta     $f118
+        lda     $f11a
+        clc
+        adc     $f11b
+        sta     $f11a
+@e87f:  cmp     $f11c
+        bcc     @e8cb
+        lda     $f117
+        bmi     @e898
+        longa
+        lda     $00
+        pha
+        lda     $f117
+        and     #$00ff
+        sta     $00
+        bra     @e8a5
+@e898:  longa
+        lda     $00
+        pha
+        lda     $f117
+        ora     #$ff00
+        sta     $00
+@e8a5:  lda     $f121
+        clc
+        adc     $00
+        sta     $f121
+        pla
+        sta     $00
+        shorta0
+        lda     $f119
+        clc
+        adc     $f117
+        sta     $f119
+        lda     $f11a
+        sec
+        sbc     $f11c
+        sta     $f11a
+        jmp     @e87f
+@e8cb:  dec     $00
+        bne     @e86b
+        dec     $f11d
+        bne     @e8d6
+        sec
+        rts
+@e8d6:  clc
+        rts
+		
 NukeRumble:
 	.byte	$00, $00, $00, $00, $11, $22, $33, $44, $55, $66, $77, $88, $99, $AA, $BB, $CC, $DD, $EE, $FF
 	.byte   $00, $00, $00, $00, $11, $22, $33, $44, $55, $66, $77, $88, $99, $AA, $BB, $CC, $DD, $EE, $FF
@@ -160,6 +224,20 @@ NukeRumblePointer:
 
 SetNukeRumble:
 	SetRumbleTable	NukeRumblePointer
+	rtl
+	
+MageRumble:
+	.byte	$FF, $FF, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+	.byte	$00, $00, $00, $00, $11, $22, $33, $44, $55, $66, $77, $88, $99, $AA, $BB, $CC, $DD, $EE, $FF
+	.byte	$00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+	.byte   $00, $00, $00, $00, $11, $22, $33, $44, $55, $66, $77, $88, $99, $AA, $BB, $CC, $DD, $EE, $FF, $FF
+	.byte   $00, $00, $00, $00, $11, $22, $33, $44, $55, $66, $77, $88, $99, $AA, $BB, $CC, $DD, $EE, $FF, $FF, $FF, $FF, $FE
+
+MageRumblePointer:
+	.byte	<MageRumble, >MageRumble
+
+SetMageRumble:
+	SetRumbleTable	MageRumblePointer
 	rtl
 
 ChocoboRumble:
@@ -891,6 +969,7 @@ _02ee31:
 ; [ magic animation $0a: goblin (imp) ]
 
 MagicAnim_0a:
+		jsl	SetChocoboRumble
 @ee5e:  ldy     #$e380
         jsr     _02ee31
         jsl     GoblinAnim
@@ -902,6 +981,7 @@ MagicAnim_0a:
 
 MagicAnim_0b:
 @ee6b:  jsl     BombAnim
+		SetRumble $FF, 30
         stz     $f2a0
         stz     $00
         lda     #$06
@@ -931,6 +1011,7 @@ MagicAnim_0c:
 ; [ magic animation $0d: mindflayer (mage) ]
 
 MagicAnim_0d:
+		jsl		SetMageRumble
 @ee9d:  jsl     CockatriceAnim
         jmp     AfterMagicAnim
 
@@ -977,7 +1058,7 @@ MagicAnim_0e:
 
 _02eef4:
 @eef4:  jsr     WaitFrame
-        jsr     UpdateTrajectory
+        jsl     UpdateTrajectory_far
         bcs     @ef05
         ldx     $f118
         stx     $f321
@@ -1062,6 +1143,7 @@ MagicAnim_14:
         cpy     #5
         bne     @ef4f
         stz     $02
+		SetRumble	$44, 110
         lda     #$3d
         jsr     ExecAnimScript
         lda     #$00
@@ -1577,6 +1659,7 @@ MagicAnim_1b:
 ; [ magic animation $00: default ]
 
 MagicAnim_00:
+		SetRumble $55, 25
 @f30d:  stz     $f2a0
 
 _02f310:
