@@ -1,6 +1,6 @@
 # Modified Final Fantasy IV Disassembly for SNES Rumble
 
-This is a disassembly of Final Fantasy IV for the Super Famicom (i.e. Final
+This is based off of a disassembly of Final Fantasy IV for the Super Famicom (i.e. Final
 Fantasy II for the SNES) by Everything8215. It builds the following ROMs (with rumble):
 
 - Final Fantasy IV 1.0 (J), CRC32: `0x21027C5D`
