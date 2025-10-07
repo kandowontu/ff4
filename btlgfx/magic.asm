@@ -129,21 +129,6 @@ CalcTrajectory:
         sta     $f11d
         rts
 
-_02cc3c:
-@cc3c:  jsr     TfrLeftMonsterTiles
-        stz     $4e
-@cc41:  jsr     WaitFrame
-        lda     $4e
-        and     #1
-        jsr     SwapMonsterScreen
-        inc     a:$004e
-        lda     a:$004e
-        cmp     #$60
-        bne     @cc41
-        jsr     TfrRightMonsterTiles
-        lda     #1
-        jsr     SwapMonsterScreen
-        rtl
 
 ; [ update vector trajectory (far) ]
 
