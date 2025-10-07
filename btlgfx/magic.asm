@@ -162,6 +162,10 @@ SetNukeRumble:
 	SetRumbleTable	NukeRumblePointer
 	rtl
 
+SummonRumble1:
+	SetRumble $77, 85
+	rtl
+
 
 .segment "btlgfx_code"
 
@@ -964,7 +968,13 @@ _02eef4:
 ; [ magic animation $0f: shiva ]
 
 MagicAnim_0f:
+		lda #$77
+		sta RumbleStrengthLong
+		lda #255
+		sta RumbleTimerLong
 @ef06:  jsl     ShivaAnim
+		lda #0
+		sta RumbleTimerLong
         jmp     AfterMagicAnim
 
 ; ------------------------------------------------------------------------------
@@ -972,6 +982,7 @@ MagicAnim_0f:
 ; [ magic animation $10: ramuh (indra) ]
 
 MagicAnim_10:
+		jsl		SummonRumble1
 @ef0d:  jsl     RamuhAnim
         jmp     AfterMagicAnim
 
@@ -984,6 +995,7 @@ MagicAnim_11:
         sta     $f2d0
         lda     #$08
         sta     $f326
+		jsl		SummonRumble1
         jsr     MagicAnim_00
         jsl     IfritAnim
         jmp     AfterMagicAnim
@@ -993,6 +1005,7 @@ MagicAnim_11:
 ; [ magic animation $12: titan ]
 
 MagicAnim_12:
+		jsl		SummonRumble1
 @ef28:  jsl     TitanAnim
         jmp     AfterMagicAnim
 
@@ -1001,6 +1014,7 @@ MagicAnim_12:
 ; [ magic animation $13: mist dragon ]
 
 MagicAnim_13:
+		SetRumble $44, 120
 @ef2f:  jsl     MistDrgnAnim
         jmp     AfterMagicAnim
 
@@ -1049,7 +1063,13 @@ MagicAnim_15:
 ; [ magic animation $16: leviathan ]
 
 MagicAnim_16:
+		lda #$77
+		sta RumbleStrengthLong
+		lda #255
+		sta RumbleTimerLong
 @ef79:  jsl     LeviathanAnim
+		lda #0
+		sta RumbleTimerLong
         jmp     AfterMagicAnim
 
 ; ------------------------------------------------------------------------------

@@ -1917,6 +1917,9 @@ _02be56:
 ; [ restore graphics after magic animation ]
 
 AfterMagicAnim:
+		;lda #0
+		;sta RumbleTimerLong
+
 @be8b:  jsr     ResetAnimSpritesLarge
         lda     $f35a
         beq     @beaa
