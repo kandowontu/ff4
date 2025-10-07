@@ -1,7 +1,7 @@
-# Final Fantasy IV Disassembly
+# Modified Final Fantasy IV Disassembly for SNES Rumble
 
 This is a disassembly of Final Fantasy IV for the Super Famicom (i.e. Final
-Fantasy II for the SNES). It builds the following ROMs:
+Fantasy II for the SNES) by Everything8215. It builds the following ROMs (with rumble):
 
 - Final Fantasy IV 1.0 (J), CRC32: `0x21027C5D`
 - Final Fantasy IV 1.1 (J), CRC32: `0xCAA15E97`
@@ -9,6 +9,8 @@ Fantasy II for the SNES). It builds the following ROMs:
 - Final Fantasy II 1.1 (U), CRC32: `0x23084FCD`
 
 The Japanese "Easy Version" of FF4 is not currently supported.
+
+It also has a Fastrom branch, which is kept up to date with main.
 
 ## Build Instructions
 
