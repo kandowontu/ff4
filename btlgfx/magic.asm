@@ -166,6 +166,10 @@ SummonRumble1:
 	SetRumble $77, 85
 	rtl
 
+NeverEndingRumble77:
+	SetRumble $77, $FF
+	rtl
+
 
 .segment "btlgfx_code"
 
@@ -968,10 +972,7 @@ _02eef4:
 ; [ magic animation $0f: shiva ]
 
 MagicAnim_0f:
-		lda #$77
-		sta RumbleStrengthLong
-		lda #255
-		sta RumbleTimerLong
+		jsl		NeverEndingRumble77
 @ef06:  jsl     ShivaAnim
 		lda #0
 		sta RumbleTimerLong
@@ -1063,10 +1064,7 @@ MagicAnim_15:
 ; [ magic animation $16: leviathan ]
 
 MagicAnim_16:
-		lda #$77
-		sta RumbleStrengthLong
-		lda #255
-		sta RumbleTimerLong
+		jsl		NeverEndingRumble77
 @ef79:  jsl     LeviathanAnim
 		lda #0
 		sta RumbleTimerLong
@@ -1088,7 +1086,10 @@ MagicAnim_19:
 ; [ magic animation $1a: bahamut ]
 
 MagicAnim_1a:
+		SetRumble $FF, $FF
 @ef8a:  jsl     BahamutAnim
+		lda #0
+		sta RumbleTimerLong
         jmp     AfterMagicAnim
 
 ; ------------------------------------------------------------------------------

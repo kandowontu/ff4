@@ -52,7 +52,7 @@
         .if .asize = 8
 				lda RumbleTimerLong
 				cmp #time
-				bpl :+
+				bcs :+
                 lda #strength
 				sta RumbleStrengthLong
 				lda #time
@@ -62,7 +62,7 @@
                 shorta
 				lda RumbleTimerLong
 				cmp #time
-				bpl :+
+				bcs :+
 				lda #strength
 				sta RumbleStrengthLong
 				lda #time
