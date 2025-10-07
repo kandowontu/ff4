@@ -224,7 +224,7 @@ CmdAnim_16:
         jsr     PlaySfx
 @c1a8:  jsr     WaitFrame
         inc     $f137
-        jsr     UpdateTrajectory
+        jsl     UpdateTrajectory_far
         bcs     @c222
         dec     $f139
         bmi     @c1c5
@@ -501,7 +501,7 @@ CmdAnim_0e:
 
 _02c3c7:
 @c3c7:  jsr     WaitFrame
-        jsr     UpdateTrajectory
+        jsl     UpdateTrajectory_far
         bcs     @c3e0
         jsr     GetAttackerCharSpritePtr
         lda     $f118
@@ -565,7 +565,7 @@ _02c404:
 _02c433:
 @c433:  jsl     _02c3e1
 @c437:  jsr     WaitFrame
-        jsr     UpdateTrajectory
+        jsl     UpdateTrajectory_far
         bcs     @c45d
         jsl     _02c404
         jsr     GetAttackerCharSpritePtr
