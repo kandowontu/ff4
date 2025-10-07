@@ -2726,7 +2726,7 @@ GfxScriptCmd_f3:
 
 ; ------------------------------------------------------------------------------
 
-; [  ]
+; [ Used in zeromus fight to summon palom/porum and maybe others ]
 
 _02cc3c:
 @cc3c:  jsr     TfrLeftMonsterTiles
