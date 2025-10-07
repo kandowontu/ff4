@@ -292,6 +292,7 @@ CmdAnim_16:
         jsr     PlaySfx
         ldx     #$0014
         stz     $f111
+		SetRumble $FF, 12
 @c255:  jsr     WaitFrame
         inc     $f111
         lda     $f111
