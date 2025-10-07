@@ -1700,6 +1700,7 @@ BahamutAnim:
         jsr     SummonWaitX
         lda     #$08
         sta     $f326
+		SetRumble $FF, $FF
         jsr     ResetAnimSpritesLarge_near
         jsr     PlayMagicSfx_near
         jsl     MegaflareAnim

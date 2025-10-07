@@ -1185,7 +1185,6 @@ MagicAnim_19:
 ; [ magic animation $1a: bahamut ]
 
 MagicAnim_1a:
-		SetRumble $FF, $FF
 @ef8a:  jsl     BahamutAnim
 		lda #0
 		sta RumbleTimerLong
