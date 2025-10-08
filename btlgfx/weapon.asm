@@ -15,6 +15,25 @@
 
 .segment "menu_code"
 
+HarpPt2:
+		lda #0
+		sta RumblePositionLong
+		SetRumble $FF, 15
+		rtl
+
+HarpRumble:
+	.byte	$11, $33, $55, $77, $99, $AA, $CC, $EE, $00, $00, $00
+	.byte	$11, $33, $55, $77, $99, $AA, $CC, $EE, $00, $00, $00
+	.byte	$11, $33, $55, $77, $99, $AA, $CC, $EE, $00, $00, $00
+	.byte	$11, $33, $55, $77, $99, $AA, $CC, $EE, $00, $00, $00, $FE
+
+HarpRumblePointer:
+	.byte	<HarpRumble, >HarpRumble
+
+HarpRumbleCode:
+	SetRumbleTable	HarpRumblePointer
+	rtl
+
 SwordRumble:
 	.byte	$00, $00, $00, $00, $88, $88, $99, $99, $AA, $BB, $FF, $FF, $00, $00, $00, $00, $00, $00, $00, $88, $88, $99, $99, $AA, $BB, $FF, $FF, $FE
 	
@@ -1041,6 +1060,7 @@ HarpAnim:
         jsr     PlaySfx
 
 ; start of 1st frame loop (sprites move toward target)
+		jsl	HarpRumbleCode
 @d458:  jsr     WaitFrame
         inc     $52
         lda     #$10
@@ -1112,6 +1132,7 @@ HarpAnim:
 @d4f9:  stz     $52
 
 ; start of 2nd frame loop (sprites disappear)
+		jsl		HarpPt2
 @d4fb:  lda     $34c4
         bpl     @d51b
         lda     $34c7

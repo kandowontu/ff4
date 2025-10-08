@@ -292,6 +292,7 @@ CmdAnim_16:
         jsr     PlaySfx
         ldx     #$0014
         stz     $f111
+		SetRumble $FF, 12
 @c255:  jsr     WaitFrame
         inc     $f111
         lda     $f111
@@ -601,6 +602,7 @@ _02c46d:
 ; [ command animation $1e: jump 2 ]
 
 CmdAnim_1e:
+		SetRumble $88, 15
 @c476:  lda     $34c2
         bpl     @c494
 

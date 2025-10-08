@@ -2868,7 +2868,8 @@ Special_08:
         jmp     @d8ba
 @d94b:  lda     #$00
         jsr     PlaySfx
-		SetRumble 0, 0
+		lda		#0
+		sta		RumbleTimerLong
         jmp     WaitVblankEvent
 
 ; ------------------------------------------------------------------------------

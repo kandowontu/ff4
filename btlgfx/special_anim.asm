@@ -94,6 +94,7 @@ SpecialAnim_af:
 ; [ special animation $bb: zeromus shakes ]
 
 SpecialAnim_bb:
+		SetRumble $CC, 80
 @ee6c:  lda     #$54
         jsl     PlaySfx_far
         ldx     #$0040

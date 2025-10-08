@@ -13,17 +13,57 @@
 
 ; [  ]
 
-.segment "menu_code"
 
 ; [ calculate trajectory (far) ]
+
+.segment "menu_code"
+
+CheckForRumble:
+
+	cpx #$21			
+	bne @NotIce3
+@ice3:
+	jsl	SetBlizzagaRumble	;ice 3
+	rtl
+	
+@NotIce3:
+	cpx #$20		
+	bne @NotIce2
+@ice2:
+	SetRumble	$88, 40	;ice 2
+	rtl
+
+@NotIce2:
+
+	cpx #$1f
+	bne @NotIce
+@ice:
+	SetRumble	$55, 50	;ice
+	rtl
+
+@NotIce:
+
+	rtl
+
+
+
+
+
+
+
+
+
+
+.segment "unused"
+
+; ------------------------------------------------------------------------------
+
+
+; [ calculate trajectory ]
 
 CalcTrajectory_far:
 @e7bc:  jsr     CalcTrajectory
         rtl
-
-; ------------------------------------------------------------------------------
-
-; [ calculate trajectory ]
 
 ; calculates a vector trajectory from one point to another
 
@@ -129,21 +169,6 @@ CalcTrajectory:
         sta     $f11d
         rts
 
-_02cc3c:
-@cc3c:  jsr     TfrLeftMonsterTiles
-        stz     $4e
-@cc41:  jsr     WaitFrame
-        lda     $4e
-        and     #1
-        jsr     SwapMonsterScreen
-        inc     a:$004e
-        lda     a:$004e
-        cmp     #$60
-        bne     @cc41
-        jsr     TfrRightMonsterTiles
-        lda     #1
-        jsr     SwapMonsterScreen
-        rtl
 
 ; [ update vector trajectory (far) ]
 
@@ -210,10 +235,16 @@ UpdateTrajectory:
 @e8d6:  clc
         rts
 		
+MeteoRumble:
+	.byte	$00, $00, $00, $00, $11, $22, $33, $44, $55, $66, $77, $88, $99, $AA, $BB, $CC, $DD, $EE, $FF
+	.byte	$00, $00, $00, $00, $11, $22, $33, $44, $55, $66, $77, $88, $99, $AA, $BB, $CC, $DD, $EE, $FF
+	;fall through
 NukeRumble:
 	.byte	$00, $00, $00, $00, $11, $22, $33, $44, $55, $66, $77, $88, $99, $AA, $BB, $CC, $DD, $EE, $FF
 	.byte   $00, $00, $00, $00, $11, $22, $33, $44, $55, $66, $77, $88, $99, $AA, $BB, $CC, $DD, $EE, $FF
 	.byte   $00, $00, $00, $00, $11, $22, $33, $44, $55, $66, $77, $88, $99, $AA, $BB, $CC, $DD, $EE, $FF
+	;fall through
+BlizzagaRumble:
 	.byte   $00, $00, $00, $00, $11, $22, $33, $44, $55, $66, $77, $88, $99, $AA, $BB, $CC, $DD, $EE, $FF
 	.byte   $00, $00, $00, $00, $11, $22, $33, $44, $55, $66, $77, $88, $99, $AA, $BB, $CC, $DD, $EE, $FF
 	.byte   $00, $00, $00, $00, $11, $22, $33, $44, $55, $66, $77, $88, $99, $AA, $BB, $CC, $DD, $EE, $FF
@@ -224,6 +255,20 @@ NukeRumblePointer:
 
 SetNukeRumble:
 	SetRumbleTable	NukeRumblePointer
+	rtl
+	
+BlizzagaRumblePointer:
+	.byte	<BlizzagaRumble, >BlizzagaRumble
+
+SetBlizzagaRumble:
+	SetRumbleTable	BlizzagaRumblePointer
+	rtl
+	
+MeteoRumblePointer:
+	.byte	<MeteoRumble, >MeteoRumble
+
+SetMeteoRumble:
+	SetRumbleTable	MeteoRumblePointer
 	rtl
 	
 MageRumble:
@@ -239,7 +284,36 @@ MageRumblePointer:
 SetMageRumble:
 	SetRumbleTable	MageRumblePointer
 	rtl
+	
+	
+DrainRumble:
+	.byte	$11, $11, $11, $11, $22, $22, $22, $22, $33, $33, $33, $33, $44, $44, $44, $44, $44, $55, $55, $55, $55, $66, $66, $66, $66, $77, $77, $77, $77, $88, $88, $00, $00, $00, $00, $00, $00, $00, $AA, $AA, $AA, $AA, $AA, $AA, $AA, $AA, $FE
+	
+DrainRumblePointer:
+	.byte	<DrainRumble, >DrainRumble
 
+SetDrainRumble:
+	SetRumbleTable	DrainRumblePointer
+	rtl
+
+
+
+Fire3Rumble:
+	.byte	$50, $50, $80, $80, $B0, $B0, $F0, $F0, $05, $05, $08, $08, $0B, $0B, $0F, $0F
+	.byte	$50, $50, $80, $80, $B0, $B0, $F0, $F0, $05, $05, $08, $08, $0B, $0B, $0F, $0F
+	.byte	$50, $50, $80, $80, $B0, $B0, $F0, $F0, $05, $05, $08, $08, $0B, $0B, $0F, $0F
+	.byte	$50, $50, $80, $80, $B0, $B0, $F0, $F0, $05, $05, $08, $08, $0B, $0B, $0F, $0F
+	.byte	$50, $50, $80, $80, $B0, $B0, $F0, $F0, $05, $05, $08, $08, $0B, $0B, $0F, $0F
+	.byte	$50, $50, $80, $80, $B0, $B0, $F0, $F0, $05, $05, $08, $08, $0B, $0B, $0F, $0F
+	.byte   $AA, $AA, $AA, $AA, $BB, $BB, $BB, $BB, $CC, $CC, $CC, $CC, $DD, $DD, $DD, $DD, $EE, $EE, $EE, $EE, $FF, $FF, $FF, $FF, $FE
+	
+Fire3RumblePointer:
+	.byte	<Fire3Rumble, >Fire3Rumble
+
+SetFire3Rumble:
+	SetRumbleTable	Fire3RumblePointer
+	rtl
+	
 ChocoboRumble:
 	.byte	$00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
 	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00 
@@ -266,6 +340,8 @@ NeverEndingRumble77:
 
 
 .segment "btlgfx_code"
+
+; [  ]
 
 _02e9f3:
 @e9f3:  pha
@@ -715,6 +791,7 @@ MagicAnim_28:
 ; [ magic animation $23: fire 3 ]
 
 MagicAnim_23:
+		jsl		SetFire3Rumble
 @ecc9:  jsr     _02f2f3
         lda     #$03
         sta     $f2a0
@@ -918,6 +995,7 @@ MagicAnim_1d:
 ; [ magic animation $06: drain, etc. ]
 
 MagicAnim_06:
+		jsl		SetDrainRumble
 @ee09:  lda     $34c5
         beq     @ee13
         jsl     DrainAnim
@@ -1195,6 +1273,7 @@ MagicAnim_1a:
 ; [ magic animation $07: quake ]
 
 MagicAnim_07:
+		SetRumble $77, 120
 @ef91:  lda     $34c5
         beq     @efaa
         ldx     #$80b0
@@ -1237,6 +1316,7 @@ MagicAnim_04:
 MagicAnim_05:
 @efc0:  lda     #$e4                    ; sprite tile id
 _efc2:  sta     $f133
+		jsl		SetMeteoRumble
         lda     $34c5
         bne     @efcb
         rts
@@ -2133,6 +2213,9 @@ PlayMagicSfx:
         cmp     #$ff
         beq     _f623
         tax
+		phx
+		jsl		CheckForRumble
+		plx
         lda     f:AttackSfx,x   ; attack sound effect
 _f5f5:  pha
         cmp     #$31
