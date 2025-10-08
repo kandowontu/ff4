@@ -13,17 +13,57 @@
 
 ; [  ]
 
-.segment "unused"
 
 ; [ calculate trajectory (far) ]
+
+.segment "menu_code"
+
+CheckForRumble:
+
+	cpx #$21			
+	bne @NotIce3
+@ice3:
+	jsl	SetBlizzagaRumble	;ice 3
+	rtl
+	
+@NotIce3:
+	cpx #$20		
+	bne @NotIce2
+@ice2:
+	SetRumble	$88, 40	;ice 2
+	rtl
+
+@NotIce2:
+
+	cpx #$1f
+	bne @NotIce
+@ice:
+	SetRumble	$55, 50	;ice
+	rtl
+
+@NotIce:
+
+	rtl
+
+
+
+
+
+
+
+
+
+
+.segment "unused"
+
+; ------------------------------------------------------------------------------
+
+
+; [ calculate trajectory ]
 
 CalcTrajectory_far:
 @e7bc:  jsr     CalcTrajectory
         rtl
-
-; ------------------------------------------------------------------------------
-
-; [ calculate trajectory ]
 
 ; calculates a vector trajectory from one point to another
 
@@ -203,6 +243,8 @@ NukeRumble:
 	.byte	$00, $00, $00, $00, $11, $22, $33, $44, $55, $66, $77, $88, $99, $AA, $BB, $CC, $DD, $EE, $FF
 	.byte   $00, $00, $00, $00, $11, $22, $33, $44, $55, $66, $77, $88, $99, $AA, $BB, $CC, $DD, $EE, $FF
 	.byte   $00, $00, $00, $00, $11, $22, $33, $44, $55, $66, $77, $88, $99, $AA, $BB, $CC, $DD, $EE, $FF
+	;fall through
+BlizzagaRumble:
 	.byte   $00, $00, $00, $00, $11, $22, $33, $44, $55, $66, $77, $88, $99, $AA, $BB, $CC, $DD, $EE, $FF
 	.byte   $00, $00, $00, $00, $11, $22, $33, $44, $55, $66, $77, $88, $99, $AA, $BB, $CC, $DD, $EE, $FF
 	.byte   $00, $00, $00, $00, $11, $22, $33, $44, $55, $66, $77, $88, $99, $AA, $BB, $CC, $DD, $EE, $FF
@@ -213,6 +255,13 @@ NukeRumblePointer:
 
 SetNukeRumble:
 	SetRumbleTable	NukeRumblePointer
+	rtl
+	
+BlizzagaRumblePointer:
+	.byte	<BlizzagaRumble, >BlizzagaRumble
+
+SetBlizzagaRumble:
+	SetRumbleTable	BlizzagaRumblePointer
 	rtl
 	
 MeteoRumblePointer:
@@ -2164,6 +2213,9 @@ PlayMagicSfx:
         cmp     #$ff
         beq     _f623
         tax
+		phx
+		jsl		CheckForRumble
+		plx
         lda     f:AttackSfx,x   ; attack sound effect
 _f5f5:  pha
         cmp     #$31
