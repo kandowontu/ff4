@@ -20,6 +20,13 @@
 
 CheckForRumble:
 
+	cpx #$0A
+	bne @NotWhite
+@White:
+	jsl	SetWhiteRumble	;peep
+	rtl
+@NotWhite:
+
 	cpx #$0C
 	bne @NotPeep
 @Peep:
@@ -174,6 +181,21 @@ HealRumblePointer:
 
 SetHealRumble:
 	SetRumbleTable	HealRumblePointer
+	rtl
+	
+WhiteRumble:
+	.byte   $55, $55, $77, $77, $99, $99, $99, $AA, $AA, $AA, $AA, $99, $99, $99, $77, $77, $55, $55, $33, $33
+	.byte   $55, $55, $77, $77, $99, $99, $99, $AA, $AA, $AA, $AA, $99, $99, $99, $77, $77, $55, $55, $33, $33
+	.byte   $55, $55, $77, $77, $99, $99, $99, $AA, $AA, $AA, $AA, $99, $99, $99, $77, $77, $55, $55, $33, $33
+	.byte   $99, $99, $77, $77, $99, $99, $99, $AA, $AA, $AA, $AA, $CC, $CC, $FF, $FF, $00, $00, $FF, $FF, $00
+	.byte	$00, $FF, $FF, $00, $00, $FF, $FF, $00, $00, $FF, $FF, $00, $00, $FF, $FF, $00, $00, $FF, $FF, $00
+	.byte	$00, $FF, $FF, $00, $00, $FF, $FF, $00, $00, $FF, $FF, $00, $00, $FF, $FF, $00, $00, $FF, $FF, $FE
+
+WhiteRumblePointer:
+	.byte	<WhiteRumble, >WhiteRumble
+
+SetWhiteRumble:
+	SetRumbleTable	WhiteRumblePointer
 	rtl
 	
 Cure4Rumble:
