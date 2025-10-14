@@ -20,6 +20,13 @@
 
 CheckForRumble:
 
+	cpx #$0C
+	bne @NotPeep
+@Peep:
+	jsl	SetPeepRumble	;peep
+	rtl
+@NotPeep:
+
 	cpx #$2b
 	bne @NotStop
 @Stop:
@@ -115,6 +122,17 @@ CheckForRumble:
 
 	rtl
 
+
+PeepRumble:
+	.byte   $00, $00, $00, $00, $00, $00, $55, $55, $77, $77, $99, $99, $99, $BB, $BB, $BB, $DD, $DD, $DD, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+	.byte   $55, $55, $77, $77, $99, $99, $99, $BB, $BB, $BB, $DD, $DD, $DD, $FE
+
+PeepRumblePointer:
+	.byte	<PeepRumble, >PeepRumble
+
+SetPeepRumble:
+	SetRumbleTable	PeepRumblePointer
+	rtl
 
 ToadPiggyRumble:
 	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00
