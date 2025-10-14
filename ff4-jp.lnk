@@ -29,6 +29,22 @@ memory {
     bank_1d: start = $1d8000, size = $8000, type = ro, fill = yes, fillval = $ff;
     bank_1e: start = $1e8000, size = $8000, type = ro, fill = yes, fillval = $ff;
     bank_1f: start = $1f8000, size = $8000, type = ro, fill = yes, fillval = $ff;
+    bank_20: start = $208000, size = $8000, type = ro, fill = yes, fillval = $ff;
+    bank_21: start = $218000, size = $8000, type = ro, fill = yes, fillval = $ff;
+    bank_22: start = $228000, size = $8000, type = ro, fill = yes, fillval = $ff;
+    bank_23: start = $238000, size = $8000, type = ro, fill = yes, fillval = $ff;
+    bank_24: start = $248000, size = $8000, type = ro, fill = yes, fillval = $ff;
+    bank_25: start = $258000, size = $8000, type = ro, fill = yes, fillval = $ff;
+    bank_26: start = $268000, size = $8000, type = ro, fill = yes, fillval = $ff;
+    bank_27: start = $278000, size = $8000, type = ro, fill = yes, fillval = $ff;
+    bank_28: start = $288000, size = $8000, type = ro, fill = yes, fillval = $ff;
+    bank_29: start = $298000, size = $8000, type = ro, fill = yes, fillval = $ff;
+    bank_2a: start = $2a8000, size = $8000, type = ro, fill = yes, fillval = $ff;
+    bank_2b: start = $2b8000, size = $8000, type = ro, fill = yes, fillval = $ff;
+    bank_2c: start = $2c8000, size = $8000, type = ro, fill = yes, fillval = $ff;
+    bank_2d: start = $2d8000, size = $8000, type = ro, fill = yes, fillval = $ff;
+    bank_2e: start = $2e8000, size = $8000, type = ro, fill = yes, fillval = $ff;
+    bank_2f: start = $2f8000, size = $8000, type = ro, fill = yes, fillval = $ff;	
 }
 
 segments {
@@ -133,4 +149,5 @@ segments {
     menu_code4: load = bank_1e, type = ro;
     earth_moon: load = bank_1e, type = ro, align = $20;
     map_gfx2: load = bank_1f, type = ro;
+	xcd_bank_20: load = bank_20, type = ro;
 }

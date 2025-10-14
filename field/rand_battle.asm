@@ -13,7 +13,7 @@
 
 .pushseg
 
-.segment "world_data"
+.segment "xcd_bank_20"
 
 BattleRumble:
 	.byte $55, $55, $66, $66, $77, $77, $88, $88, $99, $99, $AA, $AA, $BB, $BB, $CC, $CC, $DD, $DD, $EE, $EE, $FF, $FF, $00, $00, $00, $00, $00, $00, $55, $55, $66, $66, $77, $77, $88, $88, $99, $99, $FE

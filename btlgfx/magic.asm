@@ -16,9 +16,60 @@
 
 ; [ calculate trajectory (far) ]
 
-.segment "menu_code"
+.segment "xcd_bank_20"
 
 CheckForRumble:
+
+	cpx #$2b
+	bne @NotStop
+@Stop:
+	jsl	SetStopRumble	;stop
+	rtl
+@NotStop:	
+
+	cpx #$2a
+	bne @NotFatal
+@Fatal:
+	jsl	SetFatalRumble	;fatal
+	rtl
+	
+@NotFatal:	
+
+	cpx #$28
+	bne @NotSleep		;sleep
+@Sleep:
+	jsl	SetSleepRumble	
+	rtl
+@NotSleep:
+
+	cpx #$25
+	bne @NotVirus
+@Virus:
+	jsl	SetVirusRumble	;lit 3
+	rtl
+@NotVirus:	
+
+	cpx #$24
+	bne @NotLit3
+@Lit3:
+	jsl	SetThundagaRumble	;lit 3
+	rtl
+@NotLit3:	
+	
+	cpx #$23
+	bne @NotLit2
+@Lit2:
+	jsl	SetThundaraRumble	;lit 2
+	rtl
+@NotLit2:	
+	
+	cpx #$22
+	bne @NotLit
+@Lit:
+	jsl	SetThunderRumble	;lit
+	rtl
+@NotLit:	
+	
 
 	cpx #$21			
 	bne @NotIce3
@@ -43,18 +94,144 @@ CheckForRumble:
 
 @NotIce:
 
+	cpx #$18
+	beq @ToadPiggy	;toad and piggy
+	cpx #$19
+	beq @ToadPiggy
+	cpx #$14		;mini
+	bne @NotToadPiggy
+@ToadPiggy:
+	jsl	SetToadPiggyRumble
+	rtl
+
+@NotToadPiggy:
+	cpx #$1b
+	bne @NotVenom
+@Venom:
+	jsl	SetVenomRumble	;venom
+	rtl
+
+@NotVenom:
+
+	rtl
+
+
+ToadPiggyRumble:
+	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00
+	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00
+	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00
+	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00
+	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00
+	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00
+	.byte	$55, $55, $77, $77, $99, $99, $99, $FE
+
+ToadPiggyRumblePointer:
+	.byte	<ToadPiggyRumble, >ToadPiggyRumble
+
+SetToadPiggyRumble:
+	SetRumbleTable	ToadPiggyRumblePointer
+	rtl
+
+	
+ThundagaRumble:
+	.byte	$00, $00, $00, $88, $88, $88, $99, $99, $99, $AA, $AA, $AA, $BB, $BB, $BB, $BB, $00, $00, $00, $00, $00, $88, $88, $88, $99, $99, $99, $AA, $AA, $AA, $BB, $BB, $BB, $BB, $FE
+	
+	
+ThundagaRumblePointer:
+	.byte	<ThundagaRumble, >ThundagaRumble
+
+SetThundagaRumble:
+	SetRumbleTable	ThundagaRumblePointer
+	rtl
+
+
+	
+ThundaraRumble:
+	.byte	$00, $00, $00, $55, $55, $55, $66, $66, $66, $77, $77, $77, $88, $88, $88, $88, $00, $00, $00, $00, $00, $55, $55, $55, $66, $66, $66, $77, $77, $77, $88, $88, $88, $88, $FE
+	
+	
+ThundaraRumblePointer:
+	.byte	<ThundaraRumble, >ThundaraRumble
+
+SetThundaraRumble:
+	SetRumbleTable	ThundaraRumblePointer
+	rtl
+
+
+	
+VirusRumble:
+	.byte	$00, $00, $00, $88, $88, $88, $AA, $AA, $AA, $AA, $FF, $FF, $FF, $FF, $00, $00, $00, $00, $88, $88, $88, $AA, $AA, $AA, $AA, $FF, $FF, $FF, $FF, $00, $00, $00, $00, $00, $00, $00, $AA, $AA, $AA, $AA, $AA, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FE
+	
+	
+VirusRumblePointer:
+	.byte	<VirusRumble, >VirusRumble
+
+SetVirusRumble:
+	SetRumbleTable	VirusRumblePointer
+	rtl
+	
+ThunderRumble:
+	.byte	$00, $00, $00, $22, $22, $22, $33, $33, $33, $44, $44, $44, $55, $55, $55, $55, $00, $00, $00, $00, $00, $22, $22, $22, $33, $33, $33, $44, $44, $44, $55, $55, $55, $55, $FE
+	
+	
+ThunderRumblePointer:
+	.byte	<ThunderRumble, >ThunderRumble
+
+SetThunderRumble:
+	SetRumbleTable	ThunderRumblePointer
+	rtl
+
+FatalRumble:
+	.byte	$11, $11, $11, $11, $22, $22, $22, $22, $33, $33, $33, $33, $44, $44, $44, $44, $44, $55, $55, $55, $55, $66, $66, $66, $66, $00, $00, $00, $00
+	.byte	$11, $11, $11, $11, $22, $22, $22, $22, $33, $33, $33, $33, $44, $44, $44, $44, $44, $55, $55, $55, $55, $66, $66, $66, $66, $00, $00, $00, $00
+	.byte	$11, $11, $11, $11, $22, $22, $22, $22, $33, $33, $33, $33, $44, $44, $44, $44, $44, $55, $55, $55, $55, $66, $66, $66, $66, $00, $00, $00, $00
+	.byte	$11, $11, $11, $11, $22, $22, $22, $22, $33, $33, $33, $33, $44, $44, $44, $44, $44, $55, $55, $55, $55, $66, $66, $66, $66, $00, $00, $00, $00
+DrainRumble:
+	.byte	$11, $11, $11, $11, $22, $22, $22, $22, $33, $33, $33, $33, $44, $44, $44, $44, $44, $55, $55, $55, $55, $66, $66, $66, $66, $77, $77, $77, $77, $88, $88, $00, $00, $00, $00, $00, $00, $00, $AA, $AA, $AA, $AA, $AA, $AA, $AA, $AA, $FE
+	
+FatalRumblePointer:
+	.byte	<FatalRumble, >FatalRumble
+
+SetFatalRumble:
+	SetRumbleTable	FatalRumblePointer
+	rtl	
+	
+DrainRumblePointer:
+	.byte	<DrainRumble, >DrainRumble
+
+SetDrainRumble:
+	SetRumbleTable	DrainRumblePointer
+	rtl
+
+SleepRumble:
+	.byte	$00, $00, $00, $00, $00, $00, $88, $88, $88, $88, $88, $88, $88
+StopRumble:
+	;fall through
+	.byte	$00, $00, $00, $00, $00, $00, $88, $88, $88, $88, $88, $88, $88
+	.byte   $00, $00, $00, $00, $00, $00, $88, $88, $88, $88, $88, $88, $88
+	.byte   $00, $00, $00, $00, $00, $00, $88, $88, $88, $88, $88, $88, $88
+	.byte   $00, $00, $00, $00, $00, $00, $88, $88, $88, $88, $88, $88, $88
+	.byte   $00, $00, $00, $00, $00, $00, $88, $88, $88, $88, $88, $88, $88
+	.byte   $00, $00, $00, $00, $00, $00, $88, $88, $88, $88, $88, $88, $88, $FE
+	
+StopRumblePointer:
+	.byte	<StopRumble, >StopRumble
+
+SetStopRumble:
+	SetRumbleTable	StopRumblePointer
+	rtl
+
+SleepRumblePointer:
+	.byte	<SleepRumble, >SleepRumble
+
+SetSleepRumble:
+	SetRumbleTable	SleepRumblePointer
 	rtl
 
 
 
 
 
-
-
-
-
-
-.segment "unused"
 
 ; ------------------------------------------------------------------------------
 
@@ -262,7 +439,11 @@ BlizzagaRumblePointer:
 
 SetBlizzagaRumble:
 	SetRumbleTable	BlizzagaRumblePointer
-	rtl
+	rtl	
+	
+
+	
+	
 	
 MeteoRumblePointer:
 	.byte	<MeteoRumble, >MeteoRumble
@@ -286,15 +467,6 @@ SetMageRumble:
 	rtl
 	
 	
-DrainRumble:
-	.byte	$11, $11, $11, $11, $22, $22, $22, $22, $33, $33, $33, $33, $44, $44, $44, $44, $44, $55, $55, $55, $55, $66, $66, $66, $66, $77, $77, $77, $77, $88, $88, $00, $00, $00, $00, $00, $00, $00, $AA, $AA, $AA, $AA, $AA, $AA, $AA, $AA, $FE
-	
-DrainRumblePointer:
-	.byte	<DrainRumble, >DrainRumble
-
-SetDrainRumble:
-	SetRumbleTable	DrainRumblePointer
-	rtl
 
 
 
@@ -317,6 +489,8 @@ SetFire3Rumble:
 ChocoboRumble:
 	.byte	$00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
 	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00 
+VenomRumble:
+	;fall thorugh
 	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00
 	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00
 	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00
@@ -328,6 +502,13 @@ ChocoboRumblePointer:
 
 SetChocoboRumble:
 	SetRumbleTable	ChocoboRumblePointer
+	rtl
+
+VenomRumblePointer:
+	.byte	<VenomRumble, >VenomRumble
+
+SetVenomRumble:
+	SetRumbleTable	VenomRumblePointer
 	rtl
 
 SummonRumble1:
@@ -3622,3 +3803,4 @@ _02ff62:
 @ffc0:  rts
 
 ; ------------------------------------------------------------------------------
+.segment "unused"
