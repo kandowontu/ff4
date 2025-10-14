@@ -27,6 +27,20 @@ CheckForRumble:
 	rtl
 @NotPeep:
 
+	cpx #$10
+	bne @NotCure4
+@Cure4:
+	jsl	SetCure4Rumble	;Cure4
+	rtl
+@NotCure4:
+
+	cpx #$11
+	bne @NotHeal
+@Heal:
+	jsl	SetHealRumble	;Heal
+	rtl
+@NotHeal:
+
 	cpx #$2b
 	bne @NotStop
 @Stop:
@@ -148,6 +162,34 @@ ToadPiggyRumblePointer:
 
 SetToadPiggyRumble:
 	SetRumbleTable	ToadPiggyRumblePointer
+	rtl
+	
+HealRumble:
+	.byte   $55, $55, $77, $77, $99, $99, $99, $AA, $AA, $AA, $AA, $99, $99, $99, $77, $77, $55, $55, $33, $33
+	.byte   $55, $55, $77, $77, $99, $99, $99, $AA, $AA, $AA, $AA, $99, $99, $99, $77, $77, $55, $55, $33, $33
+	.byte   $55, $55, $77, $77, $99, $99, $99, $AA, $AA, $AA, $AA, $99, $99, $99, $77, $77, $55, $55, $FE
+
+HealRumblePointer:
+	.byte	<HealRumble, >HealRumble
+
+SetHealRumble:
+	SetRumbleTable	HealRumblePointer
+	rtl
+	
+Cure4Rumble:
+	.byte   $05, $05, $07, $07, $09, $09, $09, $0A, $0A, $0A, $0D, $0D, $0D
+	.byte   $5D, $5D, $7A, $7A, $99, $99, $99, $A7, $A7, $A7, $D5, $D5, $D5
+	.byte	$D0, $D0, $A0, $A0, $90, $90, $90, $70, $70, $70, $50, $50, $50
+	.byte   $05, $05, $07, $07, $09, $09, $09, $0A, $0A, $0A, $0D, $0D, $0D
+	.byte   $5D, $5D, $7A, $7A, $99, $99, $99, $A7, $A7, $A7, $D5, $D5, $D5
+	.byte	$D0, $D0, $A0, $A0, $90, $90, $90, $70, $70, $70, $50, $50, $50, $FE
+
+
+Cure4RumblePointer:
+	.byte	<Cure4Rumble, >Cure4Rumble
+
+SetCure4Rumble:
+	SetRumbleTable	Cure4RumblePointer
 	rtl
 
 	
