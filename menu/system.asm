@@ -485,7 +485,7 @@ continuerumb2:				;if it wasn't fe, we:
 	cmp #$EF				;check if its EF. if its not EF, go to continuerumb3
 	bne	continuerumb3		
 	ldy #$01					;if it IS EF, set the pointer back to 1 and start the process over again
-	jmp reloop
+	bra reloop
 
 continuerumb3:				;if not, continuing here...
 	sta	RumbleStrength		;store the strength
