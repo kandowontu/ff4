@@ -20,6 +20,14 @@
 
 CheckForRumble:
 
+
+	cpx #$00
+	bne @NotHold
+@Hold:
+	jsl	SetHoldRumble	;Hold
+	rtl
+@NotHold:
+
 	cpx #$06
 	bne @NotSlow
 @Slow:
@@ -233,6 +241,18 @@ LifeRumblePointer:
 
 SetLifeRumble:
 	SetRumbleTable	LifeRumblePointer
+	rtl
+	
+HoldRumble:
+	.byte   $88, $88, $88, $88, $88, $88, $00, $00, $00, $00, $00, $00, $88, $88, $88, $88, $88, $88, $00, $00, $00, $00, $00, $00, $88, $88, $88, $88, $88, $88, $00, $00, $00, $00, $00, $00
+	.byte	$00, $00, $00, $00, $00
+	.byte   $88, $88, $88, $88, $88, $88, $00, $00, $00, $00, $00, $00, $88, $88, $88, $88, $88, $88, $00, $00, $00, $00, $00, $00, $88, $88, $88, $88, $88, $88, $FE
+
+HoldRumblePointer:
+	.byte	<HoldRumble, >HoldRumble
+
+SetHoldRumble:
+	SetRumbleTable	HoldRumblePointer
 	rtl
 	
 SlowRumble:
