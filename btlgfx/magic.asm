@@ -48,6 +48,16 @@ CheckForRumble:
 	rtl
 @NotHeal:
 
+	cpx #$12
+	beq @Life
+	cpx #$13
+	bne @NotLife
+
+@Life:
+	jsl	SetLifeRumble	;Heal
+	rtl
+@NotLife:
+
 	cpx #$2b
 	bne @NotStop
 @Stop:
@@ -196,6 +206,19 @@ WhiteRumblePointer:
 
 SetWhiteRumble:
 	SetRumbleTable	WhiteRumblePointer
+	rtl	
+	
+LifeRumble:
+	.byte   $55, $55, $77, $77, $99, $99, $99, $AA, $AA, $BB, $BB, $00, $00, $00, $00, $00
+	.byte   $55, $55, $77, $77, $99, $99, $99, $AA, $AA, $BB, $BB, $00, $00, $00, $00, $00
+	.byte   $55, $55, $77, $77, $99, $99, $99, $AA, $AA, $BB, $BB, $00, $00, $00, $00, $00
+	.byte   $55, $55, $77, $77, $99, $99, $99, $AA, $AA, $BB, $BB, $FF, $FF, $FF, $FF, $FF, $FF, $FE
+
+LifeRumblePointer:
+	.byte	<LifeRumble, >LifeRumble
+
+SetLifeRumble:
+	SetRumbleTable	LifeRumblePointer
 	rtl
 	
 Cure4Rumble:
