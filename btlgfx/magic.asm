@@ -20,17 +20,24 @@
 
 CheckForRumble:
 
+	cpx #$06
+	bne @NotSlow
+@Slow:
+	jsl	SetSlowRumble	;slow
+	rtl
+@NotSlow:
+
 	cpx #$07
 	bne @NotFast
 @Fast:
-	jsl	SetFastRumble	;peep
+	jsl	SetFastRumble	;fast
 	rtl
 @NotFast:
 
 	cpx #$0A
 	bne @NotWhite
 @White:
-	jsl	SetWhiteRumble	;peep
+	jsl	SetWhiteRumble	;white
 	rtl
 @NotWhite:
 
@@ -61,7 +68,7 @@ CheckForRumble:
 	bne @NotLife
 
 @Life:
-	jsl	SetLifeRumble	;Heal
+	jsl	SetLifeRumble	;life/life2
 	rtl
 @NotLife:
 
@@ -90,7 +97,7 @@ CheckForRumble:
 	cpx #$25
 	bne @NotVirus
 @Virus:
-	jsl	SetVirusRumble	;lit 3
+	jsl	SetVirusRumble	;virus
 	rtl
 @NotVirus:	
 
@@ -226,6 +233,19 @@ LifeRumblePointer:
 
 SetLifeRumble:
 	SetRumbleTable	LifeRumblePointer
+	rtl
+	
+SlowRumble:
+	.byte   $08, $08, $08, $08, $08, $08, $08, $08, $88, $88, $88, $88, $88, $88, $88, $88, $80, $80, $80, $80, $80, $80, $80, $80, $88, $88, $88, $88, $88, $88, $88, $88
+	.byte	$00, $00, $00, $00, $00
+	.byte	$00, $00, $00, $00, $00
+	.byte   $08, $08, $08, $08, $08, $08, $08, $08, $08, $08, $08, $88, $88, $88, $88, $88, $88, $88, $88, $88, $88, $88, $80, $80, $80, $80, $80, $80, $80, $80, $80, $80, $80, $FE
+
+SlowRumblePointer:
+	.byte	<SlowRumble, >SlowRumble
+
+SetSlowRumble:
+	SetRumbleTable	SlowRumblePointer
 	rtl
 	
 FastRumble:
