@@ -20,6 +20,13 @@
 
 CheckForRumble:
 
+	cpx #$07
+	bne @NotFast
+@Fast:
+	jsl	SetFastRumble	;peep
+	rtl
+@NotFast:
+
 	cpx #$0A
 	bne @NotWhite
 @White:
@@ -219,6 +226,20 @@ LifeRumblePointer:
 
 SetLifeRumble:
 	SetRumbleTable	LifeRumblePointer
+	rtl
+	
+FastRumble:
+	.byte   $80, $80, $80, $80, $80, $80, $80, $80, $08, $08, $08, $08, $08, $08, $08, $08 
+	.byte	$00, $00, $00, $00, $00
+	.byte   $80, $80, $80, $80, $80, $80, $80, $80, $08, $08, $08, $08, $08, $08, $08, $08 
+	.byte	$00, $00, $00, $00, $00
+	.byte	$88, $88, $88, $80, $80, $08, $08, $80, $80, $08, $08, $88, $88, $88, $88, $88, $88, $88, $88, $FE
+
+FastRumblePointer:
+	.byte	<FastRumble, >FastRumble
+
+SetFastRumble:
+	SetRumbleTable	FastRumblePointer
 	rtl
 	
 Cure4Rumble:
