@@ -191,7 +191,7 @@ SoftReset:
         jsr     InitCharProp
         jsl     InitSpellLists
         jsl     InitHWRegs
-        jsr     UpdatePlayerSpeed
+        jsl     UpdatePlayerSpeed
         jsr     InitZoomHDMA
         lda     #1                      ; enable event
         sta     $b1
@@ -214,7 +214,7 @@ SoftReset:
 
 AfterBattle:
 @808e:  jsl     InitHWRegs
-        jsr     UpdatePlayerSpeed
+        jsl     UpdatePlayerSpeed
         lda     #1
         sta     $7d                     ; waiting for vblank
         stz     $df                     ; clear dialogue window height
@@ -447,18 +447,6 @@ CheckMenu:
 
 ; ------------------------------------------------------------------------------
 
-; [ update player movement speed ]
-
-UpdatePlayerSpeed:
-@8302:  lda     $1704       ; vehicle id
-        tax
-        lda     PlayerSpeedTbl,x     ; movement speed
-        sta     $ac
-        rts
-
-; movement speed for each vehicle
-PlayerSpeedTbl:
-@830c:  .byte   0,1,2,1,3,3,3
 
 ; ------------------------------------------------------------------------------
 
@@ -3233,3 +3221,18 @@ TfrChestDoor:
 .include "bg_anim.asm"
 
 ; ------------------------------------------------------------------------------
+.segment "xcd_bank_20"
+
+
+; [ update player movement speed ]
+
+UpdatePlayerSpeed:
+@8302:  lda     $1704       ; vehicle id
+        tax
+        lda     PlayerSpeedTbl,x     ; movement speed
+        sta     $ac
+        rtl
+
+; movement speed for each vehicle
+PlayerSpeedTbl:
+@830c:  .byte   0,1,2,1,3,3,3
