@@ -537,11 +537,11 @@ NamingwayMsg2PosText:
 
 ; *** unused ***
 NamingwayMsg3PosText:
-@e089:  def_ptxt 7,1,{NAMINGWAY_MSG3_STR,0}
+;@e089:  def_ptxt 7,1,{NAMINGWAY_MSG3_STR,0}
 
 ; *** unused ***
 NamingwayMsg4PosText:
-@e09c:  def_ptxt 7,1,{NAMINGWAY_MSG4_STR,0}
+;@e09c:  def_ptxt 7,1,{NAMINGWAY_MSG4_STR,0}
 
 NamingwayChoiceText:
 @e0ac:  .byte   NAMINGWAY_CHOICE_STR,0
