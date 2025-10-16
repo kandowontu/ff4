@@ -16,9 +16,120 @@
 
 ; [ calculate trajectory (far) ]
 
-.segment "menu_code"
+.segment "xcd_bank_20"
 
 CheckForRumble:
+
+
+	cpx #$00
+	bne @NotHold
+@Hold:
+	jsl	SetHoldRumble	;Hold
+	rtl
+@NotHold:
+
+	cpx #$06
+	bne @NotSlow
+@Slow:
+	jsl	SetSlowRumble	;slow
+	rtl
+@NotSlow:
+
+	cpx #$07
+	bne @NotFast
+@Fast:
+	jsl	SetFastRumble	;fast
+	rtl
+@NotFast:
+
+	cpx #$0A
+	bne @NotWhite
+@White:
+	jsl	SetWhiteRumble	;white
+	rtl
+@NotWhite:
+
+	cpx #$0C
+	bne @NotPeep
+@Peep:
+	jsl	SetPeepRumble	;peep
+	rtl
+@NotPeep:
+
+	cpx #$10
+	bne @NotCure4
+@Cure4:
+	jsl	SetCure4Rumble	;Cure4
+	rtl
+@NotCure4:
+
+	cpx #$11
+	bne @NotHeal
+@Heal:
+	jsl	SetHealRumble	;Heal
+	rtl
+@NotHeal:
+
+	cpx #$12
+	beq @Life
+	cpx #$13
+	bne @NotLife
+
+@Life:
+	jsl	SetLifeRumble	;life/life2
+	rtl
+@NotLife:
+
+	cpx #$2b
+	bne @NotStop
+@Stop:
+	jsl	SetStopRumble	;stop
+	rtl
+@NotStop:	
+
+	cpx #$2a
+	bne @NotFatal
+@Fatal:
+	jsl	SetFatalRumble	;fatal
+	rtl
+	
+@NotFatal:	
+
+	cpx #$28
+	bne @NotSleep		;sleep
+@Sleep:
+	jsl	SetSleepRumble	
+	rtl
+@NotSleep:
+
+	cpx #$25
+	bne @NotVirus
+@Virus:
+	jsl	SetVirusRumble	;virus
+	rtl
+@NotVirus:	
+
+	cpx #$24
+	bne @NotLit3
+@Lit3:
+	jsl	SetThundagaRumble	;lit 3
+	rtl
+@NotLit3:	
+	
+	cpx #$23
+	bne @NotLit2
+@Lit2:
+	jsl	SetThundaraRumble	;lit 2
+	rtl
+@NotLit2:	
+	
+	cpx #$22
+	bne @NotLit
+@Lit:
+	jsl	SetThunderRumble	;lit
+	rtl
+@NotLit:	
+	
 
 	cpx #$21			
 	bne @NotIce3
@@ -43,18 +154,250 @@ CheckForRumble:
 
 @NotIce:
 
+	cpx #$18
+	beq @ToadPiggy	;toad and piggy
+	cpx #$19
+	beq @ToadPiggy
+	cpx #$14		;mini
+	bne @NotToadPiggy
+@ToadPiggy:
+	jsl	SetToadPiggyRumble
+	rtl
+
+@NotToadPiggy:
+	cpx #$1b
+	bne @NotVenom
+@Venom:
+	jsl	SetVenomRumble	;venom
+	rtl
+
+@NotVenom:
+
+	rtl
+
+
+PeepRumble:
+	.byte   $00, $00, $00, $00, $00, $00, $55, $55, $77, $77, $99, $99, $99, $BB, $BB, $BB, $DD, $DD, $DD, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+	.byte   $55, $55, $77, $77, $99, $99, $99, $BB, $BB, $BB, $DD, $DD, $DD, $FE
+
+PeepRumblePointer:
+	.byte	<PeepRumble, >PeepRumble
+
+SetPeepRumble:
+	SetRumbleTable	PeepRumblePointer
+	rtl
+
+ToadPiggyRumble:
+	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00
+	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00
+	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00
+	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00
+	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00
+	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00
+	.byte	$55, $55, $77, $77, $99, $99, $99, $FE
+
+ToadPiggyRumblePointer:
+	.byte	<ToadPiggyRumble, >ToadPiggyRumble
+
+SetToadPiggyRumble:
+	SetRumbleTable	ToadPiggyRumblePointer
+	rtl
+	
+HealRumble:
+	.byte   $55, $55, $77, $77, $99, $99, $99, $AA, $AA, $AA, $AA, $99, $99, $99, $77, $77, $55, $55, $33, $33
+	.byte   $55, $55, $77, $77, $99, $99, $99, $AA, $AA, $AA, $AA, $99, $99, $99, $77, $77, $55, $55, $33, $33
+	.byte   $55, $55, $77, $77, $99, $99, $99, $AA, $AA, $AA, $AA, $99, $99, $99, $77, $77, $55, $55, $FE
+
+HealRumblePointer:
+	.byte	<HealRumble, >HealRumble
+
+SetHealRumble:
+	SetRumbleTable	HealRumblePointer
+	rtl
+	
+WhiteRumble:
+	.byte   $55, $55, $77, $77, $99, $99, $99, $AA, $AA, $AA, $AA, $99, $99, $99, $77, $77, $55, $55, $33, $33
+	.byte   $55, $55, $77, $77, $99, $99, $99, $AA, $AA, $AA, $AA, $99, $99, $99, $77, $77, $55, $55, $33, $33
+	.byte   $55, $55, $77, $77, $99, $99, $99, $AA, $AA, $AA, $AA, $99, $99, $99, $77, $77, $55, $55, $33, $33
+	.byte   $99, $99, $77, $77, $99, $99, $99, $AA, $AA, $AA, $AA, $CC, $CC, $FF, $FF, $00, $00, $FF, $FF, $00
+	.byte	$00, $FF, $FF, $00, $00, $FF, $FF, $00, $00, $FF, $FF, $00, $00, $FF, $FF, $00, $00, $FF, $FF, $00
+	.byte	$00, $FF, $FF, $00, $00, $FF, $FF, $00, $00, $FF, $FF, $00, $00, $FF, $FF, $00, $00, $FF, $FF, $FE
+
+WhiteRumblePointer:
+	.byte	<WhiteRumble, >WhiteRumble
+
+SetWhiteRumble:
+	SetRumbleTable	WhiteRumblePointer
+	rtl	
+	
+LifeRumble:
+	.byte   $55, $55, $77, $77, $99, $99, $99, $AA, $AA, $BB, $BB, $00, $00, $00, $00, $00
+	.byte   $55, $55, $77, $77, $99, $99, $99, $AA, $AA, $BB, $BB, $00, $00, $00, $00, $00
+	.byte   $55, $55, $77, $77, $99, $99, $99, $AA, $AA, $BB, $BB, $00, $00, $00, $00, $00
+	.byte   $55, $55, $77, $77, $99, $99, $99, $AA, $AA, $BB, $BB, $FF, $FF, $FF, $FF, $FF, $FF, $FE
+
+LifeRumblePointer:
+	.byte	<LifeRumble, >LifeRumble
+
+SetLifeRumble:
+	SetRumbleTable	LifeRumblePointer
+	rtl
+	
+HoldRumble:
+	.byte   $88, $88, $88, $88, $88, $88, $00, $00, $00, $00, $00, $00, $88, $88, $88, $88, $88, $88, $00, $00, $00, $00, $00, $00, $88, $88, $88, $88, $88, $88, $00, $00, $00, $00, $00, $00
+	.byte	$00, $00, $00, $00, $00
+	.byte   $88, $88, $88, $88, $88, $88, $00, $00, $00, $00, $00, $00, $88, $88, $88, $88, $88, $88, $00, $00, $00, $00, $00, $00, $88, $88, $88, $88, $88, $88, $FE
+
+HoldRumblePointer:
+	.byte	<HoldRumble, >HoldRumble
+
+SetHoldRumble:
+	SetRumbleTable	HoldRumblePointer
+	rtl
+	
+SlowRumble:
+	.byte   $08, $08, $08, $08, $08, $08, $08, $08, $88, $88, $88, $88, $88, $88, $88, $88, $80, $80, $80, $80, $80, $80, $80, $80, $88, $88, $88, $88, $88, $88, $88, $88
+	.byte	$00, $00, $00, $00, $00
+	.byte	$00, $00, $00, $00, $00
+	.byte   $08, $08, $08, $08, $08, $08, $08, $08, $08, $08, $08, $88, $88, $88, $88, $88, $88, $88, $88, $88, $88, $88, $80, $80, $80, $80, $80, $80, $80, $80, $80, $80, $80, $FE
+
+SlowRumblePointer:
+	.byte	<SlowRumble, >SlowRumble
+
+SetSlowRumble:
+	SetRumbleTable	SlowRumblePointer
+	rtl
+	
+FastRumble:
+	.byte   $80, $80, $80, $80, $80, $80, $80, $80, $08, $08, $08, $08, $08, $08, $08, $08 
+	.byte	$00, $00, $00, $00, $00
+	.byte   $80, $80, $80, $80, $80, $80, $80, $80, $08, $08, $08, $08, $08, $08, $08, $08 
+	.byte	$00, $00, $00, $00, $00
+	.byte	$88, $88, $88, $80, $80, $08, $08, $80, $80, $08, $08, $88, $88, $88, $88, $88, $88, $88, $88, $FE
+
+FastRumblePointer:
+	.byte	<FastRumble, >FastRumble
+
+SetFastRumble:
+	SetRumbleTable	FastRumblePointer
+	rtl
+	
+Cure4Rumble:
+	.byte   $05, $05, $07, $07, $09, $09, $09, $0A, $0A, $0A, $0D, $0D, $0D
+	.byte   $5D, $5D, $7A, $7A, $99, $99, $99, $A7, $A7, $A7, $D5, $D5, $D5
+	.byte	$D0, $D0, $A0, $A0, $90, $90, $90, $70, $70, $70, $50, $50, $50
+	.byte   $05, $05, $07, $07, $09, $09, $09, $0A, $0A, $0A, $0D, $0D, $0D
+	.byte   $5D, $5D, $7A, $7A, $99, $99, $99, $A7, $A7, $A7, $D5, $D5, $D5
+	.byte	$D0, $D0, $A0, $A0, $90, $90, $90, $70, $70, $70, $50, $50, $50, $FE
+
+
+Cure4RumblePointer:
+	.byte	<Cure4Rumble, >Cure4Rumble
+
+SetCure4Rumble:
+	SetRumbleTable	Cure4RumblePointer
+	rtl
+
+	
+ThundagaRumble:
+	.byte	$00, $00, $00, $88, $88, $88, $99, $99, $99, $AA, $AA, $AA, $BB, $BB, $BB, $BB, $00, $00, $00, $00, $00, $88, $88, $88, $99, $99, $99, $AA, $AA, $AA, $BB, $BB, $BB, $BB, $FE
+	
+	
+ThundagaRumblePointer:
+	.byte	<ThundagaRumble, >ThundagaRumble
+
+SetThundagaRumble:
+	SetRumbleTable	ThundagaRumblePointer
+	rtl
+
+
+	
+ThundaraRumble:
+	.byte	$00, $00, $00, $55, $55, $55, $66, $66, $66, $77, $77, $77, $88, $88, $88, $88, $00, $00, $00, $00, $00, $55, $55, $55, $66, $66, $66, $77, $77, $77, $88, $88, $88, $88, $FE
+	
+	
+ThundaraRumblePointer:
+	.byte	<ThundaraRumble, >ThundaraRumble
+
+SetThundaraRumble:
+	SetRumbleTable	ThundaraRumblePointer
+	rtl
+
+
+	
+VirusRumble:
+	.byte	$00, $00, $00, $88, $88, $88, $AA, $AA, $AA, $AA, $FF, $FF, $FF, $FF, $00, $00, $00, $00, $88, $88, $88, $AA, $AA, $AA, $AA, $FF, $FF, $FF, $FF, $00, $00, $00, $00, $00, $00, $00, $AA, $AA, $AA, $AA, $AA, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FE
+	
+	
+VirusRumblePointer:
+	.byte	<VirusRumble, >VirusRumble
+
+SetVirusRumble:
+	SetRumbleTable	VirusRumblePointer
+	rtl
+	
+ThunderRumble:
+	.byte	$00, $00, $00, $22, $22, $22, $33, $33, $33, $44, $44, $44, $55, $55, $55, $55, $00, $00, $00, $00, $00, $22, $22, $22, $33, $33, $33, $44, $44, $44, $55, $55, $55, $55, $FE
+	
+	
+ThunderRumblePointer:
+	.byte	<ThunderRumble, >ThunderRumble
+
+SetThunderRumble:
+	SetRumbleTable	ThunderRumblePointer
+	rtl
+
+FatalRumble:
+	.byte	$11, $11, $11, $11, $22, $22, $22, $22, $33, $33, $33, $33, $44, $44, $44, $44, $44, $55, $55, $55, $55, $66, $66, $66, $66, $00, $00, $00, $00
+	.byte	$11, $11, $11, $11, $22, $22, $22, $22, $33, $33, $33, $33, $44, $44, $44, $44, $44, $55, $55, $55, $55, $66, $66, $66, $66, $00, $00, $00, $00
+	.byte	$11, $11, $11, $11, $22, $22, $22, $22, $33, $33, $33, $33, $44, $44, $44, $44, $44, $55, $55, $55, $55, $66, $66, $66, $66, $00, $00, $00, $00
+	.byte	$11, $11, $11, $11, $22, $22, $22, $22, $33, $33, $33, $33, $44, $44, $44, $44, $44, $55, $55, $55, $55, $66, $66, $66, $66, $00, $00, $00, $00
+DrainRumble:
+	.byte	$11, $11, $11, $11, $22, $22, $22, $22, $33, $33, $33, $33, $44, $44, $44, $44, $44, $55, $55, $55, $55, $66, $66, $66, $66, $77, $77, $77, $77, $88, $88, $00, $00, $00, $00, $00, $00, $00, $AA, $AA, $AA, $AA, $AA, $AA, $AA, $AA, $FE
+	
+FatalRumblePointer:
+	.byte	<FatalRumble, >FatalRumble
+
+SetFatalRumble:
+	SetRumbleTable	FatalRumblePointer
+	rtl	
+	
+DrainRumblePointer:
+	.byte	<DrainRumble, >DrainRumble
+
+SetDrainRumble:
+	SetRumbleTable	DrainRumblePointer
+	rtl
+
+SleepRumble:
+	.byte	$00, $00, $00, $00, $00, $00, $88, $88, $88, $88, $88, $88, $88
+StopRumble:
+	;fall through
+	.byte	$00, $00, $00, $00, $00, $00, $88, $88, $88, $88, $88, $88, $88
+	.byte   $00, $00, $00, $00, $00, $00, $88, $88, $88, $88, $88, $88, $88
+	.byte   $00, $00, $00, $00, $00, $00, $88, $88, $88, $88, $88, $88, $88
+	.byte   $00, $00, $00, $00, $00, $00, $88, $88, $88, $88, $88, $88, $88
+	.byte   $00, $00, $00, $00, $00, $00, $88, $88, $88, $88, $88, $88, $88
+	.byte   $00, $00, $00, $00, $00, $00, $88, $88, $88, $88, $88, $88, $88, $FE
+	
+StopRumblePointer:
+	.byte	<StopRumble, >StopRumble
+
+SetStopRumble:
+	SetRumbleTable	StopRumblePointer
+	rtl
+
+SleepRumblePointer:
+	.byte	<SleepRumble, >SleepRumble
+
+SetSleepRumble:
+	SetRumbleTable	SleepRumblePointer
 	rtl
 
 
 
 
 
-
-
-
-
-
-.segment "unused"
 
 ; ------------------------------------------------------------------------------
 
@@ -262,7 +605,11 @@ BlizzagaRumblePointer:
 
 SetBlizzagaRumble:
 	SetRumbleTable	BlizzagaRumblePointer
-	rtl
+	rtl	
+	
+
+	
+	
 	
 MeteoRumblePointer:
 	.byte	<MeteoRumble, >MeteoRumble
@@ -286,15 +633,6 @@ SetMageRumble:
 	rtl
 	
 	
-DrainRumble:
-	.byte	$11, $11, $11, $11, $22, $22, $22, $22, $33, $33, $33, $33, $44, $44, $44, $44, $44, $55, $55, $55, $55, $66, $66, $66, $66, $77, $77, $77, $77, $88, $88, $00, $00, $00, $00, $00, $00, $00, $AA, $AA, $AA, $AA, $AA, $AA, $AA, $AA, $FE
-	
-DrainRumblePointer:
-	.byte	<DrainRumble, >DrainRumble
-
-SetDrainRumble:
-	SetRumbleTable	DrainRumblePointer
-	rtl
 
 
 
@@ -317,6 +655,8 @@ SetFire3Rumble:
 ChocoboRumble:
 	.byte	$00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
 	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00 
+VenomRumble:
+	;fall thorugh
 	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00
 	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00
 	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00
@@ -328,6 +668,13 @@ ChocoboRumblePointer:
 
 SetChocoboRumble:
 	SetRumbleTable	ChocoboRumblePointer
+	rtl
+
+VenomRumblePointer:
+	.byte	<VenomRumble, >VenomRumble
+
+SetVenomRumble:
+	SetRumbleTable	VenomRumblePointer
 	rtl
 
 SummonRumble1:
@@ -3622,3 +3969,4 @@ _02ff62:
 @ffc0:  rts
 
 ; ------------------------------------------------------------------------------
+.segment "unused"

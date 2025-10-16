@@ -2737,6 +2737,9 @@ SummonFailed:
         bne     @e093       ; return if not rydia
         lda     $268b
         sta     $200b,x
+		lda #0
+		sta RumblePositionLong
+		sta RumbleTimerLong
         lda     $268c
         sta     $200c,x
 @e093:  rts

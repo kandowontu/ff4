@@ -187,7 +187,7 @@ SoftReset:
         bra     @808b
 .else
 ; new game
-        jsr     InitNewGame
+        jsl     InitNewGame
         jsr     InitCharProp
         jsl     InitSpellLists
         jsl     InitHWRegs
@@ -443,53 +443,7 @@ CheckMenu:
         jsr     PlayMapSong
 @828f:  rts
 
-; ------------------------------------------------------------------------------
 
-; [ init new game ]
-
-InitNewGame:
-@8290:  stz     $1700
-        stz     $1701
-        stz     $1703
-        stz     $170f
-        stz     $1712
-        stz     $1718
-        stz     $171c
-        stz     $1720
-        stz     $1724
-        stz     $1728
-        stz     $172b
-        stz     $171b
-        stz     $171f
-        stz     $1723
-        stz     $1727
-        ldx     #0
-        stx     $172c
-        ldx     #0
-@82c6:  lda     f:InitNPCSwitch,x       ; initial npc switches
-        sta     $12e0,x
-        inx
-        cpx     #$0040
-        bne     @82c6
-        ldx     #0
-@82d6:  lda     f:InitEventSwitch,x     ; initial event switches
-        sta     $1280,x
-        inx
-        cpx     #$0020
-        bne     @82d6
-        ldx     #0
-@82e6:  stz     $12a0,x
-        inx
-        cpx     #$0020
-        bne     @82e6
-        lda     #$fe
-        sta     $149c
-        lda     #$ff
-        sta     $149e
-        lda     #1
-        sta     $149d
-        sta     $149f
-        rts
 
 ; ------------------------------------------------------------------------------
 
@@ -2828,6 +2782,57 @@ IncZoomMult:
 .include "tilemap.asm"
 
 ; ------------------------------------------------------------------------------
+
+
+
+.segment "xcd_bank_20"
+; ------------------------------------------------------------------------------
+
+; [ init new game ]
+
+InitNewGame:
+@8290:  stz     $1700
+        stz     $1701
+        stz     $1703
+        stz     $170f
+        stz     $1712
+        stz     $1718
+        stz     $171c
+        stz     $1720
+        stz     $1724
+        stz     $1728
+        stz     $172b
+        stz     $171b
+        stz     $171f
+        stz     $1723
+        stz     $1727
+        ldx     #0
+        stx     $172c
+        ldx     #0
+@82c6:  lda     f:InitNPCSwitch,x       ; initial npc switches
+        sta     $12e0,x
+        inx
+        cpx     #$0040
+        bne     @82c6
+        ldx     #0
+@82d6:  lda     f:InitEventSwitch,x     ; initial event switches
+        sta     $1280,x
+        inx
+        cpx     #$0020
+        bne     @82d6
+        ldx     #0
+@82e6:  stz     $12a0,x
+        inx
+        cpx     #$0020
+        bne     @82e6
+        lda     #$fe
+        sta     $149c
+        lda     #$ff
+        sta     $149e
+        lda     #1
+        sta     $149d
+        sta     $149f
+        rtl
 
 .segment "field_code2"
 

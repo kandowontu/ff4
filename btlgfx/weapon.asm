@@ -13,7 +13,7 @@
 
 ; [ weapon animation $0a: whip ]
 
-.segment "menu_code"
+.segment "xcd_bank_20"
 
 HarpPt2:
 		lda #0
