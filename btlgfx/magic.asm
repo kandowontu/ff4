@@ -80,6 +80,7 @@ CheckForRumble:
 	rtl
 @NotLife:
 
+
 	cpx #$2b
 	bne @NotStop
 @Stop:
@@ -101,6 +102,14 @@ CheckForRumble:
 	jsl	SetSleepRumble	
 	rtl
 @NotSleep:
+
+	cpx #$26
+	bne @NotWeak
+
+@Weak:
+	jsl	SetWeakRumble	;Weak
+	rtl
+@NotWeak:
 
 	cpx #$25
 	bne @NotVirus
@@ -214,6 +223,25 @@ HealRumblePointer:
 SetHealRumble:
 	SetRumbleTable	HealRumblePointer
 	rtl
+	
+WeakRumble:
+	.byte   $05, $05, $07, $07, $07, $09, $09, $09, $0A, $0A, $0A, $0A, $0C, $0C, $0C, $0C, $0C
+	.byte   $50, $50, $70, $70, $70, $90, $90, $90, $A0, $A0, $A0, $A0, $C0, $C0, $C0, $C0, $C0
+	.byte   $05, $05, $07, $07, $07, $09, $09, $09, $0A, $0A, $0A, $0A, $0C, $0C, $0C, $0C, $0C
+	.byte   $50, $50, $70, $70, $70, $90, $90, $90, $A0, $A0, $A0, $A0, $C0, $C0, $C0, $C0, $C0
+	.byte   $05, $05, $07, $07, $07, $09, $09, $09, $0A, $0A, $0A, $0A, $0C, $0C, $0C, $0C, $0C
+	.byte   $50, $50, $70, $70, $70, $90, $90, $90, $A0, $A0, $A0, $A0, $C0, $C0, $C0, $C0, $C0
+	.byte   $05, $05, $07, $07, $07, $09, $09, $09, $0A, $0A, $0A, $0A, $0C, $0C, $0C, $0C, $0C
+	.byte   $50, $50, $70, $70, $70, $90, $90, $90, $A0, $A0, $A0, $A0, $C0, $C0, $C0, $C0, $C0, $FE
+
+
+
+WeakRumblePointer:
+	.byte	<WeakRumble, >WeakRumble
+
+SetWeakRumble:
+	SetRumbleTable	WeakRumblePointer
+	rtl	
 	
 WhiteRumble:
 	.byte   $55, $55, $77, $77, $99, $99, $99, $AA, $AA, $AA, $AA, $99, $99, $99, $77, $77, $55, $55, $33, $33
