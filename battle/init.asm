@@ -111,7 +111,11 @@ InitObjects:
         sta     $ac
         bra     @8a28
 @8a03:  sta     $df
+.if !FUN_STUFF
         lda     #$18
+.else
+		lda 	#$E9
+.endif
         sta     $e1
         jsr     Mult8
         ldx     $e3

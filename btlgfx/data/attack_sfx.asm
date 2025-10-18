@@ -285,7 +285,7 @@ AttackSfx_005c:
         .byte   $26
 
 AttackSfx_005d:
-        .byte   $04
+        .byte   $04		;w. meteo
 
 AttackSfx_005e:
         .byte   $0e
