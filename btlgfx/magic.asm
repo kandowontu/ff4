@@ -28,6 +28,13 @@ CheckForRumble:
 	rtl
 @NotHold:
 
+	cpx #$02
+	bne @NotCharm
+@Charm:
+	jsl	SetCharmRumble	;Charm
+	rtl
+@NotCharm:
+
 	cpx #$06
 	bne @NotSlow
 @Slow:
@@ -324,6 +331,26 @@ Cure4RumblePointer:
 
 SetCure4Rumble:
 	SetRumbleTable	Cure4RumblePointer
+	rtl
+
+CharmRumble:
+	.byte   $05, $05, $07, $07, $09, $09, $09, $0A, $0A, $0A, $0D, $0D, $0D
+	.byte   $5D, $5D, $7A, $7A, $99, $99, $99, $A7, $A7, $A7, $D5, $D5, $D5
+	.byte	$D0, $D0, $A0, $A0, $90, $90, $90, $70, $70, $70, $50, $50, $50
+	.byte   $05, $05, $07, $07, $09, $09, $09, $0A, $0A, $0A, $0D, $0D, $0D
+	.byte   $5D, $5D, $7A, $7A, $99, $99, $99, $A7, $A7, $A7, $D5, $D5, $D5
+	.byte	$D0, $D0, $A0, $A0, $90, $90, $90, $70, $70, $70, $50, $50, $50
+	.byte 	$00, $00, $00, $00, $00, $00, $00
+	.byte	$AA, $AA, $AA, $AA, $AA, $AA, $AA, $AA, $AA
+	.byte 	$00, $00, $00, $00, $00, $00, $00
+	.byte	$AA, $AA, $AA, $AA, $AA, $AA, $AA, $AA, $AA, $FE
+
+
+CharmRumblePointer:
+	.byte	<CharmRumble, >CharmRumble
+
+SetCharmRumble:
+	SetRumbleTable	CharmRumblePointer
 	rtl
 
 	
@@ -2113,7 +2140,7 @@ MagicAnim_1b:
 ; [ magic animation $00: default ]
 
 MagicAnim_00:
-		SetRumble $55, 25
+	;	SetRumble $55, 25
 @f30d:  stz     $f2a0
 
 _02f310:
