@@ -197,7 +197,7 @@ AttackSfx_003e:
 AttackSfx_003f:
         .byte   $4d
 
-AttackSfx_0040:
+AttackSfx_0040:				;mini-flare (twin)
         .byte   $5f
 
 AttackSfx_0041:
@@ -387,7 +387,7 @@ AttackSfx_007e:
         .byte   $6b
 
 AttackSfx_007f:
-        .byte   $02
+        .byte   $02		;"Storm"
 
 AttackSfx_0080:
         .byte   $57
@@ -408,13 +408,13 @@ AttackSfx_0085:
         .byte   $66
 
 AttackSfx_0086:
-        .byte   $33
+        .byte   $33		;big bang
 
 AttackSfx_0087:
         .byte   $68
 
 AttackSfx_0088:
-        .byte   $40
+        .byte   $40		;digest
 
 AttackSfx_0089:
         .byte   $40
@@ -462,10 +462,10 @@ AttackSfx_0097:
         .byte   $0e
 
 AttackSfx_0098:
-        .byte   $0e
+        .byte   $0e		;"Thunder" - unknown
 
 AttackSfx_0099:
-        .byte   $1d
+        .byte   $1d		;D. Breath
 
 AttackSfx_009a:
         .byte   $29
@@ -495,16 +495,16 @@ AttackSfx_00a2:
         .byte   $36
 
 AttackSfx_00a3:
-        .byte   $13
+        .byte   $13		;glare
 
 AttackSfx_00a4:
         .byte   $63
 
 AttackSfx_00a5:
-        .byte   $0d
+        .byte   $0d		;Meganuke (Bahamut battle)
 
 AttackSfx_00a6:
-        .byte   $5b
+        .byte   $5b		;Needle
 
 AttackSfx_00a7:
         .byte   $5b

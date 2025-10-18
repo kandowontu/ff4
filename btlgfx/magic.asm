@@ -112,6 +112,10 @@ CheckForRumble:
 	rtl
 @NotSleep:
 
+	cpx #$7F			;"Storm"
+	beq	@Weak
+	cpx #$A3
+	beq @Weak			;Glare
 	cpx #$26
 	bne @NotWeak
 
@@ -127,6 +131,8 @@ CheckForRumble:
 	rtl
 @NotVirus:	
 
+	cpx #$98		;"thunder"
+	beq	@Lit3
 	cpx #$24
 	bne @NotLit3
 @Lit3:
@@ -166,6 +172,8 @@ CheckForRumble:
 
 @NotIce2:
 
+	cpx #$99
+	beq	@Ice 		;d. breath
 	cpx #$1f
 	bne @NotIce
 @Ice:
@@ -178,13 +186,15 @@ CheckForRumble:
 	beq @ToadPiggy	;toad and piggy
 	cpx #$19
 	beq @ToadPiggy
-	cpx #$14		;mini
+	cpx #$14		;size (mini)
 	bne @NotToadPiggy
 @ToadPiggy:
 	jsl	SetToadPiggyRumble
 	rtl
 
 @NotToadPiggy:
+	cpx #$88		;digest
+	beq	@Venom
 	cpx #$1b
 	bne @NotVenom
 @Venom:
