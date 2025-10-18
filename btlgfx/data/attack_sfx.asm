@@ -165,7 +165,7 @@ AttackSfx_0034:
         .byte   $0a
 
 AttackSfx_0035:
-        .byte   $69
+        .byte   $69		;ice attack (?)
 
 AttackSfx_0036:
         .byte   $0e
@@ -225,7 +225,7 @@ AttackSfx_0048:
         .byte   $1a
 
 AttackSfx_0049:
-        .byte   $66
+        .byte   $66			;group heal (used in golbez fight by rydia)
 
 AttackSfx_004a:
         .byte   $67

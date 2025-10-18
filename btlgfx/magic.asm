@@ -70,6 +70,8 @@ CheckForRumble:
 	rtl
 @NotCure4:
 
+	cpx #$49			;group heal
+	beq	@Heal
 	cpx #$11
 	bne @NotHeal
 @Heal:
@@ -147,16 +149,18 @@ CheckForRumble:
 @NotLit:	
 	
 
+	cpx #$35
+	beq	@Ice3			;ice attack
 	cpx #$21			
 	bne @NotIce3
-@ice3:
+@Ice3:
 	jsl	SetBlizzagaRumble	;ice 3
 	rtl
 	
 @NotIce3:
 	cpx #$20		
 	bne @NotIce2
-@ice2:
+@Ice2:
 	SetRumble	$88, 40	;ice 2
 	rtl
 
@@ -164,7 +168,7 @@ CheckForRumble:
 
 	cpx #$1f
 	bne @NotIce
-@ice:
+@Ice:
 	SetRumble	$55, 50	;ice
 	rtl
 

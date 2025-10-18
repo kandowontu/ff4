@@ -187,7 +187,7 @@ SoftReset:
         jsr     InitCharProp
         jsl     InitSpellLists
         jsl     InitHWRegs
-        jsl     UpdatePlayerSpeed
+        jsr     UpdatePlayerSpeed
         jsr     InitZoomHDMA
         lda     #1                      ; enable event
         sta     $b1
@@ -210,12 +210,28 @@ SoftReset:
 
 AfterBattle:
 @808e:  jsl     InitHWRegs
-        jsl     UpdatePlayerSpeed
+        jsr     UpdatePlayerSpeed
         lda     #1
         sta     $7d                     ; waiting for vblank
         stz     $df                     ; clear dialogue window height
         stz     $b1                     ; no event
         jmp     LoadMap
+
+
+
+
+; [ update player movement speed ]
+
+UpdatePlayerSpeed:
+@8302:  lda     $1704       ; vehicle id
+        tax
+        lda     PlayerSpeedTbl,x     ; movement speed
+        sta     $ac
+        rts
+
+; movement speed for each vehicle
+PlayerSpeedTbl:
+@830c:  .byte   0,1,2,1,3,3,3
 
 ; ------------------------------------------------------------------------------
 
@@ -480,52 +496,7 @@ LoadMap:
 @8348:  jsr     WipeIn
         jmp     FieldMain
 
-; ------------------------------------------------------------------------------
 
-; [ init map ram ]
-
-InitMapRAM:
-@834e:  lda     #$80
-        sta     hINIDISP
-        stz     hHDMAEN
-        stz     hNMITIMEN       ; disable nmi and irq
-        sei
-        jsr     ResetSprites
-        stz     $7a         ; animation frame counter
-        stz     $94
-        stz     $eb
-        stz     $e9
-        stz     $eb
-        stz     $ec
-        stz     $ed
-        stz     $ea         ; show map name
-        stz     $e7
-        stz     $e8
-        stz     $d4
-        stz     $ab
-        stz     $cf
-        stz     $da
-        stz     $c9
-        stz     $c4
-        stz     $c1
-        lda     #1
-        sta     $54
-        sta     $55
-        sta     $50
-        sta     $51
-        sta     $52
-        sta     $53
-        sta     $56
-        sta     $57
-        stz     $66
-        stz     $67
-        stz     $68
-        stz     $69
-        lda     #$10
-        sta     $ad         ; mode 7 zoom level
-        ldx     #0
-        stx     $06fb       ; mode 7 rotation angle
-        rts
 
 ; ------------------------------------------------------------------------------
 
@@ -544,7 +515,7 @@ InitMapRAM:
 ; [ load sub-map ]
 
 LoadSubMap:
-@83a4:  jsr     InitMapRAM
+@83a4:  jsl     InitMapRAM
         jsr     RemoveFloat
         stz     $ac
         lda     $1702
@@ -629,7 +600,7 @@ LoadSubMap:
 ; [ reload sub-map ]
 
 ReloadSubMap:
-@8452:  jsr     InitMapRAM
+@8452:  jsl     InitMapRAM
         lda     #$17
         sta     $212c
         lda     #$09
@@ -702,7 +673,7 @@ ReloadSubMap:
 ; [ load overworld ]
 
 LoadOverworld:
-@8502:  jsr     InitMapRAM
+@8502:  jsl     InitMapRAM
         jsr     InitWorld
         stz     $1701
         stz     $06fa
@@ -729,7 +700,7 @@ LoadOverworld:
 ; [ load underground ]
 
 LoadUnderground:
-@853c:  jsr     InitMapRAM
+@853c:  jsl     InitMapRAM
         jsr     InitWorld
         lda     #1
         sta     $1701
@@ -756,7 +727,7 @@ LoadUnderground:
 ; [ load moon ]
 
 LoadMoon:
-@8574:  jsr     InitMapRAM
+@8574:  jsl     InitMapRAM
         jsr     InitWorld
         lda     #2
         sta     $1701
@@ -1793,6 +1764,10 @@ WaitFrame:
 ; ------------------------------------------------------------------------------
 
 ; [ reset all sprites ]
+
+ResetSprites_L:
+		jsr	ResetSprites
+		rtl
 
 ResetSprites:
 @9177:  ldx     #0
@@ -3214,16 +3189,49 @@ TfrChestDoor:
 ; ------------------------------------------------------------------------------
 .segment "xcd_bank_20"
 
+; ------------------------------------------------------------------------------
 
-; [ update player movement speed ]
+; [ init map ram ]
 
-UpdatePlayerSpeed:
-@8302:  lda     $1704       ; vehicle id
-        tax
-        lda     PlayerSpeedTbl,x     ; movement speed
-        sta     $ac
+InitMapRAM:
+@834e:  lda     #$80
+        sta     hINIDISP
+        stz     hHDMAEN
+        stz     hNMITIMEN       ; disable nmi and irq
+        sei
+        jsl     ResetSprites_L
+        stz     $7a         ; animation frame counter
+        stz     $94
+        stz     $eb
+        stz     $e9
+        stz     $eb
+        stz     $ec
+        stz     $ed
+        stz     $ea         ; show map name
+        stz     $e7
+        stz     $e8
+        stz     $d4
+        stz     $ab
+        stz     $cf
+        stz     $da
+        stz     $c9
+        stz     $c4
+        stz     $c1
+        lda     #1
+        sta     $54
+        sta     $55
+        sta     $50
+        sta     $51
+        sta     $52
+        sta     $53
+        sta     $56
+        sta     $57
+        stz     $66
+        stz     $67
+        stz     $68
+        stz     $69
+        lda     #$10
+        sta     $ad         ; mode 7 zoom level
+        ldx     #0
+        stx     $06fb       ; mode 7 rotation angle
         rtl
-
-; movement speed for each vehicle
-PlayerSpeedTbl:
-@830c:  .byte   0,1,2,1,3,3,3
