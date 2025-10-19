@@ -11,6 +11,39 @@
 ; | created: 4/21/2022                                                         |
 ; +----------------------------------------------------------------------------+
 
+
+.segment "xcd_bank_20"
+
+KickRumble:
+	.byte   $00, $00, $00, $00
+	.byte   $00, $00, $00, $00
+	.byte   $00, $00, $00, $00
+	.byte	$11, $11, $11, $11
+	.byte   $22, $22, $22, $22
+	.byte	$33, $33, $33, $33
+	.byte   $44, $44, $44, $44
+	.byte	$55, $55, $55, $55 
+	.byte   $66, $66, $66, $66 
+	.byte	$77, $77, $77, $77 
+	.byte   $88, $88, $88, $88 
+	.byte	$99, $99, $99, $99
+	.byte   $AA, $AA, $AA, $AA 
+	.byte	$BB, $BB, $BB, $BB 
+	.byte   $CC, $CC, $CC, $CC 
+	.byte	$DD, $DD, $DD, $DD 
+	.byte   $EE, $EE, $EE, $EE 
+	.byte	$FF, $FF, $FF, $FF, $FE
+
+KickRumblePointer:
+	.byte	<KickRumble, >KickRumble
+
+SetKickRumble:
+	SetRumbleTable	KickRumblePointer
+	rtl
+	
+	
+.segment "battle_code"
+
 ; [ battle command $14: search (peep) ]
 
 Cmd_14:
@@ -707,6 +740,7 @@ Cmd_0f:
 
 Cmd_0e:
 @e6b7:  stz     $c1
+		jsl		SetKickRumble
         jmp     DoMultiAttack
 
 ; ------------------------------------------------------------------------------
