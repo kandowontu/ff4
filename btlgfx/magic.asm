@@ -154,6 +154,19 @@ CheckForRumble:
 	rtl
 @NotLit:	
 	
+	cpx #$1c
+	bne @NotFire
+@Fire:
+	jsl	SetFireRumble	;fire
+	rtl
+@NotFire:	
+	
+	cpx #$1d
+	bne @NotFire2
+@Fire2:
+	jsl	SetFire2Rumble	;fire 2/fira
+	rtl
+@NotFire2:	
 
 	cpx #$35
 	beq	@Ice3			;ice attack
@@ -331,6 +344,23 @@ SetFastRumble:
 	SetRumbleTable	FastRumblePointer
 	rtl
 	
+FireRumble:
+	.byte   $05, $05, $07, $07, $09, $09, $09, $0A, $0A, $0A, $0D, $0D, $0D
+	.byte   $5D, $5D, $7A, $7A, $99, $99, $99, $A7, $A7, $A7, $D5, $D5, $D5	
+	.byte	$D0, $D0, $A0, $A0, $90, $90, $90, $70, $70, $70, $50, $50, $50
+	.byte   $05, $05, $07, $07, $09, $09, $09, $0A, $0A, $0A, $0D, $0D, $0D
+	.byte   $5D, $5D, $7A, $7A, $99, $99, $99, $A7, $A7, $A7, $D5, $D5, $D5
+	.byte	$D0, $D0, $A0, $A0, $90, $90, $90, $70, $70, $70, $50, $50, $50
+	.byte   $05, $05, $07, $07, $09, $09, $09, $0A, $0A, $0A, $0D, $0D, $0D, $FE	
+	
+Fire2Rumble:
+	.byte   $05, $05, $07, $07, $09, $09, $09, $0A, $0A, $0A, $0D, $0D, $0D
+	.byte   $5D, $5D, $7A, $7A, $99, $99, $99, $A7, $A7, $A7, $D5, $D5, $D5	
+	.byte	$D0, $D0, $A0, $A0, $90, $90, $90, $70, $70, $70, $50, $50, $50
+	.byte   $05, $05, $07, $07, $09, $09, $09, $0A, $0A, $0A, $0D, $0D, $0D
+	.byte   $5D, $5D, $7A, $7A, $99, $99, $99, $A7, $A7, $A7, $D5, $D5, $D5
+	.byte	$D0, $D0, $D0, $D0, $D0, $D0, $D0, $D0, $D0, $D0, $D0, $D0, $D0, $FE
+
 Cure4Rumble:
 	.byte   $05, $05, $07, $07, $09, $09, $09, $0A, $0A, $0A, $0D, $0D, $0D
 	.byte   $5D, $5D, $7A, $7A, $99, $99, $99, $A7, $A7, $A7, $D5, $D5, $D5
@@ -345,6 +375,20 @@ Cure4RumblePointer:
 
 SetCure4Rumble:
 	SetRumbleTable	Cure4RumblePointer
+	rtl
+
+FireRumblePointer:
+	.byte	<FireRumble, >FireRumble
+
+SetFireRumble:
+	SetRumbleTable	FireRumblePointer
+	rtl
+
+Fire2RumblePointer:
+	.byte	<Fire2Rumble, >Fire2Rumble
+
+SetFire2Rumble:
+	SetRumbleTable	Fire2RumblePointer
 	rtl
 
 CharmRumble:
