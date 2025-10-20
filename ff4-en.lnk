@@ -93,7 +93,7 @@ segments {
     boss_tilemap: load = bank_0e, type = ro, align = $0100;
     ai_data: load = bank_0e, type = ro, start = $0ee000;  # align = $0100;
     battle_dlg: load = bank_0e, type = ro, align = $0200;
-    attack_name: load = bank_0f, type = ro, start = $0f8000;
+    attack_name: load = bank_22, type = ro;
     attack_prop: load = bank_0f, type = ro, start = $0f9070;
     attack_anim: load = bank_0f, type = ro, start = $0f9e10;
     item_misc: load = bank_0f, type = ro, start = $0fa450;
@@ -104,7 +104,7 @@ segments {
     status_name: load = bank_0f, type = ro, start = $0fb400;
     level_up: load = bank_0f, type = ro, start = $0fb500;
     menu_code2: load = bank_0f, type = ro, start = $0fc600;
-    spell_list: load = bank_0f, type = ro, start = $0fc700;
+    spell_list: load = bank_22, type = ro, start = $22b000;
     monster_gfx_prop: load = bank_0f, type = ro, start = $0fca00;
     battle_bg_pal: load = bank_0f, type = ro, start = $0fd200;
     battle_anim: load = bank_0f, type = ro, start = $0fd4e0;

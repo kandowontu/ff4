@@ -276,34 +276,34 @@ MapPal_001a:
         .byte   $00,$00,$94,$52,$c6,$00,$e8,$68,$82,$50,$02,$3c,$8c,$09,$00,$00
 
 MapPal_001b:
-        .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
-        .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
-        .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
-        .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
-        .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
-        .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
-        .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
-        .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
+        .byte   $ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f
+        .byte   $ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f
+        .byte   $ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f
+        .byte   $ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f
+        .byte   $ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f
+        .byte   $ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f
+        .byte   $ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f
+        .byte   $ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f
 
 MapPal_001c:
-        .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
-        .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
-        .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
-        .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
-        .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
-        .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
-        .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
-        .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
+        .byte   $ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f
+        .byte   $ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f
+        .byte   $ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f
+        .byte   $ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f
+        .byte   $ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f
+        .byte   $ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f
+        .byte   $ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f
+        .byte   $ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f
 
 MapPal_001d:
-        .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
-        .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
-        .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
-        .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
-        .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
-        .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
-        .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
-        .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
+        .byte   $ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f
+        .byte   $ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f
+        .byte   $ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f
+        .byte   $ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f
+        .byte   $ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f
+        .byte   $ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f
+        .byte   $ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f
+        .byte   $ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f
 
 MapPal_001e:
         .byte   $63,$0c,$ff,$7f,$bd,$6a,$9f,$5f,$bb,$3e,$b6,$49,$7d,$1f,$63,$0c

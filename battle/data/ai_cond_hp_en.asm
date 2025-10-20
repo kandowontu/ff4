@@ -6,43 +6,43 @@
 AICondHP:
 
 AICondHP_0000:
-        .byte   $10,$27
+        .byte   $10,$00
 
 AICondHP_0001:
-        .byte   $e8,$03
+        .byte   $e8,$00
 
 AICondHP_0002:
-        .byte   $bc,$02
+        .byte   $bc,$00
 
 AICondHP_0003:
-        .byte   $20,$4e
+        .byte   $20,$00
 
 AICondHP_0004:
         .byte   $64,$00
 
 AICondHP_0005:
-        .byte   $38,$4a
+        .byte   $38,$00
 
 AICondHP_0006:
-        .byte   $bc,$02
+        .byte   $bc,$00
 
 AICondHP_0007:
-        .byte   $40,$9c
+        .byte   $40,$00
 
 AICondHP_0008:
-        .byte   $f8,$2a
+        .byte   $f8,$00
 
 AICondHP_0009:
-        .byte   $78,$69
+        .byte   $78,$00
 
 AICondHP_000a:
-        .byte   $e8,$03
+        .byte   $e8,$00
 
 AICondHP_000b:
-        .byte   $80,$3e
+        .byte   $80,$00
 
 AICondHP_000c:
-        .byte   $e0,$2e
+        .byte   $e0,$00
 
 AICondHP_000d:
         .byte   $01,$00

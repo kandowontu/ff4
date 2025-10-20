@@ -1,6 +1,6 @@
 .list off
 
-.define EventScriptSize $648B
+.define EventScriptSize $6485
 .define EventScriptArrayLength 256
 
 EventScript:
@@ -35,7 +35,10 @@ EventScript_0009:
         .byte   $04,$0a,$06,$e9,$04,$ef,$05,$fb,$37,$ef,$06,$e0,$f8,$f2,$4d,$ff
 
 EventScript_000a:
-        .byte   $ef,$00,$f8,$1b,$ef,$02,$04,$d5,$e9,$04,$06,$ff,$ef,$03,$ff,$ff
+        .byte   $ef,$00,$f8,$1b,$ef,$02,$04,$d5,$e9,$04,$06,$ff
+
+EventScript_002a:
+        .byte   $ef,$03,$ff,$ff
 
 EventScript_000b:
         .byte   $d5,$ff
@@ -362,9 +365,6 @@ EventScript_0028:
 EventScript_0029:
         .byte   $ef,$02,$ff
 
-EventScript_002a:
-        .byte   $ef,$03,$ff
-
 EventScript_002b:
         .byte   $ef,$04,$ff
 
@@ -423,6 +423,7 @@ EventScript_0034:
         .byte   $ed,$17,$ff
 
 EventScript_0035:
+EventScript_00ae:
         .byte   $ed,$00,$ff
 
 EventScript_0036:
@@ -1557,9 +1558,6 @@ EventScript_00ac:
 
 EventScript_00ad:
         .byte   $ed,$11,$ff
-
-EventScript_00ae:
-        .byte   $ed,$00,$ff
 
 EventScript_00af:
         .byte   $e0,$f5,$fb,$7e,$e9,$0c,$08,$f5,$1b,$f1,$d3,$f2,$40,$fa,$15,$ff

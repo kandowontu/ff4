@@ -30,16 +30,16 @@ MapSpritePal_0007:
         .byte   $00,$00,$00,$00,$e7,$1c,$5a,$6b,$10,$42,$4a,$29,$7f,$2a,$18,$00
 
 MapSpritePal_0008:
-        .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
+        .byte   $ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f
 
 MapSpritePal_0009:
-        .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
+        .byte   $ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f
 
 MapSpritePal_000a:
-        .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
+        .byte   $ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f
 
 MapSpritePal_000b:
-        .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
+        .byte   $ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f,$ff,$7f
 
 MapSpritePal_000c:
         .byte   $00,$00,$00,$00,$ff,$7f,$39,$67,$f7,$5e,$8c,$31,$10,$42,$4a,$29

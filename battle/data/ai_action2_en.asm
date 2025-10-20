@@ -1,6 +1,6 @@
 .list off
 
-.define AIAction2Size $02CA
+.define AIAction2Size $02C8
 .define AIAction2ArrayLength 89
 
 AIAction2:
@@ -283,7 +283,5 @@ AIAction2_0057:
 
 AIAction2_0058:
         .byte   $ee,$24,$f9,$28,$26,$ff
-
-        .byte   $26,$ff
 
 .list on

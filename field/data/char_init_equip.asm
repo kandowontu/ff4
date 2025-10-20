@@ -1,6 +1,6 @@
 .list off
 
-.define CharInitEquipSize $0092
+.define CharInitEquipSize $0093
 .define CharInitEquipArrayLength 21
 
 CharInitEquip:
@@ -66,6 +66,6 @@ CharInitEquip_0013:
         .byte   $74,$8a,$a4,$6a,$01,$2a,$01
 
 CharInitEquip_0014:
-        .byte   $7a,$92,$ad,$13,$01,$00
+        .byte   $7a,$92,$ad,$13,$01,$00,$00
 
 .list on
