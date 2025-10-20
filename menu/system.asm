@@ -443,7 +443,7 @@ MagicMultiTarget:
 
 ; ------------------------------------------------------------------------------
 
-.segment "field_code2"
+.segment "xcd_bank_21"
 
 RumbleRead:
         lda     f:$00011f

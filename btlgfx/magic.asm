@@ -21,6 +21,16 @@
 CheckForRumble:
 
 
+	cpx #$61
+	beq	@Hold		;bluster
+	cpx #$6C
+	beq	@Hold		;blast / mind blast
+	cpx #$70
+	beq	@Hold		;entangle
+	cpx #$76
+	beq	@Hold		;hold gas
+	cpx #$77
+	beq	@Hold		;gas / sleep gas
 	cpx #$00
 	bne @NotHold
 @Hold:
@@ -70,7 +80,9 @@ CheckForRumble:
 	rtl
 @NotCure4:
 
-	cpx #$49			;group heal
+	cpx #$49			;group heal / basuna
+	beq	@Heal
+	cpx #$4A			;poisona
 	beq	@Heal
 	cpx #$11
 	bne @NotHeal
@@ -97,6 +109,8 @@ CheckForRumble:
 	rtl
 @NotStop:	
 
+	cpx #$69			;count
+	beq	@Fatal
 	cpx #$2a
 	bne @NotFatal
 @Fatal:
@@ -105,6 +119,16 @@ CheckForRumble:
 	
 @NotFatal:	
 
+	cpx #$63
+	beq	@Sleep			;powder
+	cpx #$66
+	beq	@Sleep			;tongue
+	cpx #$67
+	beq	@Sleep			;curse song
+	cpx #$75
+	beq	@Sleep			;curse
+	cpx #$88			;digest
+	beq	@Sleep
 	cpx #$28
 	bne @NotSleep		;sleep
 @Sleep:
@@ -114,10 +138,12 @@ CheckForRumble:
 
 	cpx #$7F			;"Storm"
 	beq	@Weak
+	cpx #$71			;"Weak" enemy cast(?)
+	beq	@Weak
 	cpx #$A3
 	beq @Weak			;Glare
 	cpx #$26
-	bne @NotWeak
+	bne @NotWeak		;Weak
 
 @Weak:
 	jsl	SetWeakRumble	;Weak
@@ -170,6 +196,8 @@ CheckForRumble:
 
 	cpx #$35
 	beq	@Ice3			;ice attack
+	cpx #$73
+	beq	@Ice3			;ColdMist
 	cpx #$21			
 	bne @NotIce3
 @Ice3:
@@ -196,9 +224,11 @@ CheckForRumble:
 @NotIce:
 
 	cpx #$18
-	beq @ToadPiggy	;toad and piggy
+	beq @ToadPiggy	;toad
+	cpx #$6F
+	beq	@ToadPiggy	;Whisper
 	cpx #$19
-	beq @ToadPiggy
+	beq @ToadPiggy	;piggy
 	cpx #$14		;size (mini)
 	bne @NotToadPiggy
 @ToadPiggy:
@@ -206,7 +236,7 @@ CheckForRumble:
 	rtl
 
 @NotToadPiggy:
-	cpx #$88		;digest
+	cpx #$78		;poison (all)
 	beq	@Venom
 	cpx #$1b
 	bne @NotVenom

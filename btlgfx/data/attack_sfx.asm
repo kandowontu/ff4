@@ -219,22 +219,22 @@ AttackSfx_0046:
         .byte   $70			;image (edge)
 
 AttackSfx_0047:
-        .byte   $00
+        .byte   $00			;magic arrow?
 
-AttackSfx_0048:
-        .byte   $1a
+AttackSfx_0048:				
+        .byte   $1a			;cure 3 (unknown)
 
 AttackSfx_0049:
         .byte   $66			;group heal (used in golbez fight by rydia)
 
-AttackSfx_004a:
-        .byte   $67
+AttackSfx_004a:				
+        .byte   $67			;poisona
 
 AttackSfx_004b:
-        .byte   $00
+        .byte   $00			;dagger?
 
 AttackSfx_004c:
-        .byte   $08
+        .byte   $08			
 
 AttackSfx_004d:
         .byte   $05
@@ -294,100 +294,100 @@ AttackSfx_005f:
         .byte   $1d
 
 AttackSfx_0060:
-        .byte   $35
+        .byte   $35		;gaze
 
 AttackSfx_0061:
-        .byte   $36
+        .byte   $36		;bluster
 
 AttackSfx_0062:
-        .byte   $52
+        .byte   $52		;slap
 
 AttackSfx_0063:
-        .byte   $40
+        .byte   $40		;powder
 
 AttackSfx_0064:
-        .byte   $35
+        .byte   $35		;glance
 
 AttackSfx_0065:
-        .byte   $53
+        .byte   $53		;charm (with hearts) ***
 
 AttackSfx_0066:
-        .byte   $40
+        .byte   $40		;tongue
 
 AttackSfx_0067:
-        .byte   $40
+        .byte   $40		;curse
 
 AttackSfx_0068:
-        .byte   $0f
+        .byte   $0f		;ray
 
 AttackSfx_0069:
-        .byte   $3b
+        .byte   $3b		;count
 
 AttackSfx_006a:
-        .byte   $0f
+        .byte   $0f		;beak
 
 AttackSfx_006b:
-        .byte   $0f
+        .byte   $0f		;petrify
 
 AttackSfx_006c:
-        .byte   $61
+        .byte   $61		;blast / Mind blast
 
 AttackSfx_006d:
-        .byte   $1a
+        .byte   $1a		;hug
 
 AttackSfx_006e:
-        .byte   $67
+        .byte   $67		;breath (???)
 
 AttackSfx_006f:
-        .byte   $14
+        .byte   $14		;whisper
 
 AttackSfx_0070:
-        .byte   $61
+        .byte   $61		;entangle
 
 AttackSfx_0071:
-        .byte   $13
+        .byte   $13		;weak (enemy cast?)
 
 AttackSfx_0072:
-        .byte   $6b
+        .byte   $6b		;disrupt? (no effect)
 
 AttackSfx_0073:
-        .byte   $1d
+        .byte   $1d		;coldmist
 
 AttackSfx_0074:
-        .byte   $05
+        .byte   $05		;explode ***
 
 AttackSfx_0075:
-        .byte   $40
+        .byte   $40		;curse song
 
 AttackSfx_0076:
-        .byte   $61
+        .byte   $61		;hold gas
 
 AttackSfx_0077:
-        .byte   $6f
+        .byte   $6f		;gas (sleep gas)
 
 AttackSfx_0078:
-        .byte   $67
+        .byte   $67		;poison (all)
 
 AttackSfx_0079:
-        .byte   $36
+        .byte   $36		;maser ***
 
 AttackSfx_007a:
-        .byte   $00
+        .byte   $00		;vanish (enemy dies)
 
 AttackSfx_007b:
-        .byte   $6b
+        .byte   $6b		;demolish ***
 
 AttackSfx_007c:
-        .byte   $4a
+        .byte   $4a		;black hole
 
 AttackSfx_007d:
-        .byte   $00
+        .byte   $00		;death song??? does nothing
 
 AttackSfx_007e:
-        .byte   $6b
+        .byte   $6b		;disrupt ***
 
 AttackSfx_007f:
-        .byte   $02		;"Storm"
+        .byte   $02		;"Storm" / Maelstrom
 
 AttackSfx_0080:
         .byte   $57
