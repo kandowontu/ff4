@@ -6,148 +6,148 @@
 AttackSfx:
 
 AttackSfx_0000:
-        .byte   $61
+        .byte   $61		;hold
 
 AttackSfx_0001:
-        .byte   $15
+        .byte   $15		;mute
 
 AttackSfx_0002:
-        .byte   $71
+        .byte   $71		;charm
 
 AttackSfx_0003:
-        .byte   $6e
+        .byte   $6e		;blink
 
 AttackSfx_0004:
-        .byte   $6e
+        .byte   $6e		;armor (protect)
 
 AttackSfx_0005:
-        .byte   $6e
+        .byte   $6e		;shell
 
 AttackSfx_0006:
-        .byte   $72
+        .byte   $72		;slow
 
 AttackSfx_0007:
-        .byte   $41
+        .byte   $41		;fast
 
 AttackSfx_0008:
-        .byte   $70
+        .byte   $70		;berserk
 
 AttackSfx_0009:
-        .byte   $1e
+        .byte   $1e		;wall
 
 AttackSfx_000a:
-        .byte   $6c
+        .byte   $6c		;white
 
 AttackSfx_000b:
-        .byte   $6d
+        .byte   $6d		;dummy (???)
 
 AttackSfx_000c:
-        .byte   $43
+        .byte   $43		;peep
 
 AttackSfx_000d:
-        .byte   $1a
+        .byte   $1a		;cure 1
 
 AttackSfx_000e:
-        .byte   $1a
+        .byte   $1a		;cure 2
 
 AttackSfx_000f:
-        .byte   $1a
+        .byte   $1a		;cure 3
 
 AttackSfx_0010:
-        .byte   $1a
+        .byte   $1a		;cure 4
 
 AttackSfx_0011:
-        .byte   $66
+        .byte   $66		;heal
 
 AttackSfx_0012:
-        .byte   $27
+        .byte   $27		;life
 
 AttackSfx_0013:
-        .byte   $27
+        .byte   $27		;life 2
 
 AttackSfx_0014:
-        .byte   $14
+        .byte   $14		;size (mini)
 
 AttackSfx_0015:
-        .byte   $0c
+        .byte   $0c		;exit
 
 AttackSfx_0016:
         .byte   $00
 
 AttackSfx_0017:
-        .byte   $1f
+        .byte   $1f		;float
 
 AttackSfx_0018:
-        .byte   $14
+        .byte   $14		;toad
 
 AttackSfx_0019:
-        .byte   $14
+        .byte   $14		;piggy
 
 AttackSfx_001a:
         .byte   $6b
 
 AttackSfx_001b:
-        .byte   $67
+        .byte   $67		;venom
 
 AttackSfx_001c:
-        .byte   $0d
+        .byte   $0d		;fire 1
 
 AttackSfx_001d:
-        .byte   $0d
+        .byte   $0d		;fire 2 (fira)
 
 AttackSfx_001e:
-        .byte   $2e
+        .byte   $2e		;fire 3 (firaga)
 
 AttackSfx_001f:
-        .byte   $1d
+        .byte   $1d		;ice 1
 
 AttackSfx_0020:
-        .byte   $11
+        .byte   $11		;ice 2 (blizzara)
 
 AttackSfx_0021:
-        .byte   $69
+        .byte   $69		;ice 3 (blizzaga)
 
 AttackSfx_0022:
-        .byte   $0e
+        .byte   $0e		;lit 1 
 
 AttackSfx_0023:
-        .byte   $0e
+        .byte   $0e		;lit 2 (thundara)
 
 AttackSfx_0024:
-        .byte   $0e
+        .byte   $0e		;lit 3 (thundaga)
 
 AttackSfx_0025:
-        .byte   $3e
+        .byte   $3e		;virus
 
 AttackSfx_0026:
-        .byte   $13
+        .byte   $13		;weak
 
 AttackSfx_0027:
-        .byte   $20
+        .byte   $20		;quake
 
 AttackSfx_0028:
-        .byte   $6f
+        .byte   $6f		;sleep
 
 AttackSfx_0029:
-        .byte   $0f
+        .byte   $0f		;stone
 
 AttackSfx_002a:
-        .byte   $3b
+        .byte   $3b		;fatal
 
 AttackSfx_002b:
-        .byte   $1c
+        .byte   $1c		;stop
 
 AttackSfx_002c:
-        .byte   $68
+        .byte   $68		;drain
 
 AttackSfx_002d:
-        .byte   $68
+        .byte   $68		;psych
 
 AttackSfx_002e:
-        .byte   $04
+        .byte   $04		;meteo
 
 AttackSfx_002f:
-        .byte   $6a
+        .byte   $6a		;nuke
 
 AttackSfx_0030:
         .byte   $00
@@ -165,7 +165,7 @@ AttackSfx_0034:
         .byte   $0a
 
 AttackSfx_0035:
-        .byte   $69
+        .byte   $69		;ice attack (?)
 
 AttackSfx_0036:
         .byte   $0e
@@ -197,44 +197,44 @@ AttackSfx_003e:
 AttackSfx_003f:
         .byte   $4d
 
-AttackSfx_0040:
+AttackSfx_0040:				;mini-flare (twin)
         .byte   $5f
 
 AttackSfx_0041:
-        .byte   $0d
+        .byte   $0d			;flame (edge)
 
 AttackSfx_0042:
-        .byte   $29
+        .byte   $29			;flood (edge)
 
 AttackSfx_0043:
-        .byte   $0e
+        .byte   $0e			;blitz (edge)
 
 AttackSfx_0044:
-        .byte   $56
+        .byte   $56			;smoke (edge)
 
 AttackSfx_0045:
-        .byte   $69
+        .byte   $69			;pin (edge)
 
 AttackSfx_0046:
-        .byte   $70
+        .byte   $70			;image (edge)
 
 AttackSfx_0047:
-        .byte   $00
+        .byte   $00			;magic arrow?
 
-AttackSfx_0048:
-        .byte   $1a
+AttackSfx_0048:				
+        .byte   $1a			;cure 3 (unknown)
 
 AttackSfx_0049:
-        .byte   $66
+        .byte   $66			;group heal (used in golbez fight by rydia)
 
-AttackSfx_004a:
-        .byte   $67
+AttackSfx_004a:				
+        .byte   $67			;poisona
 
 AttackSfx_004b:
-        .byte   $00
+        .byte   $00			;dagger?
 
 AttackSfx_004c:
-        .byte   $08
+        .byte   $08			
 
 AttackSfx_004d:
         .byte   $05
@@ -285,7 +285,7 @@ AttackSfx_005c:
         .byte   $26
 
 AttackSfx_005d:
-        .byte   $04
+        .byte   $04		;w. meteo
 
 AttackSfx_005e:
         .byte   $0e
@@ -294,100 +294,100 @@ AttackSfx_005f:
         .byte   $1d
 
 AttackSfx_0060:
-        .byte   $35
+        .byte   $35		;gaze
 
 AttackSfx_0061:
-        .byte   $36
+        .byte   $36		;bluster
 
 AttackSfx_0062:
-        .byte   $52
+        .byte   $52		;slap
 
 AttackSfx_0063:
-        .byte   $40
+        .byte   $40		;powder
 
 AttackSfx_0064:
-        .byte   $35
+        .byte   $35		;glance
 
 AttackSfx_0065:
-        .byte   $53
+        .byte   $53		;charm (with hearts) ***
 
 AttackSfx_0066:
-        .byte   $40
+        .byte   $40		;tongue
 
 AttackSfx_0067:
-        .byte   $40
+        .byte   $40		;curse
 
 AttackSfx_0068:
-        .byte   $0f
+        .byte   $0f		;ray
 
 AttackSfx_0069:
-        .byte   $3b
+        .byte   $3b		;count
 
 AttackSfx_006a:
-        .byte   $0f
+        .byte   $0f		;beak
 
 AttackSfx_006b:
-        .byte   $0f
+        .byte   $0f		;petrify
 
 AttackSfx_006c:
-        .byte   $61
+        .byte   $61		;blast / Mind blast
 
 AttackSfx_006d:
-        .byte   $1a
+        .byte   $1a		;hug
 
 AttackSfx_006e:
-        .byte   $67
+        .byte   $67		;breath (???)
 
 AttackSfx_006f:
-        .byte   $14
+        .byte   $14		;whisper
 
 AttackSfx_0070:
-        .byte   $61
+        .byte   $61		;entangle
 
 AttackSfx_0071:
-        .byte   $13
+        .byte   $13		;weak (enemy cast?)
 
 AttackSfx_0072:
-        .byte   $6b
+        .byte   $6b		;disrupt? (no effect)
 
 AttackSfx_0073:
-        .byte   $1d
+        .byte   $1d		;coldmist
 
 AttackSfx_0074:
-        .byte   $05
+        .byte   $05		;explode ***
 
 AttackSfx_0075:
-        .byte   $40
+        .byte   $40		;curse song
 
 AttackSfx_0076:
-        .byte   $61
+        .byte   $61		;hold gas
 
 AttackSfx_0077:
-        .byte   $6f
+        .byte   $6f		;gas (sleep gas)
 
 AttackSfx_0078:
-        .byte   $67
+        .byte   $67		;poison (all)
 
 AttackSfx_0079:
-        .byte   $36
+        .byte   $36		;maser ***
 
 AttackSfx_007a:
-        .byte   $00
+        .byte   $00		;vanish (enemy dies)
 
 AttackSfx_007b:
-        .byte   $6b
+        .byte   $6b		;demolish ***
 
 AttackSfx_007c:
-        .byte   $4a
+        .byte   $4a		;black hole
 
 AttackSfx_007d:
-        .byte   $00
+        .byte   $00		;death song??? does nothing
 
 AttackSfx_007e:
-        .byte   $6b
+        .byte   $6b		;disrupt ***
 
 AttackSfx_007f:
-        .byte   $02
+        .byte   $02		;"Storm" / Maelstrom
 
 AttackSfx_0080:
         .byte   $57
@@ -408,13 +408,13 @@ AttackSfx_0085:
         .byte   $66
 
 AttackSfx_0086:
-        .byte   $33
+        .byte   $33		;big bang
 
 AttackSfx_0087:
         .byte   $68
 
 AttackSfx_0088:
-        .byte   $40
+        .byte   $40		;digest
 
 AttackSfx_0089:
         .byte   $40
@@ -462,10 +462,10 @@ AttackSfx_0097:
         .byte   $0e
 
 AttackSfx_0098:
-        .byte   $0e
+        .byte   $0e		;"Thunder" - unknown
 
 AttackSfx_0099:
-        .byte   $1d
+        .byte   $1d		;D. Breath
 
 AttackSfx_009a:
         .byte   $29
@@ -495,16 +495,16 @@ AttackSfx_00a2:
         .byte   $36
 
 AttackSfx_00a3:
-        .byte   $13
+        .byte   $13		;glare
 
 AttackSfx_00a4:
         .byte   $63
 
 AttackSfx_00a5:
-        .byte   $0d
+        .byte   $0d		;Meganuke (Bahamut battle)
 
 AttackSfx_00a6:
-        .byte   $5b
+        .byte   $5b		;Needle
 
 AttackSfx_00a7:
         .byte   $5b
