@@ -2414,6 +2414,10 @@ ClearNPCSwitch:
 
 ; [ set event switch ]
 
+SetEventSwitch_L:
+		jsr SetEventSwitch
+		rtl
+
 SetEventSwitch:
 @f3bb:  jsr     GetEventSwitchOffset
         lda     #$01

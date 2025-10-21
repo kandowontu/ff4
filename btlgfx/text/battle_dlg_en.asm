@@ -1,12 +1,39 @@
 .list off
 
-.define BattleDlgSize $0B98
+.define BattleDlgSize $0B4F
 .define BattleDlgArrayLength 186
 
 BattleDlg:
 
 BattleDlg_0000:
         .byte   $55,$70,$6d,$69,$60,$5f,$ff,$64,$69,$6f,$6a,$ff,$68,$64,$6e,$6f
+
+BattleDlg_0067:
+BattleDlg_0076:
+BattleDlg_0077:
+BattleDlg_008b:
+BattleDlg_008c:
+BattleDlg_008d:
+BattleDlg_008e:
+BattleDlg_0090:
+BattleDlg_0091:
+BattleDlg_0092:
+BattleDlg_0093:
+BattleDlg_0096:
+BattleDlg_0097:
+BattleDlg_0098:
+BattleDlg_00a8:
+BattleDlg_00aa:
+BattleDlg_00ad:
+BattleDlg_00ae:
+BattleDlg_00b1:
+BattleDlg_00b3:
+BattleDlg_00b4:
+BattleDlg_00b5:
+BattleDlg_00b6:
+BattleDlg_00b7:
+BattleDlg_00b8:
+BattleDlg_00b9:
         .byte   $c4,$00
 
 BattleDlg_0001:
@@ -377,9 +404,6 @@ BattleDlg_0066:
         .byte   $4e,$5c,$62,$70,$6e,$ff,$83,$c8,$45,$46,$4d,$55,$42,$ff,$42,$55
         .byte   $55,$42,$44,$4c,$c4,$c4,$00
 
-BattleDlg_0067:
-        .byte   $c4,$00
-
 BattleDlg_0068:
         .byte   $55,$63,$70,$69,$5f,$60,$6d,$ff,$6e,$6f,$6d,$70,$5e,$66,$ff,$50
         .byte   $5f,$64,$69,$c4,$00
@@ -430,12 +454,6 @@ BattleDlg_0074:
 BattleDlg_0075:
         .byte   $4e,$5c,$62,$64,$5e,$6e,$ff,$5d,$60,$5e,$5c,$68,$60,$ff,$64,$69
         .byte   $71,$5c,$67,$64,$5f,$c1,$00
-
-BattleDlg_0076:
-        .byte   $c4,$00
-
-BattleDlg_0077:
-        .byte   $c4,$00
 
 BattleDlg_0078:
         .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$85,$00
@@ -507,48 +525,15 @@ BattleDlg_008a:
         .byte   $42,$ff,$68,$6a,$69,$6e,$6f,$60,$6d,$ff,$5c,$6b,$6b,$60,$5c,$6d
         .byte   $60,$5f,$c4,$00
 
-BattleDlg_008b:
-        .byte   $c4,$00
-
-BattleDlg_008c:
-        .byte   $c4,$00
-
-BattleDlg_008d:
-        .byte   $c4,$00
-
-BattleDlg_008e:
-        .byte   $c4,$00
-
 BattleDlg_008f:
         .byte   $53,$70,$5d,$64,$5e,$5c,$69,$6f,$c8,$4a,$ff,$67,$6a,$6e,$6f,$ff
         .byte   $69,$6a,$72,$c3,$00
-
-BattleDlg_0090:
-        .byte   $c4,$00
-
-BattleDlg_0091:
-        .byte   $c4,$00
-
-BattleDlg_0092:
-        .byte   $c4,$00
-
-BattleDlg_0093:
-        .byte   $c4,$00
 
 BattleDlg_0094:
         .byte   $48,$6a,$c3,$ff,$04,$00,$c3,$ff,$00
 
 BattleDlg_0095:
         .byte   $ff,$c3,$ff,$53,$60,$6b,$6a,$6d,$6f,$ff,$c3,$00
-
-BattleDlg_0096:
-        .byte   $c4,$00
-
-BattleDlg_0097:
-        .byte   $c4,$00
-
-BattleDlg_0098:
-        .byte   $c4,$00
 
 BattleDlg_0099:
         .byte   $4d,$60,$6f,$c0,$6e,$ff,$5f,$5c,$69,$5e,$60,$c4,$00
@@ -562,6 +547,7 @@ BattleDlg_009b:
         .byte   $ff,$70,$6b,$c4,$00
 
 BattleDlg_009c:
+BattleDlg_00a2:
         .byte   $53,$60,$5e,$60,$64,$71,$60,$5f,$ff,$6f,$63,$60,$ff,$60,$69,$60
         .byte   $6d,$62,$74,$c4,$00
 
@@ -583,10 +569,6 @@ BattleDlg_00a1:
         .byte   $04,$09,$c8,$49,$6a,$67,$5f,$ff,$6a,$69,$ff,$6f,$6a,$ff,$64,$6f
         .byte   $c4,$00
 
-BattleDlg_00a2:
-        .byte   $53,$60,$5e,$60,$64,$71,$60,$5f,$ff,$6f,$63,$60,$ff,$60,$69,$60
-        .byte   $6d,$62,$74,$c4,$00
-
 BattleDlg_00a3:
         .byte   $04,$0b,$c8,$43,$67,$60,$6e,$6e,$ff,$63,$64,$68,$c9,$ff,$4e,$6a
         .byte   $6a,$69,$c4,$00
@@ -607,15 +589,9 @@ BattleDlg_00a7:
         .byte   $ff,$5b,$60,$6d,$6a,$68,$70,$6e,$c4,$ff,$4a,$6f,$c0,$6e,$ff,$6f
         .byte   $63,$60,$ff,$60,$69,$5f,$c4,$00
 
-BattleDlg_00a8:
-        .byte   $c4,$00
-
 BattleDlg_00a9:
         .byte   $5b,$60,$6d,$6a,$68,$70,$6e,$c8,$48,$53,$53,$c3,$c3,$46,$53,$53
         .byte   $53,$48,$49,$c3,$c3,$00
-
-BattleDlg_00aa:
-        .byte   $c4,$00
 
 BattleDlg_00ab:
         .byte   $ff,$68,$60,$c9,$ff,$74,$6a,$70,$ff,$61,$6a,$6a,$67,$6e,$c4,$00
@@ -623,12 +599,6 @@ BattleDlg_00ab:
 BattleDlg_00ac:
         .byte   $49,$64,$6e,$ff,$6f,$6d,$70,$60,$ff,$5e,$6a,$67,$6a,$6d,$6e,$ff
         .byte   $60,$68,$60,$6d,$62,$60,$5f,$c4,$00
-
-BattleDlg_00ad:
-        .byte   $c4,$00
-
-BattleDlg_00ae:
-        .byte   $c4,$00
 
 BattleDlg_00af:
         .byte   $49,$42,$ff,$49,$42,$ff,$49,$42,$c4,$ff,$55,$63,$5c,$69,$66,$6e
@@ -638,32 +608,8 @@ BattleDlg_00b0:
         .byte   $ff,$54,$63,$5c,$5f,$6a,$72,$ff,$45,$6d,$5c,$62,$6a,$69,$ff,$5c
         .byte   $72,$5c,$74,$c3,$c3,$c5,$c4,$00
 
-BattleDlg_00b1:
-        .byte   $c4,$00
-
 BattleDlg_00b2:
         .byte   $4a,$6f,$c0,$6e,$ff,$68,$74,$ff,$6f,$70,$6d,$69,$ff,$69,$6a,$72
-        .byte   $c4,$00
-
-BattleDlg_00b3:
-        .byte   $c4,$00
-
-BattleDlg_00b4:
-        .byte   $c4,$00
-
-BattleDlg_00b5:
-        .byte   $c4,$00
-
-BattleDlg_00b6:
-        .byte   $c4,$00
-
-BattleDlg_00b7:
-        .byte   $c4,$00
-
-BattleDlg_00b8:
-        .byte   $c4,$00
-
-BattleDlg_00b9:
         .byte   $c4,$00
 
 .list on

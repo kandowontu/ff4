@@ -1,6 +1,6 @@
 .list off
 
-.define MonsterPropSize $0BD9
+.define MonsterPropSize $0BCC
 .define MonsterPropArrayLength 224
 
 MonsterProp:
@@ -232,7 +232,7 @@ MonsterProp_0049:
         .byte   $19,$2c,$01,$15,$77,$b3,$10,$44,$00,$60,$00,$18,$00,$84
 
 MonsterProp_004a:
-        .byte   $2c,$e8,$03,$2e,$8a,$c0,$24,$47,$00,$08,$12,$08
+        .byte   $2c,$e8,$03,$2e,$8a,$c0,$24,$47,$00,$08,$12
 
 MonsterProp_004b:
         .byte   $31,$60,$09,$37,$8c,$bb,$23,$55,$00,$04,$4f
@@ -493,7 +493,6 @@ MonsterProp_009e:
 
 MonsterProp_009f:
         .byte   $e3,$98,$3a,$58,$60,$a0,$2c,$6e,$e4,$78,$41,$7e,$28,$02,$4f,$01
-        .byte   $e5
 
 MonsterProp_00a0:
         .byte   $e3,$80,$3e,$55,$96,$df,$03,$6f,$f5,$14,$3f,$c3
@@ -578,7 +577,7 @@ MonsterProp_00ba:
         .byte   $8f,$60,$ea,$0f,$60,$a0,$36,$00,$b7,$04,$b8
 
 MonsterProp_00bb:
-        .byte   $b2,$70,$62,$30,$6f,$cf,$3b,$00,$b4,$74,$41,$00,$04,$00,$10,$b5
+        .byte   $b2,$70,$62,$30,$6f,$cf,$3b,$00,$b4,$54,$41,$00,$04,$10,$b5
 
 MonsterProp_00bc:
         .byte   $b5,$14,$50,$3f,$7c,$ca,$2e,$00,$c0,$34,$84,$5f,$c1
@@ -596,12 +595,10 @@ MonsterProp_00c0:
         .byte   $bf,$d8,$59,$47,$60,$cf,$34,$00,$cc,$1c,$45,$40,$cd
 
 MonsterProp_00c1:
-        .byte   $cf,$a8,$de,$44,$74,$86,$3c,$00,$ce,$7c,$00,$00,$00,$00,$0f,$00
-        .byte   $cf
+        .byte   $cf,$a8,$de,$44,$74,$86,$3c,$00,$ce,$14,$0f,$cf
 
 MonsterProp_00c2:
-        .byte   $cf,$98,$b7,$46,$68,$63,$3c,$00,$d0,$7c,$00,$00,$00,$00,$1f,$00
-        .byte   $d1
+        .byte   $cf,$98,$b7,$46,$68,$63,$3c,$00,$d0,$14,$1f,$d1
 
 MonsterProp_00c3:
         .byte   $13,$b8,$0b,$1f,$63,$df,$38,$00,$a2,$78,$50,$fe,$ff,$90,$0f,$01

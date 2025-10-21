@@ -1,6 +1,6 @@
 .list off
 
-.define NPCPropSize $13E8
+.define NPCPropSize $13D9
 .define NPCPropArrayLength 384
 
 NPCProp:
@@ -8,7 +8,191 @@ NPCProp:
 NPCProp_0000:
         .byte   $2d,$03,$13,$c0,$2e,$0e,$10,$c0,$2f,$8b,$1b,$75,$30,$88,$16,$35
         .byte   $93,$0f,$19,$b2,$32,$90,$12,$70,$33,$95,$0d,$b3,$34,$1b,$07,$3a
-        .byte   $36,$17,$05,$a2,$85,$17,$05,$b0,$86,$17,$05,$82,$00
+        .byte   $36,$17,$05,$a2,$85,$17,$05,$b0,$86,$17,$05,$82
+
+NPCProp_000f:
+NPCProp_001f:
+NPCProp_0022:
+NPCProp_0023:
+NPCProp_0028:
+NPCProp_0029:
+NPCProp_002f:
+NPCProp_0032:
+NPCProp_0035:
+NPCProp_0036:
+NPCProp_0037:
+NPCProp_0038:
+NPCProp_003a:
+NPCProp_003b:
+NPCProp_003c:
+NPCProp_003d:
+NPCProp_003e:
+NPCProp_0043:
+NPCProp_0044:
+NPCProp_0050:
+NPCProp_0057:
+NPCProp_0058:
+NPCProp_0059:
+NPCProp_005b:
+NPCProp_005c:
+NPCProp_005d:
+NPCProp_005e:
+NPCProp_005f:
+NPCProp_0060:
+NPCProp_0061:
+NPCProp_0062:
+NPCProp_0063:
+NPCProp_0065:
+NPCProp_0068:
+NPCProp_0069:
+NPCProp_006b:
+NPCProp_006c:
+NPCProp_006d:
+NPCProp_006e:
+NPCProp_0070:
+NPCProp_0071:
+NPCProp_0072:
+NPCProp_0073:
+NPCProp_0077:
+NPCProp_0078:
+NPCProp_007a:
+NPCProp_007b:
+NPCProp_007c:
+NPCProp_007d:
+NPCProp_0080:
+NPCProp_0081:
+NPCProp_0082:
+NPCProp_0083:
+NPCProp_0086:
+NPCProp_0089:
+NPCProp_008c:
+NPCProp_008d:
+NPCProp_008e:
+NPCProp_008f:
+NPCProp_0090:
+NPCProp_0091:
+NPCProp_0092:
+NPCProp_0093:
+NPCProp_0095:
+NPCProp_0098:
+NPCProp_0099:
+NPCProp_009a:
+NPCProp_009b:
+NPCProp_009c:
+NPCProp_00a1:
+NPCProp_00a2:
+NPCProp_00a6:
+NPCProp_00a7:
+NPCProp_00a8:
+NPCProp_00a9:
+NPCProp_00aa:
+NPCProp_00ad:
+NPCProp_00ae:
+NPCProp_00af:
+NPCProp_00b0:
+NPCProp_00b1:
+NPCProp_00b2:
+NPCProp_00b3:
+NPCProp_00b4:
+NPCProp_00b5:
+NPCProp_00b6:
+NPCProp_00b7:
+NPCProp_00b8:
+NPCProp_00b9:
+NPCProp_00ba:
+NPCProp_00bb:
+NPCProp_00be:
+NPCProp_00bf:
+NPCProp_00c5:
+NPCProp_00c6:
+NPCProp_00c7:
+NPCProp_00cd:
+NPCProp_00d1:
+NPCProp_00d2:
+NPCProp_00d3:
+NPCProp_00d4:
+NPCProp_00d7:
+NPCProp_00d8:
+NPCProp_00d9:
+NPCProp_00da:
+NPCProp_00db:
+NPCProp_00dc:
+NPCProp_00dd:
+NPCProp_00de:
+NPCProp_00df:
+NPCProp_00ed:
+NPCProp_00ee:
+NPCProp_00ef:
+NPCProp_00f0:
+NPCProp_00f1:
+NPCProp_00f2:
+NPCProp_00f3:
+NPCProp_00f4:
+NPCProp_00f5:
+NPCProp_00f6:
+NPCProp_00f7:
+NPCProp_00f8:
+NPCProp_00f9:
+NPCProp_00fa:
+NPCProp_00fb:
+NPCProp_00fc:
+NPCProp_00fd:
+NPCProp_00fe:
+NPCProp_00ff:
+NPCProp_011f:
+NPCProp_0124:
+NPCProp_0126:
+NPCProp_0127:
+NPCProp_0129:
+NPCProp_0130:
+NPCProp_0131:
+NPCProp_0134:
+NPCProp_0135:
+NPCProp_0136:
+NPCProp_0137:
+NPCProp_0138:
+NPCProp_0139:
+NPCProp_013b:
+NPCProp_0145:
+NPCProp_0146:
+NPCProp_0147:
+NPCProp_0148:
+NPCProp_014b:
+NPCProp_014e:
+NPCProp_014f:
+NPCProp_0150:
+NPCProp_0151:
+NPCProp_0154:
+NPCProp_0155:
+NPCProp_0156:
+NPCProp_0158:
+NPCProp_015a:
+NPCProp_015b:
+NPCProp_015d:
+NPCProp_0162:
+NPCProp_0163:
+NPCProp_0164:
+NPCProp_0166:
+NPCProp_0168:
+NPCProp_016a:
+NPCProp_016c:
+NPCProp_016d:
+NPCProp_016f:
+NPCProp_0170:
+NPCProp_0171:
+NPCProp_0173:
+NPCProp_0174:
+NPCProp_0175:
+NPCProp_0176:
+NPCProp_0177:
+NPCProp_0178:
+NPCProp_0179:
+NPCProp_017b:
+NPCProp_017c:
+NPCProp_017d:
+NPCProp_017e:
+NPCProp_017f:
+        .byte   $00
 
 NPCProp_0001:
         .byte   $46,$8b,$0a,$70,$47,$94,$0d,$76,$48,$94,$0c,$75,$49,$8c,$1a,$36
@@ -540,6 +724,11 @@ NPCProp_00eb:
 NPCProp_00ec:
         .byte   $44,$05,$03,$b2,$a9,$82,$07,$b1,$00
 
+NPCProp_0100:
+        .byte   $b8,$0e,$06,$b6,$ba,$0e,$07,$80,$bb,$0c,$05,$b6,$bb,$0d,$05,$b6
+        .byte   $bc,$0f,$05,$b2,$bc,$10,$05,$b2,$d1,$0e,$0b,$80,$b9,$0e,$0b,$82
+        .byte   $bb,$0a,$03,$b6,$bc,$12,$03,$b2,$bb,$16,$04,$b4,$00
+
 NPCProp_0101:
         .byte   $1d,$8f,$15,$ba,$01,$93,$0e,$7b,$02,$84,$17,$f8,$03,$8c,$05,$39
         .byte   $04,$9b,$17,$39,$05,$9c,$16,$ba,$00
@@ -585,6 +774,10 @@ NPCProp_010b:
         .byte   $1d,$1d,$08,$b6,$01,$09,$0d,$b6,$02,$0b,$0d,$b6,$03,$0a,$19,$b6
         .byte   $00
 
+NPCProp_010c:
+        .byte   $b9,$09,$0d,$c3,$bd,$08,$0d,$b1,$d1,$05,$02,$c2,$d0,$8c,$06,$bd
+        .byte   $d0,$8b,$0e,$fe,$d0,$8f,$0d,$ff,$d0,$85,$0f,$bc,$00
+
 NPCProp_010d:
         .byte   $1b,$09,$07,$fa,$0e,$09,$12,$80,$10,$09,$10,$80,$0f,$09,$13,$80
         .byte   $12,$09,$0f,$82,$14,$09,$09,$46,$15,$09,$0d,$06,$1c,$09,$0d,$c6
@@ -600,6 +793,7 @@ NPCProp_010f:
         .byte   $04,$88,$07,$f4,$05,$02,$09,$b6,$26,$02,$07,$92,$00
 
 NPCProp_0110:
+NPCProp_0113:
         .byte   $18,$04,$04,$b7,$18,$08,$04,$b5,$18,$06,$06,$b6,$00
 
 NPCProp_0111:
@@ -611,14 +805,51 @@ NPCProp_0112:
         .byte   $2e,$05,$05,$83,$0f,$05,$05,$83,$12,$05,$05,$83,$04,$01,$03,$96
         .byte   $05,$03,$06,$a4,$35,$03,$02,$a2,$00
 
-NPCProp_0113:
-        .byte   $18,$04,$04,$b7,$18,$08,$04,$b5,$18,$06,$06,$b6,$00
+NPCProp_0114:
+        .byte   $c9,$0d,$04,$82,$c5,$0e,$04,$b3,$ce,$0a,$04,$b6,$ce,$10,$04,$b6
+        .byte   $ce,$0c,$08,$b4,$ce,$0e,$08,$b4,$cc,$0d,$08,$f2,$00
+
+NPCProp_0115:
+        .byte   $53,$06,$05,$ba,$54,$07,$05,$86,$4b,$04,$07,$b1,$4c,$08,$07,$b2
+        .byte   $ca,$05,$07,$83,$cf,$06,$09,$b7,$00
+
+NPCProp_0116:
+        .byte   $c8,$0d,$06,$82,$be,$17,$08,$c7,$be,$17,$08,$c3,$bd,$17,$08,$cb
+        .byte   $ce,$0f,$06,$b1,$ce,$10,$07,$b8,$ce,$0a,$0d,$b0,$ce,$08,$07,$b8
+        .byte   $c5,$0b,$0c,$b7,$c6,$0b,$0b,$ba,$d2,$0c,$05,$ba,$d2,$0e,$05,$ba
+        .byte   $00
+
+NPCProp_0117:
+        .byte   $b4,$0f,$09,$ba,$b5,$10,$09,$b2,$b6,$0e,$0d,$b4,$b6,$10,$0d,$b4
+        .byte   $b6,$0b,$03,$b7,$b6,$13,$03,$b5,$b6,$0e,$05,$b6,$b6,$10,$05,$b6
+        .byte   $b6,$0c,$0b,$b1,$b6,$12,$0b,$b3,$b6,$0a,$0d,$b6,$b6,$14,$0d,$b6
+        .byte   $00
+
+NPCProp_0118:
+        .byte   $cb,$1c,$07,$fa,$00
+
+NPCProp_0119:
+        .byte   $b7,$03,$0a,$84,$b7,$05,$09,$40,$00
 
 NPCProp_011a:
         .byte   $24,$09,$07,$76,$00
 
 NPCProp_011b:
         .byte   $1d,$06,$03,$b6,$01,$18,$13,$b6,$00
+
+NPCProp_011c:
+        .byte   $0e,$06,$05,$83,$11,$09,$04,$b3,$c1,$06,$03,$41,$00
+
+NPCProp_011d:
+        .byte   $c1,$09,$04,$86,$c2,$06,$06,$86,$b4,$08,$0c,$88,$b5,$08,$0c,$80
+        .byte   $b9,$08,$0c,$c0,$d1,$08,$0c,$c0,$b8,$08,$0c,$84,$c7,$08,$0c,$80
+        .byte   $c8,$08,$0c,$80,$c9,$08,$0c,$80,$ca,$08,$0c,$80,$c3,$08,$04,$82
+        .byte   $00
+
+NPCProp_011e:
+        .byte   $c7,$08,$06,$82,$bf,$09,$06,$ba,$c5,$0a,$07,$b7,$cd,$07,$06,$76
+        .byte   $c0,$05,$0c,$b4,$c0,$0b,$0c,$b4,$c0,$07,$09,$b4,$c0,$09,$09,$b4
+        .byte   $00
 
 NPCProp_0120:
         .byte   $92,$05,$08,$74,$00
@@ -627,6 +858,17 @@ NPCProp_0121:
         .byte   $2c,$0f,$11,$8a,$2c,$0f,$12,$8a,$2c,$0f,$13,$8a,$2c,$0f,$14,$8a
         .byte   $2c,$0f,$15,$8a,$2c,$0f,$16,$8a,$2c,$0f,$17,$8a,$2c,$0f,$18,$8a
         .byte   $2c,$0f,$19,$8a,$2c,$0f,$1a,$8a,$29,$0f,$11,$a2,$00
+
+NPCProp_0122:
+        .byte   $9f,$05,$02,$84,$a0,$04,$02,$80,$a1,$06,$02,$80,$a4,$03,$03,$80
+        .byte   $a2,$07,$03,$80,$a3,$05,$06,$80,$a5,$08,$04,$88,$a6,$07,$05,$80
+        .byte   $a7,$04,$06,$84,$a8,$06,$06,$84,$a9,$02,$04,$88,$aa,$03,$05,$88
+        .byte   $00
+
+NPCProp_0123:
+        .byte   $e5,$09,$07,$12,$e6,$0d,$05,$ae,$e8,$0a,$05,$f2,$e9,$0b,$05,$f6
+        .byte   $ea,$02,$03,$b2,$e7,$08,$04,$82,$10,$08,$04,$82,$11,$08,$04,$82
+        .byte   $78,$0d,$05,$ae,$00
 
 NPCProp_0125:
         .byte   $2b,$10,$09,$c2,$00
@@ -725,9 +967,6 @@ NPCProp_0149:
 NPCProp_014a:
         .byte   $3d,$08,$07,$de,$3e,$19,$16,$de,$00
 
-NPCProp_014b:
-        .byte   $00
-
 NPCProp_014c:
         .byte   $3f,$06,$03,$de,$40,$0c,$04,$de,$00
 
@@ -750,6 +989,14 @@ NPCProp_0159:
 NPCProp_015c:
         .byte   $63,$08,$0d,$9e,$64,$07,$12,$be,$65,$09,$12,$be,$00
 
+NPCProp_015e:
+        .byte   $d9,$05,$09,$70,$d5,$03,$09,$b2,$00
+
+NPCProp_015f:
+        .byte   $1e,$07,$01,$02,$1f,$08,$01,$02,$20,$07,$02,$02,$21,$08,$02,$02
+        .byte   $22,$07,$02,$12,$22,$08,$02,$12,$d6,$8b,$08,$b0,$d6,$88,$06,$b1
+        .byte   $d6,$83,$05,$b3,$d7,$84,$09,$f6,$d8,$86,$07,$ee,$00
+
 NPCProp_0160:
         .byte   $66,$10,$0d,$82,$0e,$10,$12,$80,$2e,$10,$12,$80,$12,$10,$12,$80
         .byte   $67,$10,$05,$b2,$00
@@ -760,77 +1007,14 @@ NPCProp_0161:
         .byte   $0e,$10,$10,$82,$2e,$10,$10,$82,$0f,$10,$10,$82,$12,$10,$10,$82
         .byte   $00
 
-NPCProp_0167:
-        .byte   $0e,$0e,$0d,$82,$2e,$0d,$0e,$82,$0f,$0c,$0d,$82,$12,$0d,$0c,$82
-        .byte   $00
-
-NPCProp_0172:
-        .byte   $af,$0f,$09,$c6,$b0,$0f,$09,$c6,$b0,$0f,$09,$e6,$b1,$0f,$09,$e6
-        .byte   $b2,$0e,$0a,$80,$b3,$10,$0a,$84,$0e,$0f,$0f,$80,$0f,$0f,$0f,$80
-        .byte   $2e,$0f,$0f,$80,$12,$0f,$0f,$80,$1c,$10,$0a,$84,$2e,$0e,$0b,$e2
-        .byte   $00
-
-NPCProp_0100:
-        .byte   $b8,$0e,$06,$b6,$ba,$0e,$07,$80,$bb,$0c,$05,$b6,$bb,$0d,$05,$b6
-        .byte   $bc,$0f,$05,$b2,$bc,$10,$05,$b2,$d1,$0e,$0b,$80,$b9,$0e,$0b,$82
-        .byte   $bb,$0a,$03,$b6,$bc,$12,$03,$b2,$bb,$16,$04,$b4,$00
-
-NPCProp_010c:
-        .byte   $b9,$09,$0d,$c3,$bd,$08,$0d,$b1,$d1,$05,$02,$c2,$d0,$8c,$06,$bd
-        .byte   $d0,$8b,$0e,$fe,$d0,$8f,$0d,$ff,$d0,$85,$0f,$bc,$00
-
-NPCProp_0114:
-        .byte   $c9,$0d,$04,$82,$c5,$0e,$04,$b3,$ce,$0a,$04,$b6,$ce,$10,$04,$b6
-        .byte   $ce,$0c,$08,$b4,$ce,$0e,$08,$b4,$cc,$0d,$08,$f2,$00
-
-NPCProp_0115:
-        .byte   $53,$06,$05,$ba,$54,$07,$05,$86,$4b,$04,$07,$b1,$4c,$08,$07,$b2
-        .byte   $ca,$05,$07,$83,$cf,$06,$09,$b7,$00
-
-NPCProp_0116:
-        .byte   $c8,$0d,$06,$82,$be,$17,$08,$c7,$be,$17,$08,$c3,$bd,$17,$08,$cb
-        .byte   $ce,$0f,$06,$b1,$ce,$10,$07,$b8,$ce,$0a,$0d,$b0,$ce,$08,$07,$b8
-        .byte   $c5,$0b,$0c,$b7,$c6,$0b,$0b,$ba,$d2,$0c,$05,$ba,$d2,$0e,$05,$ba
-        .byte   $00
-
-NPCProp_011e:
-        .byte   $c7,$08,$06,$82,$bf,$09,$06,$ba,$c5,$0a,$07,$b7,$cd,$07,$06,$76
-        .byte   $c0,$05,$0c,$b4,$c0,$0b,$0c,$b4,$c0,$07,$09,$b4,$c0,$09,$09,$b4
-        .byte   $00
-
-NPCProp_0117:
-        .byte   $b4,$0f,$09,$ba,$b5,$10,$09,$b2,$b6,$0e,$0d,$b4,$b6,$10,$0d,$b4
-        .byte   $b6,$0b,$03,$b7,$b6,$13,$03,$b5,$b6,$0e,$05,$b6,$b6,$10,$05,$b6
-        .byte   $b6,$0c,$0b,$b1,$b6,$12,$0b,$b3,$b6,$0a,$0d,$b6,$b6,$14,$0d,$b6
-        .byte   $00
-
-NPCProp_0118:
-        .byte   $cb,$1c,$07,$fa,$00
-
-NPCProp_0119:
-        .byte   $b7,$03,$0a,$84,$b7,$05,$09,$40,$00
-
-NPCProp_011c:
-        .byte   $0e,$06,$05,$83,$11,$09,$04,$b3,$c1,$06,$03,$41,$00
-
-NPCProp_011d:
-        .byte   $c1,$09,$04,$86,$c2,$06,$06,$86,$b4,$08,$0c,$88,$b5,$08,$0c,$80
-        .byte   $b9,$08,$0c,$c0,$d1,$08,$0c,$c0,$b8,$08,$0c,$84,$c7,$08,$0c,$80
-        .byte   $c8,$08,$0c,$80,$c9,$08,$0c,$80,$ca,$08,$0c,$80,$c3,$08,$04,$82
-        .byte   $00
-
-NPCProp_015e:
-        .byte   $d9,$05,$09,$70,$d5,$03,$09,$b2,$00
-
-NPCProp_015f:
-        .byte   $1e,$07,$01,$02,$1f,$08,$01,$02,$20,$07,$02,$02,$21,$08,$02,$02
-        .byte   $22,$07,$02,$12,$22,$08,$02,$12,$d6,$8b,$08,$b0,$d6,$88,$06,$b1
-        .byte   $d6,$83,$05,$b3,$d7,$84,$09,$f6,$d8,$86,$07,$ee,$00
-
 NPCProp_0165:
         .byte   $e0,$0a,$05,$ba,$e1,$03,$05,$b2,$e2,$11,$05,$b2,$24,$81,$0b,$f5
         .byte   $e3,$84,$0a,$b4,$e3,$85,$0d,$76,$e3,$88,$10,$b5,$e3,$8a,$0c,$f4
         .byte   $e4,$8d,$0b,$b7,$e3,$8b,$0d,$76,$e3,$90,$0c,$b4,$e3,$91,$08,$f6
+        .byte   $00
+
+NPCProp_0167:
+        .byte   $0e,$0e,$0d,$82,$2e,$0d,$0e,$82,$0f,$0c,$0d,$82,$12,$0d,$0c,$82
         .byte   $00
 
 NPCProp_0169:
@@ -842,201 +1026,13 @@ NPCProp_016b:
 NPCProp_016e:
         .byte   $dc,$18,$18,$b2,$00
 
+NPCProp_0172:
+        .byte   $af,$0f,$09,$c6,$b0,$0f,$09,$c6,$b0,$0f,$09,$e6,$b1,$0f,$09,$e6
+        .byte   $b2,$0e,$0a,$80,$b3,$10,$0a,$84,$0e,$0f,$0f,$80,$0f,$0f,$0f,$80
+        .byte   $2e,$0f,$0f,$80,$12,$0f,$0f,$80,$1c,$10,$0a,$84,$2e,$0e,$0b,$e2
+        .byte   $00
+
 NPCProp_017a:
         .byte   $de,$03,$05,$82,$00
-
-NPCProp_0122:
-        .byte   $9f,$05,$02,$84,$a0,$04,$02,$80,$a1,$06,$02,$80,$a4,$03,$03,$80
-        .byte   $a2,$07,$03,$80,$a3,$05,$06,$80,$a5,$08,$04,$88,$a6,$07,$05,$80
-        .byte   $a7,$04,$06,$84,$a8,$06,$06,$84,$a9,$02,$04,$88,$aa,$03,$05,$88
-        .byte   $00
-
-NPCProp_0123:
-        .byte   $e5,$09,$07,$12,$e6,$0d,$05,$ae,$e8,$0a,$05,$f2,$e9,$0b,$05,$f6
-        .byte   $ea,$02,$03,$b2,$e7,$08,$04,$82,$10,$08,$04,$82,$11,$08,$04,$82
-        .byte   $78,$0d,$05,$ae,$00
-
-NPCProp_000f:
-NPCProp_001f:
-NPCProp_0022:
-NPCProp_0023:
-NPCProp_0028:
-NPCProp_0029:
-NPCProp_002f:
-NPCProp_0032:
-NPCProp_0035:
-NPCProp_0036:
-NPCProp_0037:
-NPCProp_0038:
-NPCProp_003a:
-NPCProp_003b:
-NPCProp_003c:
-NPCProp_003d:
-NPCProp_003e:
-NPCProp_0043:
-NPCProp_0044:
-NPCProp_0050:
-NPCProp_0057:
-NPCProp_0058:
-NPCProp_0059:
-NPCProp_005b:
-NPCProp_005c:
-NPCProp_005d:
-NPCProp_005e:
-NPCProp_005f:
-NPCProp_0060:
-NPCProp_0061:
-NPCProp_0062:
-NPCProp_0063:
-NPCProp_0065:
-NPCProp_0068:
-NPCProp_0069:
-NPCProp_006b:
-NPCProp_006c:
-NPCProp_006d:
-NPCProp_006e:
-NPCProp_0070:
-NPCProp_0071:
-NPCProp_0072:
-NPCProp_0073:
-NPCProp_0077:
-NPCProp_0078:
-NPCProp_007a:
-NPCProp_007b:
-NPCProp_007c:
-NPCProp_007d:
-NPCProp_0080:
-NPCProp_0081:
-NPCProp_0082:
-NPCProp_0083:
-NPCProp_0086:
-NPCProp_0089:
-NPCProp_008c:
-NPCProp_008d:
-NPCProp_008e:
-NPCProp_008f:
-NPCProp_0090:
-NPCProp_0091:
-NPCProp_0092:
-NPCProp_0093:
-NPCProp_0095:
-NPCProp_0098:
-NPCProp_0099:
-NPCProp_009a:
-NPCProp_009b:
-NPCProp_009c:
-NPCProp_00a1:
-NPCProp_00a2:
-NPCProp_00a6:
-NPCProp_00a7:
-NPCProp_00a8:
-NPCProp_00a9:
-NPCProp_00aa:
-NPCProp_00ad:
-NPCProp_00ae:
-NPCProp_00af:
-NPCProp_00b0:
-NPCProp_00b1:
-NPCProp_00b2:
-NPCProp_00b3:
-NPCProp_00b4:
-NPCProp_00b5:
-NPCProp_00b6:
-NPCProp_00b7:
-NPCProp_00b8:
-NPCProp_00b9:
-NPCProp_00ba:
-NPCProp_00bb:
-NPCProp_00be:
-NPCProp_00bf:
-NPCProp_00c5:
-NPCProp_00c6:
-NPCProp_00c7:
-NPCProp_00cd:
-NPCProp_00d1:
-NPCProp_00d2:
-NPCProp_00d3:
-NPCProp_00d4:
-NPCProp_00d7:
-NPCProp_00d8:
-NPCProp_00d9:
-NPCProp_00da:
-NPCProp_00db:
-NPCProp_00dc:
-NPCProp_00dd:
-NPCProp_00de:
-NPCProp_00df:
-NPCProp_00ed:
-NPCProp_00ee:
-NPCProp_00ef:
-NPCProp_00f0:
-NPCProp_00f1:
-NPCProp_00f2:
-NPCProp_00f3:
-NPCProp_00f4:
-NPCProp_00f5:
-NPCProp_00f6:
-NPCProp_00f7:
-NPCProp_00f8:
-NPCProp_00f9:
-NPCProp_00fa:
-NPCProp_00fb:
-NPCProp_00fc:
-NPCProp_00fd:
-NPCProp_00fe:
-NPCProp_00ff:
-NPCProp_011f:
-NPCProp_0124:
-NPCProp_0126:
-NPCProp_0127:
-NPCProp_0129:
-NPCProp_0130:
-NPCProp_0131:
-NPCProp_0134:
-NPCProp_0135:
-NPCProp_0136:
-NPCProp_0137:
-NPCProp_0138:
-NPCProp_0139:
-NPCProp_013b:
-NPCProp_0145:
-NPCProp_0146:
-NPCProp_0147:
-NPCProp_0148:
-NPCProp_014e:
-NPCProp_014f:
-NPCProp_0150:
-NPCProp_0151:
-NPCProp_0154:
-NPCProp_0155:
-NPCProp_0156:
-NPCProp_0158:
-NPCProp_015a:
-NPCProp_015b:
-NPCProp_015d:
-NPCProp_0162:
-NPCProp_0163:
-NPCProp_0164:
-NPCProp_0166:
-NPCProp_0168:
-NPCProp_016a:
-NPCProp_016c:
-NPCProp_016d:
-NPCProp_016f:
-NPCProp_0170:
-NPCProp_0171:
-NPCProp_0173:
-NPCProp_0174:
-NPCProp_0175:
-NPCProp_0176:
-NPCProp_0177:
-NPCProp_0178:
-NPCProp_0179:
-NPCProp_017b:
-NPCProp_017c:
-NPCProp_017d:
-NPCProp_017e:
-NPCProp_017f:
-        .byte   $00
 
 .list on

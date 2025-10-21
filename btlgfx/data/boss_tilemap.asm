@@ -1,16 +1,19 @@
 .list off
 
-.define BossTilemapSize $0FE1
+.define BossTilemapSize $0FA2
 .define BossTilemapArrayLength 57
 
 BossTilemap:
 
 BossTilemap_0000:
         .byte   $fe,$06,$00,$01,$02,$fe,$06,$03,$04,$05,$06,$fe,$03,$07,$08,$09
-        .byte   $0a,$0b,$0c,$0d,$fe,$03,$0e,$0f,$10,$11,$12,$ff,$14,$fe,$03,$15
-        .byte   $16,$17,$18,$19,$fe,$05,$13,$1a,$1b,$1c,$1d,$1e,$1f,$fe,$02,$20
-        .byte   $21,$21,$22,$23,$24,$25,$26,$ff,$27,$2f,$2a,$2b,$29,$2a,$2b,$2c
-        .byte   $2d,$2e
+        .byte   $0a,$0b,$0c,$0d,$fe,$03,$0e,$0f,$10,$11,$12
+
+BossTilemap_0034:
+BossTilemap_0035:
+        .byte   $ff,$14,$fe,$03,$15,$16,$17,$18,$19,$fe,$05,$13,$1a,$1b,$1c,$1d
+        .byte   $1e,$1f,$fe,$02,$20,$21,$21,$22,$23,$24,$25,$26,$ff,$27,$2f,$2a
+        .byte   $2b,$29,$2a,$2b,$2c,$2d,$2e
 
 BossTilemap_0001:
         .byte   $fe,$16,$1f,$1f,$ff,$13,$1f,$27,$28,$29,$2a,$2d,$fe,$05,$20,$29
@@ -105,6 +108,9 @@ BossTilemap_000b:
         .byte   $0b,$4b,$4c,$4d,$fe,$02,$4c,$4d,$fe,$4d
 
 BossTilemap_000c:
+BossTilemap_0017:
+BossTilemap_0022:
+BossTilemap_0033:
         .byte   $00,$01,$02,$03,$04,$05,$06,$07,$08,$09,$0a,$0b,$0c,$0d,$0e,$0f
         .byte   $10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$1a,$1b,$1c,$1d,$1e,$1f
         .byte   $20,$21,$22,$23,$24,$25,$26,$27,$fe,$03,$28,$29,$2a,$2b,$2c
@@ -177,11 +183,6 @@ BossTilemap_0016:
         .byte   $c8,$c9,$ca,$cb,$cc,$cd,$ce,$cf,$ff,$d9,$da,$db,$dc,$dd,$de,$fe
         .byte   $05,$67,$68,$69,$fe,$03,$5e,$5f,$d8,$df,$fe,$02
 
-BossTilemap_0017:
-        .byte   $00,$01,$02,$03,$04,$05,$06,$07,$08,$09,$0a,$0b,$0c,$0d,$0e,$0f
-        .byte   $10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$1a,$1b,$1c,$1d,$1e,$1f
-        .byte   $20,$21,$22,$23
-
 BossTilemap_0018:
         .byte   $0a,$0b,$0c,$0d,$1a,$1b,$1c,$1d,$2a,$2b,$2c,$2d,$3a,$3b,$3c,$3d
         .byte   $4a,$4b,$4c,$4d,$40,$41,$42,$4d,$50,$51,$52,$53,$ff,$0e,$0f,$4e
@@ -243,9 +244,6 @@ BossTilemap_0020:
 
 BossTilemap_0021:
         .byte   $fe,$08,$05,$06,$07,$ff,$15,$16,$17,$ff
-
-BossTilemap_0022:
-        .byte   $00,$01,$02,$03,$04,$05,$06,$07,$08,$09,$0a,$0b,$0c,$0d,$0e,$0f
 
 BossTilemap_0023:
         .byte   $0f,$50,$51,$ff,$1f,$60,$61,$ff,$2f,$52,$fe,$02,$3f,$62,$fe,$02
@@ -350,15 +348,6 @@ BossTilemap_0032:
         .byte   $30,$31,$32,$33,$34,$35,$36,$37,$38,$39,$3a,$3b,$3c,$3d,$3e,$3f
         .byte   $40,$41,$42,$43,$44,$45,$46,$47,$48,$49,$4a,$4b,$4c,$4d,$4e,$4f
         .byte   $50
-
-BossTilemap_0033:
-        .byte   $00,$01,$02,$03,$04,$05,$06,$07,$08
-
-BossTilemap_0034:
-        .byte   $ff
-
-BossTilemap_0035:
-        .byte   $ff
 
 BossTilemap_0036:
         .byte   $fe,$04,$30,$31,$20,$fe,$02,$1a,$ff,$00,$01,$02,$03,$04,$05,$06

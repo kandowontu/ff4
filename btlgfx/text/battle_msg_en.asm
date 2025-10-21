@@ -1,6 +1,6 @@
 .list off
 
-.define BattleMsgSize $02C7
+.define BattleMsgSize $028E
 .define BattleMsgArrayLength 59
 
 BattleMsg:
@@ -29,12 +29,16 @@ BattleMsg_0006:
         .byte   $58,$6a,$69,$c4,$00
 
 BattleMsg_0007:
-        .byte   $45,$00
-
 BattleMsg_0008:
-        .byte   $45,$00
-
 BattleMsg_0009:
+BattleMsg_000f:
+BattleMsg_0010:
+BattleMsg_0012:
+BattleMsg_0013:
+BattleMsg_002e:
+BattleMsg_0036:
+BattleMsg_0039:
+BattleMsg_003a:
         .byte   $45,$00
 
 BattleMsg_000a:
@@ -52,20 +56,10 @@ BattleMsg_000d:
 BattleMsg_000e:
         .byte   $54,$6a,$69,$62,$ff,$6a,$61,$ff,$54,$64,$67,$60,$69,$5e,$60,$00
 
-BattleMsg_000f:
-        .byte   $45,$00
-
-BattleMsg_0010:
-        .byte   $45,$00
-
 BattleMsg_0011:
+BattleMsg_001b:
+BattleMsg_001c:
         .byte   $47,$5c,$64,$67,$60,$5f,$c1,$00
-
-BattleMsg_0012:
-        .byte   $45,$00
-
-BattleMsg_0013:
-        .byte   $45,$00
 
 BattleMsg_0014:
         .byte   $4f,$6a,$ff,$72,$60,$5c,$66,$ff,$6b,$6a,$64,$69,$6f,$6e,$ff,$61
@@ -94,12 +88,6 @@ BattleMsg_0019:
 BattleMsg_001a:
         .byte   $58,$60,$5c,$66,$ff,$5c,$62,$5c,$64,$69,$6e,$6f,$ff,$5c,$6d,$6d
         .byte   $6a,$72,$6e,$c1,$00
-
-BattleMsg_001b:
-        .byte   $47,$5c,$64,$67,$60,$5f,$c1,$00
-
-BattleMsg_001c:
-        .byte   $47,$5c,$64,$67,$60,$5f,$c1,$00
 
 BattleMsg_001d:
         .byte   $47,$6a,$70,$69,$5f,$ff,$06,$83,$c1,$00
@@ -158,9 +146,6 @@ BattleMsg_002c:
 BattleMsg_002d:
         .byte   $44,$70,$6d,$6e,$60,$5f,$c4,$00
 
-BattleMsg_002e:
-        .byte   $45,$00
-
 BattleMsg_002f:
         .byte   $51,$5c,$6d,$5c,$67,$74,$75,$60,$5f,$c4,$00
 
@@ -174,9 +159,6 @@ BattleMsg_0032:
         .byte   $43,$60,$6d,$6e,$60,$6d,$66,$60,$5f,$c4,$00
 
 BattleMsg_0033:
-        .byte   $55,$70,$6d,$69,$64,$69,$62,$ff,$64,$69,$6f,$6a,$ff,$6e,$6f,$6a
-        .byte   $69,$60,$c4,$c5,$00
-
 BattleMsg_0034:
         .byte   $55,$70,$6d,$69,$64,$69,$62,$ff,$64,$69,$6f,$6a,$ff,$6e,$6f,$6a
         .byte   $69,$60,$c4,$c5,$00
@@ -185,19 +167,10 @@ BattleMsg_0035:
         .byte   $45,$5c,$68,$5c,$62,$60,$5f,$ff,$5d,$74,$ff,$6b,$6a,$64,$6e,$6a
         .byte   $69,$c1,$00
 
-BattleMsg_0036:
-        .byte   $45,$00
-
 BattleMsg_0037:
         .byte   $45,$6d,$6a,$6b,$6b,$60,$5f,$ff,$06,$80,$ff,$48,$51,$c4,$00
 
 BattleMsg_0038:
         .byte   $49,$51,$ff,$6d,$5c,$69,$ff,$6a,$70,$6f,$c1,$00
-
-BattleMsg_0039:
-        .byte   $45,$00
-
-BattleMsg_003a:
-        .byte   $45,$00
 
 .list on

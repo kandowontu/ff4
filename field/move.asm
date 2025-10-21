@@ -296,8 +296,12 @@ CheckTilePass:
         beq     @aa91
         lda     #$00
         rts
+.if FUN_STUFF
+@aa91:	lda		#$00
+.else
 @aa91:  lda     #$01
-        rts
+.endif 
+       rts
 
 ; ------------------------------------------------------------------------------
 
@@ -548,12 +552,22 @@ CheckPlayerMoveWorld:
 @ac4b:  tay
         lda     $a1,x
         and     VehiclePassBit,y   ; check vehicle passability
+.if !FUN_STUFF
         beq     @ac65
+.else
+		nop
+		nop
+.endif
         jmp     @ac5e
 @ac56:  lda     $a1,x
         and     #$41                  ; check passability (no vehicle)
         and     $d2
+.if !FUN_STUFF
         beq     @ac65
+.else	
+		nop
+		nop
+.endif
 @ac5e:  jsr     CheckVehicleBlock
         lda     $0a
         beq     @ac68       ; branch if not blocked

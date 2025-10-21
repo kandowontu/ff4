@@ -94,20 +94,36 @@ SpecialAnim_af:
 ; [ special animation $bb: zeromus shakes ]
 
 SpecialAnim_bb:
-		SetRumble $CC, 80
-@ee6c:  lda     #$54
-        jsl     PlaySfx_far
-        ldx     #$0040
-@ee75:  phx
-        jsr     WaitFrame_near
-        jsl     UpdateShakeMonstersOnly
-        plx
-        dex
-        bne     @ee75
-        jsl     DisableShakeBG_far
-        clr_a
-        jsl     PlaySfx_far
-        rts
+		jsl	SpecAnimBB
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		rts
+
+
 
 ; ------------------------------------------------------------------------------
 
@@ -133,47 +149,59 @@ _ee95:  sta     $ef88
         stz     $ef8a
         rts
 
-; ------------------------------------------------------------------------------
 
-; [ flash screen ]
-
-FlashScreenMagenta:
-@eead:  lda     #$a0        ; blue + red
-        bra     _eec7
-
-FlashScreenCyan:
-@eeb1:  lda     #$c0        ; blue + green
-        bra     _eec7
-
-FlashScreenYellow:
-@eeb5:  lda     #$60        ; red + green
-        bra     _eec7
-
-FlashScreenRed:
-@eeb9:  lda     #$20        ; red
-        bra     _eec7
-
-FlashScreenGreen:
-@eebd:  lda     #$40        ; green
-        bra     _eec7
-
-FlashScreenBlue:
-@eec1:  lda     #$80        ; blue
-        bra     _eec7
-
-FlashScreenWhite:
-@eec5:  lda     #$e0        ; white
-_eec7:  sta     $ef88       ; set flash color components
-		SetRumble $FF, 12
-        lda     #$1f
-        sta     $f433
-        sta     $f435
-        sta     $f434
-        lda     #$01
-        sta     $ef87
-        stz     $ef89
-        stz     $ef8a
-        rtl
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
 
 ; ------------------------------------------------------------------------------
 
@@ -551,3 +579,66 @@ LoadGhostCharGfx:
         rts
 
 ; ------------------------------------------------------------------------------
+
+.segment "xcd_bank_21"
+
+; ------------------------------------------------------------------------------
+
+; [ flash screen ]
+
+FlashScreenMagenta:
+@eead:  lda     #$a0        ; blue + red
+        bra     _eec7
+
+FlashScreenCyan:
+@eeb1:  lda     #$c0        ; blue + green
+        bra     _eec7
+
+FlashScreenYellow:
+@eeb5:  lda     #$60        ; red + green
+        bra     _eec7
+
+FlashScreenRed:
+@eeb9:  lda     #$20        ; red
+        bra     _eec7
+
+FlashScreenGreen:
+@eebd:  lda     #$40        ; green
+        bra     _eec7
+
+FlashScreenBlue:
+@eec1:  lda     #$80        ; blue
+        bra     _eec7
+
+FlashScreenWhite:
+@eec5:  lda     #$e0        ; white
+_eec7:  sta     $ef88       ; set flash color components
+		SetRumble $FF, 12
+        lda     #$1f
+        sta     $f433
+        sta     $f435
+        sta     $f434
+        lda     #$01
+        sta     $ef87
+        stz     $ef89
+        stz     $ef8a
+        rtl
+
+
+SpecAnimBB:
+		SetRumble $CC, 80
+@ee6c:  lda     #$54
+        jsl     PlaySfx_far
+        ldx     #$0040
+@ee75:  phx
+        jsl     WaitFrame_far
+        jsl     UpdateShakeMonstersOnly
+        plx
+        dex
+        bne     @ee75
+        jsl     DisableShakeBG_far		;31
+        clr_a
+        jsl     PlaySfx_far
+        rtl
+
+.segment "btlgfx_code3"

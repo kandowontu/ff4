@@ -11,6 +11,10 @@
 ; | created: 4/21/2022                                                         |
 ; +----------------------------------------------------------------------------+
 
+.segment "unused"
+
+
+.segment "battle_code"
 ; [ battle command $02: magic ]
 
 Cmd_02:

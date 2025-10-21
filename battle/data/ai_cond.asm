@@ -1,15 +1,15 @@
 .list off
 
-.define AICondSize $0200
+.define AICondSize $0140
 .define AICondArrayLength 80
 
 AICond:
 
 AICond_0000:
-        .byte   $ff,$ff,$ff,$ff
+        .byte   $ff,$00,$00,$00
 
 AICond_0001:
-        .byte   $00,$17,$01,$08
+        .byte   $00,$17,$01,$00
 
 AICond_0002:
         .byte   $0b,$00,$00,$00
@@ -39,16 +39,16 @@ AICond_000a:
         .byte   $07,$19,$c2,$04
 
 AICond_000b:
-        .byte   $08,$19,$c2,$00
+        .byte   $08,$00,$c2,$00
 
 AICond_000c:
-        .byte   $08,$19,$c2,$01
+        .byte   $08,$00,$c2,$01
 
 AICond_000d:
-        .byte   $08,$19,$c2,$02
+        .byte   $08,$00,$c2,$02
 
 AICond_000e:
-        .byte   $08,$19,$c2,$04
+        .byte   $08,$00,$c2,$04
 
 AICond_000f:
         .byte   $07,$19,$c2,$10
@@ -114,16 +114,16 @@ AICond_0023:
         .byte   $02,$00,$01,$03
 
 AICond_0024:
-        .byte   $05,$00,$00,$f7
+        .byte   $05,$00,$00,$05
 
 AICond_0025:
-        .byte   $05,$00,$00,$fc
+        .byte   $05,$00,$00,$05
 
 AICond_0026:
-        .byte   $05,$00,$00,$fd
+        .byte   $05,$00,$00,$05
 
 AICond_0027:
-        .byte   $05,$00,$01,$a1
+        .byte   $05,$00,$00,$05
 
 AICond_0028:
         .byte   $07,$1a,$c2,$00
@@ -138,13 +138,13 @@ AICond_002b:
         .byte   $07,$19,$de,$00
 
 AICond_002c:
-        .byte   $08,$19,$c2,$10
+        .byte   $08,$00,$c2,$10
 
 AICond_002d:
-        .byte   $00,$01,$03,$01
+        .byte   $00,$01,$03,$00
 
 AICond_002e:
-        .byte   $00,$17,$02,$20
+        .byte   $00,$17,$02,$00
 
 AICond_002f:
         .byte   $04,$00,$01,$a7
@@ -168,7 +168,7 @@ AICond_0035:
         .byte   $07,$0b,$c2,$08
 
 AICond_0036:
-        .byte   $05,$00,$01,$c3
+        .byte   $05,$00,$00,$05
 
 AICond_0037:
         .byte   $07,$19,$e0,$00
@@ -186,7 +186,7 @@ AICond_003b:
         .byte   $03,$10,$01,$00
 
 AICond_003c:
-        .byte   $00,$98,$02,$01
+        .byte   $00,$18,$02,$00
 
 AICond_003d:
         .byte   $07,$19,$c2,$08
@@ -234,27 +234,15 @@ AICond_004b:
         .byte   $01,$17,$00,$0b
 
 AICond_004c:
-        .byte   $07,$a3,$c2,$00
+        .byte   $07,$23,$c2,$00
 
 AICond_004d:
         .byte   $03,$12,$01,$00
 
 AICond_004e:
-        .byte   $00,$17,$03,$20
+        .byte   $00,$17,$03,$00
 
 AICond_004f:
-        .byte   $01,$17,$00,$0c,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
-        .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
-        .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
-        .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
-        .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
-        .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
-        .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
-        .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
-        .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
-        .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
-        .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
-        .byte   $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff
-        .byte   $ff,$ff,$ff,$ff
+        .byte   $01,$17,$00,$0c
 
 .list on

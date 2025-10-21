@@ -489,10 +489,10 @@ MonsterGfxProp_00a0:
         .byte   $09,$a0,$08,$9d
 
 MonsterGfxProp_00a1:
-        .byte   $80,$a1,$44,$c5
+        .byte   $80,$00,$44,$c5
 
 MonsterGfxProp_00a2:
-        .byte   $84,$a2,$00,$a0
+        .byte   $84,$00,$00,$a0
 
 MonsterGfxProp_00a3:
         .byte   $8c,$00,$0e,$a1
@@ -519,10 +519,10 @@ MonsterGfxProp_00aa:
         .byte   $92,$00,$43,$a5
 
 MonsterGfxProp_00ab:
-        .byte   $97,$ab,$34,$a8
+        .byte   $97,$00,$34,$a8
 
 MonsterGfxProp_00ac:
-        .byte   $97,$ab,$34,$a8
+        .byte   $97,$00,$34,$a8
 
 MonsterGfxProp_00ad:
         .byte   $98,$00,$a0,$a8
@@ -597,10 +597,10 @@ MonsterGfxProp_00c4:
         .byte   $02,$15,$b0,$91
 
 MonsterGfxProp_00c5:
-        .byte   $b8,$c5,$00,$b0
+        .byte   $b8,$00,$00,$b0
 
 MonsterGfxProp_00c6:
-        .byte   $ba,$c5,$f3,$b0
+        .byte   $ba,$00,$f3,$b0
 
 MonsterGfxProp_00c7:
         .byte   $be,$00,$2c,$b1
@@ -627,7 +627,7 @@ MonsterGfxProp_00ce:
         .byte   $42,$02,$00,$80
 
 MonsterGfxProp_00cf:
-        .byte   $82,$cf,$84,$c4
+        .byte   $82,$00,$84,$c4
 
 MonsterGfxProp_00d0:
         .byte   $04,$03,$50,$84
@@ -645,7 +645,7 @@ MonsterGfxProp_00d4:
         .byte   $a7,$00,$59,$ad
 
 MonsterGfxProp_00d5:
-        .byte   $bc,$c5,$f3,$b0
+        .byte   $bc,$00,$f3,$b0
 
 MonsterGfxProp_00d6:
         .byte   $bb,$00,$df,$32

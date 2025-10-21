@@ -150,4 +150,5 @@ segments {
     earth_moon: load = bank_1e, type = ro, align = $20;
     map_gfx2: load = bank_1f, type = ro;
 	xcd_bank_20: load = bank_20, type = ro;
+	xcd_bank_21: load = bank_21, type = ro;
 }

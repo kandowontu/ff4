@@ -58,7 +58,7 @@ field_dp:
 
 ; ------------------------------------------------------------------------------
 
-.segment "menu_code"
+.segment "field_code"
 .a8
 .i16
 
@@ -68,14 +68,14 @@ DebugInit:
         sta     $1440
         lda     #1
         sta     $1441
-        phk
-        per     @1-1
-        pea     .loword($ffbe)
-        jml     InitNewGame
-@1:     phk
-        per     @2-1
-        pea     .loword($ffbe)
-        jml     InitCharProp
+;        phk
+;        per     @1-1
+;        pea     .loword($ffbe)
+        jsl     InitNewGame
+;@1:     phk
+;        per     @2-1
+;        pea     .loword($ffbe)
+        jsr     InitCharProp
 @2:     jsl     InitSpellLists
         lda     #0
         sta     $1700       ; overworld
@@ -107,15 +107,15 @@ DebugInit:
         ldx     #50000          ; give gil
         stx     $16a0
         lda     #$36            ; give hook
-        phk
-        per     @3-1
-        pea     .loword($ffbe)
-        jml     SetEventSwitch
+;        phk
+;        per     @3-1
+;        pea     .loword($ffbe)
+        jsl     SetEventSwitch_L
 @3:     lda     #$30            ; open tunnel to underground
-        phk
-        per     @4-1
-        pea     .loword($ffbe)
-        jml     SetEventSwitch
+;        phk
+;        per     @4-1
+;        pea     .loword($ffbe)
+        jsl     SetEventSwitch_L
 @4:     rtl
 .endif
 
@@ -138,16 +138,12 @@ InitCharProp_ext:
 ; [ reset ]
 
 Reset:
-@8000:  
-		jml hi
-hi:
-		sei
+@8000:  sei
         clc
         xce
         longi
         shorta
-        lda #1
-		sta hMEMSEL
+        stz     hMEMSEL
         stz     hMDMAEN
         stz     hHDMAEN
         lda     #$8f
@@ -191,7 +187,7 @@ SoftReset:
         jsr     InitCharProp
         jsl     InitSpellLists
         jsl     InitHWRegs
-        jsl     UpdatePlayerSpeed
+        jsr     UpdatePlayerSpeed
         jsr     InitZoomHDMA
         lda     #1                      ; enable event
         sta     $b1
@@ -214,12 +210,28 @@ SoftReset:
 
 AfterBattle:
 @808e:  jsl     InitHWRegs
-        jsl     UpdatePlayerSpeed
+        jsr     UpdatePlayerSpeed
         lda     #1
         sta     $7d                     ; waiting for vblank
         stz     $df                     ; clear dialogue window height
         stz     $b1                     ; no event
         jmp     LoadMap
+
+
+
+
+; [ update player movement speed ]
+
+UpdatePlayerSpeed:
+@8302:  lda     $1704       ; vehicle id
+        tax
+        lda     PlayerSpeedTbl,x     ; movement speed
+        sta     $ac
+        rts
+
+; movement speed for each vehicle
+PlayerSpeedTbl:
+@830c:  .byte   0,1,2,1,3,3,3
 
 ; ------------------------------------------------------------------------------
 
@@ -260,7 +272,32 @@ MainLoop:
 .if NO_RAND_BATTLES
         nop3
 .else
+
+.if	!FUN_STUFF
         jsr     CheckBattle
+.else
+		lda $7e0108
+		and #$10
+		bne :+
+		jsr		CheckBattle
+:
+
+		lda $7e0104
+		and #$20
+		beq :+
+		lda $7e06AD
+		inc a
+		cmp #$32
+		beq @hi
+		sta $7e06AD
+		bra :+
+@hi:
+		lda #$10
+		sta $7e06AD
+
+:
+.endif
+
 .endif
         lda     $85
         beq     @80ef
@@ -303,7 +340,31 @@ MainLoop:
 .if NO_RAND_BATTLES
         nop3
 .else
+
+.if	!FUN_STUFF
         jsr     CheckBattle
+.else
+		lda $7e0108
+		and #$10
+		bne :+
+		jsr		CheckBattle
+:
+
+		lda $7e0108
+		and #$20
+		beq :+
+		lda $7e06AD
+		inc a
+		cmp #$32
+		beq @hi2
+		sta $7e06AD
+		bra :+
+@hi2:
+		lda #$10
+		sta $7e06AD
+:
+.endif
+
 .endif
         lda     $85
         beq     @814f                   ; branch if no battle
@@ -484,8 +545,6 @@ LoadMap:
 @8348:  jsr     WipeIn
         jmp     FieldMain
 
-; ------------------------------------------------------------------------------
-
 
 
 ; ------------------------------------------------------------------------------
@@ -578,7 +637,7 @@ LoadSubMap:
         iny
         cpy     #$0400
         bne     @843a
-        lda     #0
+        lda     #$00
         pha
         plb
         jsr     InitBG1Tilemap
@@ -946,10 +1005,10 @@ InitInterrupts:
 @89ed:  lda     #$5c                    ; jml
         sta     JmpNMI
         sta     JmpIRQ
-        ldx     #FieldNMI&$FFFF
+        ldx     #FieldNMI
         stx     JmpNMI+1
         stz     JmpNMI+3
-        ldx     #FieldIRQ&$FFFF
+        ldx     #FieldIRQ
         stx     JmpIRQ+1
         stz     JmpIRQ+3
         rts
@@ -1477,7 +1536,7 @@ TfrLavaGfx:
 ; [ transfer overworld water graphics from vram ]
 
 LoadWaterGfx:
-@8f69:  lda     #0
+@8f69:  lda     #$80
         sta     $2115
         ldx     #$2000
         stx     $2116
@@ -1960,10 +2019,7 @@ UnusedAsl:
 ; [ field nmi ]
 
 FieldNMI:
-@92a3:  
-		jml nmihi
-nmihi:
-		php
+@92a3:  php
         longa
         pha
         phx
@@ -2181,8 +2237,6 @@ nmihi:
 ; [ field irq ]
 
 FieldIRQ:
-		jml irqhi
-irqhi:
 @947e:  php
         longa
         pha
@@ -3184,19 +3238,7 @@ TfrChestDoor:
 ; ------------------------------------------------------------------------------
 .segment "xcd_bank_20"
 
-
-; [ update player movement speed ]
-
-UpdatePlayerSpeed:
-@8302:  lda     $1704       ; vehicle id
-        tax
-        lda     PlayerSpeedTbl,x     ; movement speed
-        sta     $ac
-        rtl
-
-; movement speed for each vehicle
-PlayerSpeedTbl:
-@830c:  .byte   0,1,2,1,3,3,3
+; ------------------------------------------------------------------------------
 
 ; [ init map ram ]
 

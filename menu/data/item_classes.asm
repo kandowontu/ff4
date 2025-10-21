@@ -6,7 +6,7 @@
 ItemClasses:
 
 ItemClasses_0000:
-        .byte   $ff,$ff
+        .byte   $ff,$3f
 
 ItemClasses_0001:
         .byte   $fe,$3f

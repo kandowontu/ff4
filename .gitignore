@@ -4,4 +4,3 @@
 *.lst
 *.map
 node_modules/*
-ff4-*-data.json

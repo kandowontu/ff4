@@ -50,18 +50,6 @@ StatusName_000d:
 StatusName_000e:
         .byte   $51,$60,$6f,$6d,$64,$61,$74,$00
 
-StatusName_0011:
-        .byte   $54,$6f,$6a,$6b,$00
-
-StatusName_0017:
-        .byte   $44,$6a,$70,$69,$6f,$00
-
-StatusName_001a:
-        .byte   $58,$5c,$67,$67,$00
-
-StatusName_001b:
-        .byte   $43,$5c,$6d,$6d,$64,$60,$6d,$00
-
 StatusName_000f:
 StatusName_0010:
 StatusName_0012:
@@ -76,5 +64,17 @@ StatusName_001d:
 StatusName_001e:
 StatusName_001f:
         .byte   $45,$00
+
+StatusName_0011:
+        .byte   $54,$6f,$6a,$6b,$00
+
+StatusName_0017:
+        .byte   $44,$6a,$70,$69,$6f,$00
+
+StatusName_001a:
+        .byte   $58,$5c,$67,$67,$00
+
+StatusName_001b:
+        .byte   $43,$5c,$6d,$6d,$64,$60,$6d,$00
 
 .list on

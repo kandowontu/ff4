@@ -21,12 +21,51 @@
 CheckForRumble:
 
 
+	cpx #$79
+	beq	@Beam		;Maser
+	cpx #$93
+	beq	@Beam		;Beam
+	cpx #$9e
+	beq	@Beam		;Laser
+	cpx #$a2		;heat ray
+	bne	@NotBeam
+@Beam:
+	jsl	SetBeamRumble
+	rtl
+@NotBeam:
+
+	cpx #$9f
+	beq	@Explode		;explode
+	cpx #$74
+	bne	@NotExplode
+@Explode:
+	jsl	SetExplodeRumble
+	rtl
+@NotExplode:
+
+	cpx #$61
+	beq	@Hold		;bluster
+	cpx #$6C
+	beq	@Hold		;blast / mind blast
+	cpx #$70
+	beq	@Hold		;entangle
+	cpx #$76
+	beq	@Hold		;hold gas
+	cpx #$77
+	beq	@Hold		;gas / sleep gas
 	cpx #$00
 	bne @NotHold
 @Hold:
 	jsl	SetHoldRumble	;Hold
 	rtl
 @NotHold:
+
+	cpx #$02
+	bne @NotCharm
+@Charm:
+	jsl	SetCharmRumble	;Charm
+	rtl
+@NotCharm:
 
 	cpx #$06
 	bne @NotSlow
@@ -49,6 +88,8 @@ CheckForRumble:
 	rtl
 @NotWhite:
 
+	cpx #$8f			;search
+	beq	@Peep
 	cpx #$0C
 	bne @NotPeep
 @Peep:
@@ -63,6 +104,14 @@ CheckForRumble:
 	rtl
 @NotCure4:
 
+	cpx #$49			;group heal / basuna
+	beq	@Heal
+	cpx #$4A			;poisona
+	beq	@Heal
+	cpx #$85			;heal all
+	beq @Heal
+	cpx #$92			;heal all (enemies)
+	beq @Heal
 	cpx #$11
 	bne @NotHeal
 @Heal:
@@ -80,6 +129,7 @@ CheckForRumble:
 	rtl
 @NotLife:
 
+
 	cpx #$2b
 	bne @NotStop
 @Stop:
@@ -87,6 +137,8 @@ CheckForRumble:
 	rtl
 @NotStop:	
 
+	cpx #$69			;count
+	beq	@Fatal
 	cpx #$2a
 	bne @NotFatal
 @Fatal:
@@ -95,12 +147,40 @@ CheckForRumble:
 	
 @NotFatal:	
 
+	cpx #$63
+	beq	@Sleep			;powder
+	cpx #$66
+	beq	@Sleep			;tongue
+	cpx #$67
+	beq	@Sleep			;curse song
+	cpx #$75
+	beq	@Sleep			;curse
+	cpx #$88			;digest
+	beq	@Sleep
+	cpx #$89			;pollen
+	beq	@Sleep
 	cpx #$28
 	bne @NotSleep		;sleep
 @Sleep:
 	jsl	SetSleepRumble	
 	rtl
 @NotSleep:
+
+	cpx #$9D			;Tornado
+	beq	@Weak
+	cpx #$7F			;"Storm"
+	beq	@Weak
+	cpx #$71			;"Weak" enemy cast(?)
+	beq	@Weak
+	cpx #$A3
+	beq @Weak			;Glare
+	cpx #$26
+	bne @NotWeak		;Weak
+
+@Weak:
+	jsl	SetWeakRumble	;Weak
+	rtl
+@NotWeak:
 
 	cpx #$25
 	bne @NotVirus
@@ -109,6 +189,10 @@ CheckForRumble:
 	rtl
 @NotVirus:	
 
+	cpx #$98		;"thunder"
+	beq	@Lit3
+	cpx #$97		;blitz (enemy)
+	beq	@Lit3
 	cpx #$24
 	bne @NotLit3
 @Lit3:
@@ -123,6 +207,8 @@ CheckForRumble:
 	rtl
 @NotLit2:	
 	
+	cpx #$80
+	beq @Lit		;magnet
 	cpx #$22
 	bne @NotLit
 @Lit:
@@ -130,41 +216,68 @@ CheckForRumble:
 	rtl
 @NotLit:	
 	
+	cpx #$a1
+	beq	@Fire			;emission
+	cpx #$1c
+	bne @NotFire
+@Fire:
+	jsl	SetFireRumble	;fire
+	rtl
+@NotFire:	
+	
+	cpx #$1d
+	bne @NotFire2
+@Fire2:
+	jsl	SetFire2Rumble	;fire 2/fira
+	rtl
+@NotFire2:	
 
+	cpx #$35
+	beq	@Ice3			;ice attack
+	cpx #$73
+	beq	@Ice3			;ColdMist
 	cpx #$21			
 	bne @NotIce3
-@ice3:
+@Ice3:
 	jsl	SetBlizzagaRumble	;ice 3
 	rtl
 	
 @NotIce3:
 	cpx #$20		
 	bne @NotIce2
-@ice2:
+@Ice2:
 	SetRumble	$88, 40	;ice 2
 	rtl
 
 @NotIce2:
 
+	cpx #$99
+	beq	@Ice 		;d. breath
+	cpx #$9B
+	beq	@Ice 		;blizzard
 	cpx #$1f
 	bne @NotIce
-@ice:
+@Ice:
 	SetRumble	$55, 50	;ice
 	rtl
 
 @NotIce:
 
 	cpx #$18
-	beq @ToadPiggy	;toad and piggy
+	beq @ToadPiggy	;toad
+	cpx #$6F
+	beq	@ToadPiggy	;Whisper
 	cpx #$19
-	beq @ToadPiggy
-	cpx #$14		;mini
+	beq @ToadPiggy	;piggy
+	cpx #$14		;size (mini)
 	bne @NotToadPiggy
 @ToadPiggy:
 	jsl	SetToadPiggyRumble
 	rtl
 
 @NotToadPiggy:
+	cpx #$78		;poison (all)
+	beq	@Venom
 	cpx #$1b
 	bne @NotVenom
 @Venom:
@@ -174,6 +287,34 @@ CheckForRumble:
 @NotVenom:
 
 	rtl
+
+
+.segment "xcd_bank_21"
+
+
+BeamRumble:
+	.byte   $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $AA, $AA, $AA, $AA
+	.byte	$88, $88, $88, $88, $55, $55, $55, $55, $33, $33, $33, $33, $11, $11, $11, $11, $FE
+
+BeamRumblePointer:
+	.byte	<BeamRumble, >BeamRumble
+
+SetBeamRumble:
+	SetRumbleTable	BeamRumblePointer
+	rtl
+
+ExplodeRumble:
+	.byte   $55, $55, $55, $55, $55, $55, $55, $55, $55, $55, $55, $55, $55, $55, $55
+	.byte	$00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+	.byte   $AA, $AA, $AA, $AA, $AA, $AA, $EE, $EE, $EE, $EE, $EE, $EE, $EE, $EE, $EE, $EE, $EE, $FE
+
+ExplodeRumblePointer:
+	.byte	<ExplodeRumble, >ExplodeRumble
+
+SetExplodeRumble:
+	SetRumbleTable	ExplodeRumblePointer
+	rtl
+
 
 
 PeepRumble:
@@ -214,6 +355,25 @@ HealRumblePointer:
 SetHealRumble:
 	SetRumbleTable	HealRumblePointer
 	rtl
+	
+WeakRumble:
+	.byte   $05, $05, $07, $07, $07, $09, $09, $09, $0A, $0A, $0A, $0A, $0C, $0C, $0C, $0C, $0C
+	.byte   $50, $50, $70, $70, $70, $90, $90, $90, $A0, $A0, $A0, $A0, $C0, $C0, $C0, $C0, $C0
+	.byte   $05, $05, $07, $07, $07, $09, $09, $09, $0A, $0A, $0A, $0A, $0C, $0C, $0C, $0C, $0C
+	.byte   $50, $50, $70, $70, $70, $90, $90, $90, $A0, $A0, $A0, $A0, $C0, $C0, $C0, $C0, $C0
+	.byte   $05, $05, $07, $07, $07, $09, $09, $09, $0A, $0A, $0A, $0A, $0C, $0C, $0C, $0C, $0C
+	.byte   $50, $50, $70, $70, $70, $90, $90, $90, $A0, $A0, $A0, $A0, $C0, $C0, $C0, $C0, $C0
+	.byte   $05, $05, $07, $07, $07, $09, $09, $09, $0A, $0A, $0A, $0A, $0C, $0C, $0C, $0C, $0C
+	.byte   $50, $50, $70, $70, $70, $90, $90, $90, $A0, $A0, $A0, $A0, $C0, $C0, $C0, $C0, $C0, $FE
+
+
+
+WeakRumblePointer:
+	.byte	<WeakRumble, >WeakRumble
+
+SetWeakRumble:
+	SetRumbleTable	WeakRumblePointer
+	rtl	
 	
 WhiteRumble:
 	.byte   $55, $55, $77, $77, $99, $99, $99, $AA, $AA, $AA, $AA, $99, $99, $99, $77, $77, $55, $55, $33, $33
@@ -282,6 +442,23 @@ SetFastRumble:
 	SetRumbleTable	FastRumblePointer
 	rtl
 	
+FireRumble:
+	.byte   $05, $05, $07, $07, $09, $09, $09, $0A, $0A, $0A, $0D, $0D, $0D
+	.byte   $5D, $5D, $7A, $7A, $99, $99, $99, $A7, $A7, $A7, $D5, $D5, $D5	
+	.byte	$D0, $D0, $A0, $A0, $90, $90, $90, $70, $70, $70, $50, $50, $50
+	.byte   $05, $05, $07, $07, $09, $09, $09, $0A, $0A, $0A, $0D, $0D, $0D
+	.byte   $5D, $5D, $7A, $7A, $99, $99, $99, $A7, $A7, $A7, $D5, $D5, $D5
+	.byte	$D0, $D0, $A0, $A0, $90, $90, $90, $70, $70, $70, $50, $50, $50
+	.byte   $05, $05, $07, $07, $09, $09, $09, $0A, $0A, $0A, $0D, $0D, $0D, $FE	
+	
+Fire2Rumble:
+	.byte   $05, $05, $07, $07, $09, $09, $09, $0A, $0A, $0A, $0D, $0D, $0D
+	.byte   $5D, $5D, $7A, $7A, $99, $99, $99, $A7, $A7, $A7, $D5, $D5, $D5	
+	.byte	$D0, $D0, $A0, $A0, $90, $90, $90, $70, $70, $70, $50, $50, $50
+	.byte   $05, $05, $07, $07, $09, $09, $09, $0A, $0A, $0A, $0D, $0D, $0D
+	.byte   $5D, $5D, $7A, $7A, $99, $99, $99, $A7, $A7, $A7, $D5, $D5, $D5
+	.byte	$D0, $D0, $D0, $D0, $D0, $D0, $D0, $D0, $D0, $D0, $D0, $D0, $D0, $FE
+
 Cure4Rumble:
 	.byte   $05, $05, $07, $07, $09, $09, $09, $0A, $0A, $0A, $0D, $0D, $0D
 	.byte   $5D, $5D, $7A, $7A, $99, $99, $99, $A7, $A7, $A7, $D5, $D5, $D5
@@ -296,6 +473,40 @@ Cure4RumblePointer:
 
 SetCure4Rumble:
 	SetRumbleTable	Cure4RumblePointer
+	rtl
+
+FireRumblePointer:
+	.byte	<FireRumble, >FireRumble
+
+SetFireRumble:
+	SetRumbleTable	FireRumblePointer
+	rtl
+
+Fire2RumblePointer:
+	.byte	<Fire2Rumble, >Fire2Rumble
+
+SetFire2Rumble:
+	SetRumbleTable	Fire2RumblePointer
+	rtl
+
+CharmRumble:
+	.byte   $05, $05, $07, $07, $09, $09, $09, $0A, $0A, $0A, $0D, $0D, $0D
+	.byte   $5D, $5D, $7A, $7A, $99, $99, $99, $A7, $A7, $A7, $D5, $D5, $D5
+	.byte	$D0, $D0, $A0, $A0, $90, $90, $90, $70, $70, $70, $50, $50, $50
+	.byte   $05, $05, $07, $07, $09, $09, $09, $0A, $0A, $0A, $0D, $0D, $0D
+	.byte   $5D, $5D, $7A, $7A, $99, $99, $99, $A7, $A7, $A7, $D5, $D5, $D5
+	.byte	$D0, $D0, $A0, $A0, $90, $90, $90, $70, $70, $70, $50, $50, $50
+	.byte 	$00, $00, $00, $00, $00, $00, $00
+	.byte	$AA, $AA, $AA, $AA, $AA, $AA, $AA, $AA, $AA
+	.byte 	$00, $00, $00, $00, $00, $00, $00
+	.byte	$AA, $AA, $AA, $AA, $AA, $AA, $AA, $AA, $AA, $FE
+
+
+CharmRumblePointer:
+	.byte	<CharmRumble, >CharmRumble
+
+SetCharmRumble:
+	SetRumbleTable	CharmRumblePointer
 	rtl
 
 	
@@ -1317,6 +1528,7 @@ SelfTargetMagicAnim:
 ; [ magic animation $1f: reaction ??? ]
 
 MagicAnim_1f:
+		jsl		SetExplodeRumble
 @edf5:  jsr     SelfTargetMagicAnim
         lda     a:$0048
         jmp     _02e8e7
@@ -2085,7 +2297,7 @@ MagicAnim_1b:
 ; [ magic animation $00: default ]
 
 MagicAnim_00:
-		SetRumble $55, 25
+	;	SetRumble $55, 25
 @f30d:  stz     $f2a0
 
 _02f310:
@@ -3969,4 +4181,3 @@ _02ff62:
 @ffc0:  rts
 
 ; ------------------------------------------------------------------------------
-.segment "unused"
