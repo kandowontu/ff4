@@ -48,12 +48,12 @@ memory {
 }
 
 segments {
-#    battle_dp: load = ram, type = bss, start = $8000;
-    menu_dp: load = ram, type = bss, start = $8100;
-    stack: load = ram, type = bss, start = $8200;
-    sprite_ram: load = ram, type = bss, start = $8300;
-    field_dp: load = ram, type = bss, start = $8600;
-#    sound_dp: load = ram, type = bss, start = $9e00;
+#    battle_dp: load = ram, type = bss, start = $0000;
+    menu_dp: load = ram, type = bss, start = $0100;
+    stack: load = ram, type = bss, start = $0200;
+    sprite_ram: load = ram, type = bss, start = $0300;
+    field_dp: load = ram, type = bss, start = $0600;
+#    sound_dp: load = ram, type = bss, start = $1e00;
 #    wram: load = wram, type = bss;
 #    sram: load = sram, type = bss;
 
