@@ -354,7 +354,7 @@ AttackSfx_0073:
         .byte   $1d		;coldmist
 
 AttackSfx_0074:
-        .byte   $05		;explode ***
+        .byte   $05		;explode
 
 AttackSfx_0075:
         .byte   $40		;curse song
@@ -390,76 +390,76 @@ AttackSfx_007f:
         .byte   $02		;"Storm" / Maelstrom
 
 AttackSfx_0080:
-        .byte   $57
+        .byte   $57		;magnet
 
 AttackSfx_0081:
-        .byte   $05
+        .byte   $05		;reaction
 
 AttackSfx_0082:
-        .byte   $5a
+        .byte   $5a		;hatch
 
 AttackSfx_0083:
-        .byte   $1a
+        .byte   $1a		;remedy (cure 3 animation) ***
 
 AttackSfx_0084:
-        .byte   $4e
+        .byte   $4e		;absorb
 
 AttackSfx_0085:
-        .byte   $66
+        .byte   $66		;heal all
 
 AttackSfx_0086:
         .byte   $33		;big bang
 
 AttackSfx_0087:
-        .byte   $68
+        .byte   $68		;vampire
 
 AttackSfx_0088:
         .byte   $40		;digest
 
 AttackSfx_0089:
-        .byte   $40
+        .byte   $40		;pollen
 
 AttackSfx_008a:
-        .byte   $23
+        .byte   $23		;crush
 
 AttackSfx_008b:
-        .byte   $3c
+        .byte   $3c		;alert
 
 AttackSfx_008c:
-        .byte   $00
+        .byte   $00		;call
 
 AttackSfx_008d:
-        .byte   $00
+        .byte   $00		;dummy (nothing?)
 
 AttackSfx_008e:
-        .byte   $00
+        .byte   $00		;vanish (nothing?)
 
 AttackSfx_008f:
-        .byte   $43
+        .byte   $43		;search
 
 AttackSfx_0090:
-        .byte   $6a
+        .byte   $6a		;fission ***
 
 AttackSfx_0091:
-        .byte   $00
+        .byte   $00		;retreat (enemies)
 
 AttackSfx_0092:
-        .byte   $66
+        .byte   $66		;Heal All (enemies)
 
 AttackSfx_0093:
-        .byte   $36
+        .byte   $36		;beam ***
 
 AttackSfx_0094:
-        .byte   $2d
+        .byte   $2d		;globe199 ***
 
 AttackSfx_0095:
-        .byte   $0d
+        .byte   $0d		;fire (like edges fire) ***
 
 AttackSfx_0096:
-        .byte   $0d
+        .byte   $0d		;blaze (blue fire) ***
 
 AttackSfx_0097:
-        .byte   $0e
+        .byte   $0e		;blitz
 
 AttackSfx_0098:
         .byte   $0e		;"Thunder" - unknown
@@ -468,37 +468,37 @@ AttackSfx_0099:
         .byte   $1d		;D. Breath
 
 AttackSfx_009a:
-        .byte   $29
+        .byte   $29		;big wave ***
 
 AttackSfx_009b:
-        .byte   $1d
+        .byte   $1d		;blizzard
 
 AttackSfx_009c:
-        .byte   $29
+        .byte   $29		;wave ***
 
 AttackSfx_009d:
-        .byte   $13
+        .byte   $13		;tornado
 
 AttackSfx_009e:
-        .byte   $36
+        .byte   $36		;laser ***
 
 AttackSfx_009f:
-        .byte   $05
+        .byte   $05		;explode
 
 AttackSfx_00a0:
-        .byte   $20
+        .byte   $20		;quake
 
 AttackSfx_00a1:
-        .byte   $0d
+        .byte   $0d		;emission
 
 AttackSfx_00a2:
-        .byte   $36
+        .byte   $36		;heat ray ***
 
 AttackSfx_00a3:
         .byte   $13		;glare
 
 AttackSfx_00a4:
-        .byte   $63
+        .byte   $63		;odin (?)
 
 AttackSfx_00a5:
         .byte   $0d		;Meganuke (Bahamut battle)
@@ -507,7 +507,7 @@ AttackSfx_00a6:
         .byte   $5b		;Needle
 
 AttackSfx_00a7:
-        .byte   $5b
+        .byte   $5b		;counter (needle)
 
 AttackSfx_00a8:
         .byte   $00

@@ -21,6 +21,15 @@
 CheckForRumble:
 
 
+	cpx #$9f
+	beq	@Explode		;explode
+	cpx #$74
+	bne	@NotExplode
+@Explode:
+	jsl	SetExplodeRumble
+	rtl
+@NotExplode:
+
 	cpx #$61
 	beq	@Hold		;bluster
 	cpx #$6C
@@ -66,6 +75,8 @@ CheckForRumble:
 	rtl
 @NotWhite:
 
+	cpx #$8f			;search
+	beq	@Peep
 	cpx #$0C
 	bne @NotPeep
 @Peep:
@@ -84,6 +95,10 @@ CheckForRumble:
 	beq	@Heal
 	cpx #$4A			;poisona
 	beq	@Heal
+	cpx #$85			;heal all
+	beq @Heal
+	cpx #$92			;heal all (enemies)
+	beq @Heal
 	cpx #$11
 	bne @NotHeal
 @Heal:
@@ -129,6 +144,8 @@ CheckForRumble:
 	beq	@Sleep			;curse
 	cpx #$88			;digest
 	beq	@Sleep
+	cpx #$89			;pollen
+	beq	@Sleep
 	cpx #$28
 	bne @NotSleep		;sleep
 @Sleep:
@@ -136,6 +153,8 @@ CheckForRumble:
 	rtl
 @NotSleep:
 
+	cpx #$9D			;Tornado
+	beq	@Weak
 	cpx #$7F			;"Storm"
 	beq	@Weak
 	cpx #$71			;"Weak" enemy cast(?)
@@ -159,6 +178,8 @@ CheckForRumble:
 
 	cpx #$98		;"thunder"
 	beq	@Lit3
+	cpx #$97		;blitz (enemy)
+	beq	@Lit3
 	cpx #$24
 	bne @NotLit3
 @Lit3:
@@ -173,6 +194,8 @@ CheckForRumble:
 	rtl
 @NotLit2:	
 	
+	cpx #$80
+	beq @Lit		;magnet
 	cpx #$22
 	bne @NotLit
 @Lit:
@@ -180,6 +203,8 @@ CheckForRumble:
 	rtl
 @NotLit:	
 	
+	cpx #$a1
+	beq	@Fire			;emission
 	cpx #$1c
 	bne @NotFire
 @Fire:
@@ -215,6 +240,8 @@ CheckForRumble:
 
 	cpx #$99
 	beq	@Ice 		;d. breath
+	cpx #$9B
+	beq	@Ice 		;blizzard
 	cpx #$1f
 	bne @NotIce
 @Ice:
@@ -247,6 +274,23 @@ CheckForRumble:
 @NotVenom:
 
 	rtl
+
+
+.segment "xcd_bank_21"
+
+
+ExplodeRumble:
+	.byte   $55, $55, $55, $55, $55, $55, $55, $55, $55, $55, $55, $55, $55, $55, $55
+	.byte	$00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+	.byte   $AA, $AA, $AA, $AA, $AA, $AA, $EE, $EE, $EE, $EE, $EE, $EE, $EE, $EE, $EE, $EE, $EE, $FE
+
+ExplodeRumblePointer:
+	.byte	<ExplodeRumble, >ExplodeRumble
+
+SetExplodeRumble:
+	SetRumbleTable	ExplodeRumblePointer
+	rtl
+
 
 
 PeepRumble:
@@ -1460,6 +1504,7 @@ SelfTargetMagicAnim:
 ; [ magic animation $1f: reaction ??? ]
 
 MagicAnim_1f:
+		jsl		SetExplodeRumble
 @edf5:  jsr     SelfTargetMagicAnim
         lda     a:$0048
         jmp     _02e8e7
@@ -4112,4 +4157,3 @@ _02ff62:
 @ffc0:  rts
 
 ; ------------------------------------------------------------------------------
-.segment "unused"

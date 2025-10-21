@@ -58,7 +58,7 @@ field_dp:
 
 ; ------------------------------------------------------------------------------
 
-.segment "menu_code"
+.segment "field_code"
 .a8
 .i16
 
@@ -68,14 +68,14 @@ DebugInit:
         sta     $1440
         lda     #1
         sta     $1441
-        phk
-        per     @1-1
-        pea     .loword($ffbe)
-        jml     InitNewGame
-@1:     phk
-        per     @2-1
-        pea     .loword($ffbe)
-        jml     InitCharProp
+;        phk
+;        per     @1-1
+;        pea     .loword($ffbe)
+;        jml     InitNewGame
+;@1:     phk
+;        per     @2-1
+;        pea     .loword($ffbe)
+        jsr     InitCharProp
 @2:     jsl     InitSpellLists
         lda     #0
         sta     $1700       ; overworld
@@ -107,15 +107,15 @@ DebugInit:
         ldx     #50000          ; give gil
         stx     $16a0
         lda     #$36            ; give hook
-        phk
-        per     @3-1
-        pea     .loword($ffbe)
-        jml     SetEventSwitch
+;        phk
+;        per     @3-1
+;        pea     .loword($ffbe)
+        jsl     SetEventSwitch_L
 @3:     lda     #$30            ; open tunnel to underground
-        phk
-        per     @4-1
-        pea     .loword($ffbe)
-        jml     SetEventSwitch
+;        phk
+;        per     @4-1
+;        pea     .loword($ffbe)
+        jsl     SetEventSwitch_L
 @4:     rtl
 .endif
 
