@@ -1645,7 +1645,8 @@ _01fcb6:
 ; [  ]
 
 _01fd22:
-@fd22:  jsr     PlayMagicSfx_near
+@fd22:  SetRumble $77, $FF
+		jsr     PlayMagicSfx_near
         jsr     ResetAnimSpritesLarge_near
         jsr     _01fb16
         jsr     _01fc51
@@ -1659,6 +1660,8 @@ _01fd22:
         plx
         dex
         bne     @fd31
+		lda #$00
+		sta RumbleTimerLong
         ldx     $34c4
         stx     $f466
         jsl     MagicHitCharAnim
