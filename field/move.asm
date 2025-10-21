@@ -552,7 +552,12 @@ CheckPlayerMoveWorld:
 @ac4b:  tay
         lda     $a1,x
         and     VehiclePassBit,y   ; check vehicle passability
+.if !FUN_STUFF
         beq     @ac65
+.else
+		nop
+		nop
+.endif
         jmp     @ac5e
 @ac56:  lda     $a1,x
         and     #$41                  ; check passability (no vehicle)
