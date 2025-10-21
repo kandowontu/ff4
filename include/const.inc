@@ -35,9 +35,12 @@ def_config LANG_EN,0
 def_config NO_RAND_BATTLES,0
 def_config ROM_VERSION,0
 def_config SIMPLE_CONFIG,0
-def_config SKIP_INTRO,1
 def_config FUN_STUFF,1
-
+.if FUN_STUFF
+def_config SKIP_INTRO,1
+.else
+def_config SKIP_INTRO,0
+.endif
 RumbleStrengthLong = $7E0520
 RumbleTimerLong = $7E0521
 RumbleStrength = $0520

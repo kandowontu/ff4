@@ -281,6 +281,21 @@ MainLoop:
 		bne :+
 		jsr		CheckBattle
 :
+
+		lda $7e0104
+		and #$20
+		beq :+
+		lda $7e06AD
+		inc a
+		cmp #$32
+		beq @hi
+		sta $7e06AD
+		bra :+
+@hi:
+		lda #$10
+		sta $7e06AD
+
+:
 .endif
 
 .endif
@@ -333,6 +348,14 @@ MainLoop:
 		and #$10
 		bne :+
 		jsr		CheckBattle
+:
+
+		lda $7e0108
+		and #$20
+		beq :+
+		lda $7e06AD
+		inc a
+		sta $7e06AD
 :
 .endif
 
