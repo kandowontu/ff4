@@ -71,7 +71,7 @@ DebugInit:
 ;        phk
 ;        per     @1-1
 ;        pea     .loword($ffbe)
-;        jml     InitNewGame
+        jsl     InitNewGame
 ;@1:     phk
 ;        per     @2-1
 ;        pea     .loword($ffbe)
