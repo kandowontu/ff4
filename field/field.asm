@@ -138,7 +138,9 @@ InitCharProp_ext:
 ; [ reset ]
 
 Reset:
-@8000:  sei
+@8000:  
+		jml @jo
+@jo:		sei
         clc
         xce
         longi
@@ -1005,12 +1007,14 @@ InitInterrupts:
 @89ed:  lda     #$5c                    ; jml
         sta     JmpNMI
         sta     JmpIRQ
-        ldx     #FieldNMI
+        ldx     #.loword(FieldNMI)
         stx     JmpNMI+1
-        stz     JmpNMI+3
-        ldx     #FieldIRQ
+		lda #$80
+        sta     JmpNMI+3
+        ldx     #.loword(FieldIRQ)
         stx     JmpIRQ+1
-        stz     JmpIRQ+3
+		lda #$80
+		sta     JmpIRQ+3
         rts
 
 ; ------------------------------------------------------------------------------
