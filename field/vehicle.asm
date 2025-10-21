@@ -423,7 +423,11 @@ LandBkChoco:
         bne     @a122
         lda     $a1
         and     #$08
+.if !FUN_STUFF
         bne     @a138       ; branch if forest tile (can land)
+.else
+		bra		@a138
+.endif
         jmp     LiftoffBkChoco
 @a138:  stz     $1704
         stz     $ac
@@ -522,7 +526,11 @@ ShowVehicleSmoke:
 LandHover:
 @a1de:  lda     $a1
         and     #$01
-        bne     @a1e5
+.if !FUN_STUFF
+        bne     @a1e5		;can land aircraft?
+.else
+		bra		@a1e5		;can land aircraft.
+.endif
         rts
 @a1e5:  stz     $79
 @a1e7:  jsr     Animate8
