@@ -286,16 +286,39 @@ CheckForRumble:
 
 @NotVenom:
 
+	cpx #$7E		;disrupt
+	beq @Disrupt
+	cpx #$7B		;demolish
+	bne	@NotDisrupt
+@Disrupt:	
+	jsl	SetDisruptRumble
+@NotDisrupt:
+
 	rtl
 
 
 .segment "xcd_bank_21"
 
 
+DisruptRumble:
+	.byte	$11, $11, $11, $11, $33, $33, $33, $33, $55, $55, $55, $55, $88, $88, $88, $88
+	.byte   $AA, $AA, $AA, $AA, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD
+	.byte   $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $AA, $AA, $AA, $AA
+	.byte	$88, $88, $88, $88, $55, $55, $55, $55, $33, $33, $33, $33, $11, $11, $11, $11
+	.byte	$11, $11, $11, $11, $33, $33, $33, $33, $55, $55, $55, $55, $88, $88, $88, $88
+	.byte   $AA, $AA, $AA, $AA, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD
 BeamRumble:
+	;fall through
 	.byte   $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $AA, $AA, $AA, $AA
 	.byte	$88, $88, $88, $88, $55, $55, $55, $55, $33, $33, $33, $33, $11, $11, $11, $11, $FE
 
+DisruptRumblePointer:
+	.byte	<DisruptRumble, >DisruptRumble
+
+SetDisruptRumble:
+	SetRumbleTable	DisruptRumblePointer
+	rtl
+	
 BeamRumblePointer:
 	.byte	<BeamRumble, >BeamRumble
 
@@ -1331,6 +1354,7 @@ MagicAnim_26:
 ; [ magic animation $28: fission ]
 
 MagicAnim_28:
+		jsl		SetNukeRumble
 @ecac:  ldx     $34c4
         phx
         lda     $34c2
