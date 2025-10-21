@@ -355,6 +355,12 @@ MainLoop:
 		beq :+
 		lda $7e06AD
 		inc a
+		cmp #$32
+		beq @hi2
+		sta $7e06AD
+		bra :+
+@hi2:
+		lda #$10
 		sta $7e06AD
 :
 .endif
