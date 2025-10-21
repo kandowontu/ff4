@@ -272,7 +272,17 @@ MainLoop:
 .if NO_RAND_BATTLES
         nop3
 .else
+
+.if	!FUN_STUFF
         jsr     CheckBattle
+.else
+		lda $7e0108
+		and #$10
+		bne :+
+		jsr		CheckBattle
+:
+.endif
+
 .endif
         lda     $85
         beq     @80ef
@@ -315,7 +325,17 @@ MainLoop:
 .if NO_RAND_BATTLES
         nop3
 .else
+
+.if	!FUN_STUFF
         jsr     CheckBattle
+.else
+		lda $7e0108
+		and #$10
+		bne :+
+		jsr		CheckBattle
+:
+.endif
+
 .endif
         lda     $85
         beq     @814f                   ; branch if no battle
