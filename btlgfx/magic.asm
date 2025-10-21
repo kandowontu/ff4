@@ -21,6 +21,19 @@
 CheckForRumble:
 
 
+	cpx #$79
+	beq	@Beam		;Maser
+	cpx #$93
+	beq	@Beam		;Beam
+	cpx #$9e
+	beq	@Beam		;Laser
+	cpx #$a2		;heat ray
+	bne	@NotBeam
+@Beam:
+	jsl	SetBeamRumble
+	rtl
+@NotBeam:
+
 	cpx #$9f
 	beq	@Explode		;explode
 	cpx #$74
@@ -278,6 +291,17 @@ CheckForRumble:
 
 .segment "xcd_bank_21"
 
+
+BeamRumble:
+	.byte   $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $AA, $AA, $AA, $AA
+	.byte	$88, $88, $88, $88, $55, $55, $55, $55, $33, $33, $33, $33, $11, $11, $11, $11, $FE
+
+BeamRumblePointer:
+	.byte	<BeamRumble, >BeamRumble
+
+SetBeamRumble:
+	SetRumbleTable	BeamRumblePointer
+	rtl
 
 ExplodeRumble:
 	.byte   $55, $55, $55, $55, $55, $55, $55, $55, $55, $55, $55, $55, $55, $55, $55

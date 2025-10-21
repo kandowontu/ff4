@@ -369,7 +369,7 @@ AttackSfx_0078:
         .byte   $67		;poison (all)
 
 AttackSfx_0079:
-        .byte   $36		;maser ***
+        .byte   $36		;maser
 
 AttackSfx_007a:
         .byte   $00		;vanish (enemy dies)
@@ -447,7 +447,7 @@ AttackSfx_0092:
         .byte   $66		;Heal All (enemies)
 
 AttackSfx_0093:
-        .byte   $36		;beam ***
+        .byte   $36		;beam
 
 AttackSfx_0094:
         .byte   $2d		;globe199 ***
@@ -480,7 +480,7 @@ AttackSfx_009d:
         .byte   $13		;tornado
 
 AttackSfx_009e:
-        .byte   $36		;laser ***
+        .byte   $36		;laser
 
 AttackSfx_009f:
         .byte   $05		;explode
@@ -492,7 +492,7 @@ AttackSfx_00a1:
         .byte   $0d		;emission
 
 AttackSfx_00a2:
-        .byte   $36		;heat ray ***
+        .byte   $36		;heat ray
 
 AttackSfx_00a3:
         .byte   $13		;glare
