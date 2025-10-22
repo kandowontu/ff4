@@ -2451,6 +2451,7 @@ Special_04:
         jsl     ExecSound_ext
         jsr     _00e075
 @d5d1:  jsr     WaitFrame
+		SetRumble	$FF, 20
         jsr     UpdateExplosions
         ldx     $0ad2
         cpx     #$0010
