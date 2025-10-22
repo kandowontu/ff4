@@ -18,8 +18,67 @@
 
 .segment "xcd_bank_20"
 
+SetHurtRumble:				;generic hurt by enemy rumble
+	SetRumble $88, 8
+	rtl
+
+SetOdinRumble:
+	SetRumble $AA, 40
+	rtl
+
 CheckForRumble:
 
+	cpx #$01
+	bne @NotMute
+@Mute:
+	jsl	SetMuteRumble
+	rtl
+@NotMute:
+
+	cpx #$15
+	bne @NotExit
+@Exit:
+	jsl	SetExitRumble
+	rtl
+@NotExit:
+
+	cpx #$a6		;needle
+	beq @Needle
+	cpx #$a7		;counter
+	bne @NotNeedle
+@Needle:
+	SetRumble $88, 25
+	rtl
+@NotNeedle:
+
+	cpx #$09
+	bne @NotWall
+@Wall:	
+	SetRumble $77, 25
+	rtl
+@NotWall:
+
+	cpx #$44
+	bne @NotSmoke		;smoke (edge)
+@Smoke:	
+	jsl	SetSmokeRumble
+	rtl
+@NotSmoke:
+
+	cpx #$03	;blink
+	beq @Image
+	cpx #$04	;armor (protect)
+	beq	@Image
+	cpx #$05	;shell
+	beq @Image
+	cpx #$08	;berserk
+	beq @Image
+	cpx #$46
+	bne @NotImage	;image (edge)
+@Image:
+	jsl	SetDrainRumble		;same pattern
+	rtl
+@NotImage:
 
 	cpx #$83				;remedy
 	beq @Cure
@@ -88,6 +147,13 @@ CheckForRumble:
 	jsl	SetHoldRumble	;Hold
 	rtl
 @NotHold:
+
+	cpx #$42
+	bne @NotFlood
+@Flood:
+	jsl	SetFloodRumble	;Flood (Edge)
+	rtl
+@NotFlood:
 
 	cpx #$02
 	bne @NotCharm
@@ -178,6 +244,13 @@ CheckForRumble:
 	
 @NotFatal:	
 
+	cpx #$a5
+	bne @NotNuke
+@Nuke:
+	jsl	SetFire3Rumble
+	rtl
+@NotNuke:
+
 	cpx #$63
 	beq	@Sleep			;powder
 	cpx #$66
@@ -221,6 +294,8 @@ CheckForRumble:
 @NotVirus:	
 
 	cpx #$98		;"thunder"
+	beq	@Lit3
+	cpx #$43		;blitz (edge)
 	beq	@Lit3
 	cpx #$97		;blitz (enemy)
 	beq	@Lit3
@@ -274,6 +349,8 @@ CheckForRumble:
 	beq @Fire2
 	cpx #$96		;"blaze"
 	beq @Fire2
+	cpx #$41		;flame (edge)
+	beq @Fire2
 	cpx #$1d
 	bne @NotFire2
 @Fire2:
@@ -304,6 +381,8 @@ CheckForRumble:
 	beq	@Ice 		;d. breath
 	cpx #$9B
 	beq	@Ice 		;blizzard
+	cpx #$45
+	beq @Ice			;pin (edge)
 	cpx #$1f
 	bne @NotIce
 @Ice:
@@ -312,6 +391,8 @@ CheckForRumble:
 
 @NotIce:
 
+	cpx #$65
+	beq @ToadPiggy	;Charm (with hearts)
 	cpx #$18
 	beq @ToadPiggy	;toad
 	cpx #$6F
@@ -354,6 +435,23 @@ CheckForRumble:
 
 
 
+FloodRumble:
+	.byte   $F0, $F0, $F0, $F3, $F3, $F3, $D4, $D4, $D4
+	.byte   $C5, $C5, $C5, $98, $98, $98, $89, $89, $89
+	.byte   $5C, $5C, $5C, $4D, $4D, $4D, $3E, $3E, $3E
+	.byte   $2F, $2F, $2F, $1F, $1F, $1F, $0F, $0F, $0F
+	.byte   $F0, $F0, $F0, $F1, $F1, $F1, $F2, $F2, $F2, $F3, $F3, $F3, $D4, $D4, $D4
+	.byte   $C5, $C5, $C5, $98, $98, $98, $89, $89, $89
+	.byte   $5C, $5C, $5C, $4D, $4D, $4D, $3E, $3E, $3E
+	.byte   $0F, $0F, $0F, $FE
+
+FloodRumblePointer:
+	.byte	<FloodRumble, >FloodRumble
+
+SetFloodRumble:
+	SetRumbleTable	FloodRumblePointer
+	rtl
+	
 CureRumble:
 	.byte   $11, $11, $11, $33, $33, $55, $55, $77, $77, $77, $00, $00, $00, $77, $77, $77
 	.byte	$77, $77, $77, $00, $00, $00, $77, $77, $77, $00, $00, $00, $77, $77, $77, $00, $00, $00, $77, $77, $77, $FE
@@ -364,6 +462,8 @@ CureRumblePointer:
 SetCureRumble:
 	SetRumbleTable	CureRumblePointer
 	rtl
+
+
 
 
 Cure2Rumble:
@@ -393,9 +493,38 @@ SetCure3Rumble:
 
 
 
+ExitRumble:
+	.byte	$11, $11, $11, $11, $33, $33, $33, $33, $55, $55, $55, $55, $88, $88, $88, $88
+	.byte   $AA, $AA, $AA, $AA
+	.byte	$88, $88, $88, $88, $55, $55, $55, $55, $33, $33, $33, $33, $11, $11, $11, $11
+	.byte 	$00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+	.byte	$11, $11, $11, $11, $33, $33, $33, $33, $55, $55, $55, $55, $88, $88, $88, $88
+	.byte   $AA, $AA, $AA, $AA
+	.byte	$88, $88, $88, $88, $55, $55, $55, $55, $33, $33, $33, $33, $11, $11, $11, $11
+	.byte 	$00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+	.byte	$11, $11, $11, $11, $33, $33, $33, $33, $55, $55, $55, $55, $88, $88, $88, $88
+	.byte   $AA, $AA, $AA, $AA
+	.byte	$88, $88, $88, $88, $55, $55, $55, $55, $33, $33, $33, $33, $11, $11, $11, $11
+	.byte 	$00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+	.byte	$11, $11, $11, $11, $33, $33, $33, $33, $55, $55, $55, $55, $88, $88, $88, $88
+	.byte   $AA, $AA, $AA, $AA
+	.byte	$88, $88, $88, $88, $55, $55, $55, $55, $33, $33, $33, $33, $11, $11, $11, $11
+	.byte 	$00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+	.byte	$11, $11, $11, $11, $33, $33, $33, $33, $55, $55, $55, $55, $88, $88, $88, $88
+	.byte   $AA, $AA, $AA, $AA
+	.byte	$88, $88, $88, $88, $55, $55, $55, $55, $33, $33, $33, $33, $11, $11, $11, $11
+	.byte 	$00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+	.byte	$11, $11, $11, $11, $33, $33, $33, $33, $55, $55, $55, $55, $88, $88, $88, $88
+	.byte   $AA, $AA, $AA, $AA
+	.byte	$88, $88, $88, $88, $55, $55, $55, $55, $33, $33, $33, $33, $11, $11, $11, $11, $FE
 
 
+ExitRumblePointer:
+	.byte	<ExitRumble, >ExitRumble
 
+SetExitRumble:
+	SetRumbleTable	ExitRumblePointer
+	rtl
 
 
 DisruptRumble:
@@ -1002,6 +1131,52 @@ SetFire3Rumble:
 	SetRumbleTable	Fire3RumblePointer
 	rtl
 	
+MuteRumble:
+	.byte   $55, $55, $77, $77, $00, $00, $00
+	.byte   $55, $55, $77, $77, $00, $00, $00
+	.byte   $55, $55, $77, $77, $00, $00, $00
+	.byte   $55, $55, $77, $77, $00, $00, $00
+	.byte	$00, $00, $00, $00, $00
+	.byte   $77, $77, $77, $55, $55, $55, $33, $33, $33, $11, $11, $11
+	.byte	$00, $00, $00, $00, $00
+	.byte   $77, $77, $77, $55, $55, $55, $33, $33, $33, $11, $11, $11, $FE
+
+MuteRumblePointer:
+	.byte	<MuteRumble, >MuteRumble
+
+SetMuteRumble:
+	SetRumbleTable	MuteRumblePointer
+	rtl
+
+SmokeRumble:
+	.byte	$00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00 
+	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00
+	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00
+	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00
+	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00 
+	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00
+	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00
+	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00
+	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00 
+	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00
+	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00
+	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00
+	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00
+	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00
+	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00
+	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00
+	.byte	$55, $55, $77, $77, $99, $99, $99, $FE
+
+	
+SmokeRumblePointer:
+	.byte	<SmokeRumble, >SmokeRumble
+
+SetSmokeRumble:
+	SetRumbleTable	SmokeRumblePointer
+	rtl
+
+
 ChocoboRumble:
 	.byte	$00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
 	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00 
@@ -1460,7 +1635,7 @@ MagicAnim_24:
 ; [ attack animation $26: odin attack ]
 
 MagicAnim_26:
-		
+		jsl		SetOdinRumble
 @eca4:  jsr     _02c46d
         jsl     _01fcb6
         rts
@@ -1931,7 +2106,7 @@ MagicAnim_14:
 ; [ magic animation $15: odin (summon) ]
 
 MagicAnim_15:
-		SetRumble $AA, 40
+		jsl		SetOdinRumble
 @ef72:  jsl     OdinSummonAnim
         jmp     AfterMagicAnim
 
@@ -2931,6 +3106,10 @@ _f5f5:  pha
 @f60d:  sta     $f414       ; sound effect pan
         pla
         sta     $f413       ; sound effect id
+		cmp 	#$2A
+		bne @norumb
+		jsl	SetHurtRumble
+@norumb:
         lda     #$ff
         sta     $f415
         lda     #$02        ; play sound effect

@@ -309,7 +309,7 @@ AttackSfx_0064:
         .byte   $35		;glance
 
 AttackSfx_0065:
-        .byte   $53		;charm (with hearts) ***
+        .byte   $53		;charm (with hearts)
 
 AttackSfx_0066:
         .byte   $40		;tongue
@@ -375,7 +375,7 @@ AttackSfx_007a:
         .byte   $00		;vanish (enemy dies)
 
 AttackSfx_007b:
-        .byte   $6b		;demolish ***
+        .byte   $6b		;demolish
 
 AttackSfx_007c:
         .byte   $4a		;black hole
@@ -384,7 +384,7 @@ AttackSfx_007d:
         .byte   $00		;death song??? does nothing
 
 AttackSfx_007e:
-        .byte   $6b		;disrupt ***
+        .byte   $6b		;disrupt
 
 AttackSfx_007f:
         .byte   $02		;"Storm" / Maelstrom
@@ -399,7 +399,7 @@ AttackSfx_0082:
         .byte   $5a		;hatch
 
 AttackSfx_0083:
-        .byte   $1a		;remedy (cure 3 animation) ***
+        .byte   $1a		;remedy (cure 3 animation)
 
 AttackSfx_0084:
         .byte   $4e		;absorb
@@ -438,7 +438,7 @@ AttackSfx_008f:
         .byte   $43		;search
 
 AttackSfx_0090:
-        .byte   $6a		;fission ***
+        .byte   $6a		;fission
 
 AttackSfx_0091:
         .byte   $00		;retreat (enemies)
@@ -450,13 +450,13 @@ AttackSfx_0093:
         .byte   $36		;beam
 
 AttackSfx_0094:
-        .byte   $2d		;globe199 ***
+        .byte   $2d		;globe199
 
 AttackSfx_0095:
-        .byte   $0d		;fire (like edges fire) ***
+        .byte   $0d		;fire (like edges fire)
 
 AttackSfx_0096:
-        .byte   $0d		;blaze (blue fire) ***
+        .byte   $0d		;blaze (blue fire)
 
 AttackSfx_0097:
         .byte   $0e		;blitz
@@ -468,13 +468,13 @@ AttackSfx_0099:
         .byte   $1d		;D. Breath
 
 AttackSfx_009a:
-        .byte   $29		;big wave ***
+        .byte   $29		;big wave
 
 AttackSfx_009b:
         .byte   $1d		;blizzard
 
 AttackSfx_009c:
-        .byte   $29		;wave ***
+        .byte   $29		;wave
 
 AttackSfx_009d:
         .byte   $13		;tornado

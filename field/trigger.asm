@@ -15,7 +15,15 @@
 
 ; ------------------------------------------------------------------------------
 
+HurtRumble:
+	SetRumble	$88, 8
+	rtl
+
+
 .pushseg
+
+
+
 
 .if LANG_EN
 .segment "world_triggers"
@@ -36,6 +44,7 @@ WorldTriggers:
 
 .segment "triggers"
 .align $80
+
 
 MapTriggersPtrs:
         make_ptr_tbl_rel MapTriggers1, $0100
@@ -86,6 +95,7 @@ DoPoisonDmg:
         sta     $1007,x
 @97e4:  lda     #0
         shorta
+		jsl		HurtRumble
 @97e9:  jsr     NextChar
         cpx     #$0140
         bne     @97bd
@@ -127,6 +137,7 @@ DoFloorDmg:
         sta     $1007,x
 @9835:  lda     #0
         shorta
+		jsl		HurtRumble
 @983a:  jsr     NextChar
         cpx     #$0140
         bne     @980a
@@ -263,6 +274,7 @@ CheckTreasure:
         jsr     GetTreasureTiles
         lda     #$30
         jsr     PlaySfx
+		SetRumble	$88, 8
         lda     #$01
         sta     $d4
         lda     #1
@@ -272,6 +284,7 @@ CheckTreasure:
         sta     $b2
         lda     #$37
         jsr     PlaySfx
+		SetRumble	$88, 8
 @9952:  ldx     $40
         lda     f:MapTriggers1+3,x
         sta     $09
