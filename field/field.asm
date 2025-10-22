@@ -58,7 +58,18 @@ field_dp:
 
 ; ------------------------------------------------------------------------------
 
-.segment "field_code"
+; ------------------------------------------------------------------------------
+
+.segment "field_code_ext"
+
+InitCharProp_ext:
+@ffbc:  jsr     InitCharProp
+        rtl
+
+; ------------------------------------------------------------------------------
+
+.segment "unused"
+
 .a8
 .i16
 
@@ -75,7 +86,7 @@ DebugInit:
 ;@1:     phk
 ;        per     @2-1
 ;        pea     .loword($ffbe)
-        jsr     InitCharProp
+        jsl     InitCharProp_ext
 @2:     jsl     InitSpellLists
         lda     #0
         sta     $1700       ; overworld
@@ -119,15 +130,6 @@ DebugInit:
 @4:     rtl
 .endif
 
-; ------------------------------------------------------------------------------
-
-.segment "field_code_ext"
-
-InitCharProp_ext:
-@ffbc:  jsr     InitCharProp
-        rtl
-
-; ------------------------------------------------------------------------------
 
 .segment "field_code"
 .a8
@@ -216,6 +218,7 @@ AfterBattle:
         stz     $df                     ; clear dialogue window height
         stz     $b1                     ; no event
         jmp     LoadMap
+
 
 
 
@@ -723,7 +726,7 @@ ReloadSubMap:
 
 LoadOverworld:
 @8502:  jsl     InitMapRAM
-        jsr     InitWorld
+        jsl     InitWorld
         stz     $1701
         stz     $06fa
         jsr     LoadWaterGfx
@@ -750,7 +753,7 @@ LoadOverworld:
 
 LoadUnderground:
 @853c:  jsl     InitMapRAM
-        jsr     InitWorld
+        jsl     InitWorld
         lda     #1
         sta     $1701
         stz     $06fa
@@ -777,7 +780,7 @@ LoadUnderground:
 
 LoadMoon:
 @8574:  jsl     InitMapRAM
-        jsr     InitWorld
+        jsl     InitWorld
         lda     #2
         sta     $1701
         lda     #$02
@@ -800,33 +803,16 @@ LoadMoon:
 
 ; ------------------------------------------------------------------------------
 
-; [ init world map ]
 
-InitWorld:
-@85ab:  jsr     RemoveFloat
-        stz     $d1
-        lda     $85
-        bne     @85b9                   ; branch if returning from a battle
-        lda     #$02
-        sta     $1705                   ; face down
-@85b9:  stz     $85                     ; disable battle
-        lda     #7
-        sta     hBGMODE
-        lda     #$11                    ; enable sprites and bg1
-        sta     $212c
-        stz     $2130                   ; disable color math
-        stz     $2131
-        lda     $b1
-        bne     @85d2
-        jsr     PlayMapSong
-@85d2:  jsl     TfrWorldGfx
-        jsl     InvertPal
-        rts
 
 ; ------------------------------------------------------------------------------
 
 ; [ remove float ]
 
+RemoveFloat_L:
+		jsr	RemoveFloat
+		rtl
+		
 RemoveFloat:
 @85db:  ldx     #0
 @85de:  lda     $1004,x                 ; clear float status
@@ -1220,6 +1206,10 @@ FadeOutSongSlow:
 ; ------------------------------------------------------------------------------
 
 ; [ play map song ]
+
+PlayMapSong_L:
+		jsr	PlayMapSong
+		rtl
 
 PlayMapSong:
 @8d5d:  lda     $1704
@@ -2683,7 +2673,7 @@ InitZoomHDMA:
         ldy     $3d
         cpy     #$00f0
         bne     @f440
-        jsr     IncZoomMult
+        jsl     IncZoomMult
         lda     $40                     ; next zoom level
         cmp     #$80
         bne     @f440
@@ -2735,7 +2725,7 @@ InitZoomHDMA:
         ldy     $3d
         cpy     #$00f0
         bne     @f4b0
-        jsr     IncZoomMult
+        jsl     IncZoomMult
         lda     $40
         cmp     #$80
         bne     @f4b0
@@ -2762,23 +2752,7 @@ InitZoomHDMA:
 
 ; ------------------------------------------------------------------------------
 
-; [ increment zoom multiplier ]
 
-IncZoomMult:
-@f518:  ldy     #0
-        sty     $3d
-        lda     $40
-        clc
-        adc     #8
-        sta     $40
-        sta     $44
-        stz     $43
-        lsr     $44
-        ror     $43
-        lsr     $44
-        ror     $43
-        ldx     $43
-        rts
 
 ; ------------------------------------------------------------------------------
 
@@ -3283,4 +3257,46 @@ InitMapRAM:
         sta     $ad         ; mode 7 zoom level
         ldx     #0
         stx     $06fb       ; mode 7 rotation angle
+        rtl
+		
+		
+; [ init world map ]
+
+InitWorld:
+@85ab:  jsl     RemoveFloat_L
+        stz     $d1
+        lda     $85
+        bne     @85b9                   ; branch if returning from a battle
+        lda     #$02
+        sta     $1705                   ; face down
+@85b9:  stz     $85                     ; disable battle
+        lda     #7
+        sta     hBGMODE
+        lda     #$11                    ; enable sprites and bg1
+        sta     $212c
+        stz     $2130                   ; disable color math
+        stz     $2131
+        lda     $b1
+        bne     @85d2
+        jsl     PlayMapSong_L
+@85d2:  jsl     TfrWorldGfx
+        jsl     InvertPal
+        rtl
+		
+; [ increment zoom multiplier ]
+
+IncZoomMult:
+@f518:  ldy     #0
+        sty     $3d
+        lda     $40
+        clc
+        adc     #8
+        sta     $40
+        sta     $44
+        stz     $43
+        lsr     $44
+        ror     $43
+        lsr     $44
+        ror     $43
+        ldx     $43
         rtl
