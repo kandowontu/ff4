@@ -15,14 +15,15 @@
 
 ; ------------------------------------------------------------------------------
 
-.pushseg
-
-
-.segment "xcd_bank_21"
-
 HurtRumble:
 	SetRumble	$88, 8
 	rtl
+
+
+.pushseg
+
+
+
 
 .if LANG_EN
 .segment "world_triggers"
@@ -43,6 +44,7 @@ WorldTriggers:
 
 .segment "triggers"
 .align $80
+
 
 MapTriggersPtrs:
         make_ptr_tbl_rel MapTriggers1, $0100
@@ -91,9 +93,9 @@ DoPoisonDmg:
         bcs     @97e4
         lda     #1
         sta     $1007,x
-@97e4:  jsl		HurtRumble
-		lda     #0
+@97e4:  lda     #0
         shorta
+		jsl		HurtRumble
 @97e9:  jsr     NextChar
         cpx     #$0140
         bne     @97bd
@@ -133,9 +135,9 @@ DoFloorDmg:
         bcs     @9835
 @982f:  lda     #1
         sta     $1007,x
-@9835:  jsl		HurtRumble
-		lda     #0
+@9835:  lda     #0
         shorta
+		jsl		HurtRumble
 @983a:  jsr     NextChar
         cpx     #$0140
         bne     @980a
