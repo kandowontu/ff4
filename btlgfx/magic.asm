@@ -18,13 +18,22 @@
 
 .segment "xcd_bank_20"
 
-SetHurtRumble:
+SetHurtRumble:				;generic hurt by enemy rumble
 	SetRumble $88, 8
 	rtl
 
 
 
 CheckForRumble:
+
+	cpx #$a6		;needle
+	beq @Needle
+	cpx #$a7		;counter
+	bne @NotNeedle
+@Needle:
+	SetRumble $88, 25
+	rtl
+@NotNeedle:
 
 	cpx #$09
 	bne @NotWall
@@ -216,6 +225,13 @@ CheckForRumble:
 	rtl
 	
 @NotFatal:	
+
+	cpx #$a5
+	bne @NotNuke
+@Nuke:
+	jsl	SetFire3Rumble
+	rtl
+@NotNuke:
 
 	cpx #$63
 	beq	@Sleep			;powder
