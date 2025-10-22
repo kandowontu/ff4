@@ -315,6 +315,7 @@ Special_36:
         clc
         adc     _00c616,x
         sta     $0ad5
+		SetRumble $FF, 30
         jsr     UpdateExplosions
         jsr     DrawWorldSprites
         ldx     $89
@@ -753,6 +754,7 @@ Special_2d:
         stx     $1706
         lda     $1727
         jsr     _00f167
+		SetRumble  $99, 150
         jsr     BoardWhale
         jmp     WaitVblankEvent
 
@@ -1497,6 +1499,7 @@ Special_35:
 ; [ special effect $1f: big whale emerges 2 ]
 
 Special_1f:
+		SetRumble  $99, $FF
 @ce76:  lda     #$01
         sta     $06c8
         jsr     _00cf98
@@ -1593,6 +1596,7 @@ WhaleFlashPal:
 Special_2a:
 @cf23:  jsr     _00cf98
         lda     #$01
+		sta		RumbleTimerLong
         sta     $06c8
         ldx     #0
 @cf2e:  lda     $0ebb,x
@@ -1715,6 +1719,9 @@ Special_28:
 ; [ special effect $19: crushing corridor 1 ]
 
 Special_19:
+		lda #0
+		sta RumbleTimerLong
+		SetRumble $FF, 30
 @cff6:  lda     #$16
         sta     $212c
         lda     #$01
@@ -1724,31 +1731,37 @@ Special_19:
         ldx     #$02e0
         stx     $60
         jsr     _00d02f
-        jmp     WaitVblankEvent
+        jmp     WaitVblankEvent2
 
 ; ------------------------------------------------------------------------------
 
 ; [ special effect $1a: crushing corridor 2 ]
 
 Special_1a:
+		lda #0
+		sta RumbleTimerLong
+		SetRumble $FF, 30
 @d00f:  ldx     #$0100
         stx     $5e
         ldx     #$02e0
         stx     $60
         jsr     _00d02f
-        jmp     WaitVblankEvent
+        jmp     WaitVblankEvent2
 
 ; ------------------------------------------------------------------------------
 
 ; [ special effect $1b: crushing corridor 3 ]
 
 Special_1b:
+		lda #0
+		sta RumbleTimerLong
+		SetRumble $FF, 30
 @d01f:  ldx     #$0100
         stx     $5e
         ldx     #$01e0
         stx     $60
         jsr     _00d02f
-        jmp     WaitVblankEvent
+        jmp     WaitVblankEvent2
 
 ; ------------------------------------------------------------------------------
 
@@ -2352,6 +2365,7 @@ Special_0e:
         jsr     FadeIn
         ldx     #$0040
         jsr     WaitSpecial
+		SetRumble $FF, $FF
         lda     #$01
         sta     $e3
         lda     #$20
@@ -2377,6 +2391,8 @@ Special_0e:
         bcs     @d54b
         txa
         sta     $2100                   ; set screen brightness
+		lda #0
+		sta RumbleTimerLong
 @d54b:  ldx     $0ad2
         bne     @d539
         plx
