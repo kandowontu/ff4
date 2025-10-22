@@ -18,6 +18,10 @@
 
 .segment "xcd_bank_20"
 
+SetHurtRumble:
+	SetRumble $88, 8
+	rtl
+
 CheckForRumble:
 
 
@@ -2931,6 +2935,10 @@ _f5f5:  pha
 @f60d:  sta     $f414       ; sound effect pan
         pla
         sta     $f413       ; sound effect id
+		cmp 	#$2A
+		bne @norumb
+		jsl	SetHurtRumble
+@norumb:
         lda     #$ff
         sta     $f415
         lda     #$02        ; play sound effect
