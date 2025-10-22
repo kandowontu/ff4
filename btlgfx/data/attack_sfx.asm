@@ -161,7 +161,7 @@ AttackSfx_0032:
 AttackSfx_0033:
         .byte   $00
 
-AttackSfx_0034:
+AttackSfx_0034:			;fire bomb (item)
         .byte   $0a
 
 AttackSfx_0035:

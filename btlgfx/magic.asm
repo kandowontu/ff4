@@ -25,6 +25,8 @@ CheckForRumble:
 	beq	@Beam		;Maser
 	cpx #$93
 	beq	@Beam		;Beam
+	cpx #$94
+	beq	@Beam		;Globe199
 	cpx #$9e
 	beq	@Beam		;Laser
 	cpx #$a2		;heat ray
@@ -225,6 +227,24 @@ CheckForRumble:
 	rtl
 @NotFire:	
 	
+	cpx #$34		;fire bomb (item)
+	bne @NotFireBomb
+@FireBomb:
+	jsl	SetFireBombRumble
+	rtl
+@NotFireBomb:
+
+	cpx #$36		;lit-bolt (item
+	bne @NotLitBolt
+@LitBolt:
+	jsl	SetLitBoltRumble
+	rtl
+@NotLitBolt:
+
+	cpx #$95		;"fire"
+	beq @Fire2
+	cpx #$96		;"blaze"
+	beq @Fire2
 	cpx #$1d
 	bne @NotFire2
 @Fire2:
@@ -477,6 +497,7 @@ FireRumble:
 Fire2Rumble:
 	.byte   $05, $05, $07, $07, $09, $09, $09, $0A, $0A, $0A, $0D, $0D, $0D
 	.byte   $5D, $5D, $7A, $7A, $99, $99, $99, $A7, $A7, $A7, $D5, $D5, $D5	
+FireBombRumble:
 	.byte	$D0, $D0, $A0, $A0, $90, $90, $90, $70, $70, $70, $50, $50, $50
 	.byte   $05, $05, $07, $07, $09, $09, $09, $0A, $0A, $0A, $0D, $0D, $0D
 	.byte   $5D, $5D, $7A, $7A, $99, $99, $99, $A7, $A7, $A7, $D5, $D5, $D5
@@ -498,6 +519,13 @@ SetCure4Rumble:
 	SetRumbleTable	Cure4RumblePointer
 	rtl
 
+FireBombRumblePointer:
+	.byte	<FireBombRumble, >FireBombRumble
+
+SetFireBombRumble:
+	SetRumbleTable	FireBombRumblePointer
+	rtl
+	
 FireRumblePointer:
 	.byte	<FireRumble, >FireRumble
 
@@ -533,9 +561,19 @@ SetCharmRumble:
 	rtl
 
 	
+LitBoltRumble:
+	.byte	$00, $00, $00, $88, $88, $88, $99, $99, $99, $AA, $AA, $AA, $BB, $BB, $BB, $BB, $00, $00, $00, $00, $00, $88, $88, $88, $99, $99, $99, $AA, $AA, $AA, $BB, $BB, $BB, $BB
 ThundagaRumble:
+	;fall through
 	.byte	$00, $00, $00, $88, $88, $88, $99, $99, $99, $AA, $AA, $AA, $BB, $BB, $BB, $BB, $00, $00, $00, $00, $00, $88, $88, $88, $99, $99, $99, $AA, $AA, $AA, $BB, $BB, $BB, $BB, $FE
 	
+	
+LitBoltRumblePointer:
+	.byte	<LitBoltRumble, >LitBoltRumble
+
+SetLitBoltRumble:
+	SetRumbleTable	LitBoltRumblePointer
+	rtl	
 	
 ThundagaRumblePointer:
 	.byte	<ThundagaRumble, >ThundagaRumble
