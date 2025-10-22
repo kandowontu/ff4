@@ -24,6 +24,25 @@ SetHurtRumble:
 
 CheckForRumble:
 
+	cpx #$09
+	bne @NotWall
+@Wall:	
+	SetRumble $77, 25
+	rtl
+@NotWall:
+
+	cpx #$03	;blink
+	beq @Image
+	cpx #$04	;armor (protect)
+	beq	@Image
+	cpx #$05	;shell
+	beq @Image
+	cpx #$46
+	bne @NotImage	;image (edge)
+@Image:
+	jsl	SetDrainRumble		;same pattern
+	rtl
+@NotImage:
 
 	cpx #$83				;remedy
 	beq @Cure
@@ -92,6 +111,13 @@ CheckForRumble:
 	jsl	SetHoldRumble	;Hold
 	rtl
 @NotHold:
+
+	cpx #$42
+	bne @NotFlood
+@Flood:
+	jsl	SetFloodRumble	;Flood (Edge)
+	rtl
+@NotFlood:
 
 	cpx #$02
 	bne @NotCharm
@@ -226,6 +252,8 @@ CheckForRumble:
 
 	cpx #$98		;"thunder"
 	beq	@Lit3
+	cpx #$43		;blitz (edge)
+	beq	@Lit3
 	cpx #$97		;blitz (enemy)
 	beq	@Lit3
 	cpx #$24
@@ -277,6 +305,8 @@ CheckForRumble:
 	cpx #$95		;"fire"
 	beq @Fire2
 	cpx #$96		;"blaze"
+	beq @Fire2
+	cpx #$41		;flame (edge)
 	beq @Fire2
 	cpx #$1d
 	bne @NotFire2
@@ -358,6 +388,23 @@ CheckForRumble:
 
 
 
+FloodRumble:
+	.byte   $F0, $F0, $F0, $F3, $F3, $F3, $D4, $D4, $D4
+	.byte   $C5, $C5, $C5, $98, $98, $98, $89, $89, $89
+	.byte   $5C, $5C, $5C, $4D, $4D, $4D, $3E, $3E, $3E
+	.byte   $2F, $2F, $2F, $1F, $1F, $1F, $0F, $0F, $0F
+	.byte   $F0, $F0, $F0, $F1, $F1, $F1, $F2, $F2, $F2, $F3, $F3, $F3, $D4, $D4, $D4
+	.byte   $C5, $C5, $C5, $98, $98, $98, $89, $89, $89
+	.byte   $5C, $5C, $5C, $4D, $4D, $4D, $3E, $3E, $3E
+	.byte   $0F, $0F, $0F, $FE
+
+FloodRumblePointer:
+	.byte	<FloodRumble, >FloodRumble
+
+SetFloodRumble:
+	SetRumbleTable	FloodRumblePointer
+	rtl
+	
 CureRumble:
 	.byte   $11, $11, $11, $33, $33, $55, $55, $77, $77, $77, $00, $00, $00, $77, $77, $77
 	.byte	$77, $77, $77, $00, $00, $00, $77, $77, $77, $00, $00, $00, $77, $77, $77, $00, $00, $00, $77, $77, $77, $FE
@@ -368,6 +415,8 @@ CureRumblePointer:
 SetCureRumble:
 	SetRumbleTable	CureRumblePointer
 	rtl
+
+
 
 
 Cure2Rumble:
