@@ -22,7 +22,9 @@ SetHurtRumble:				;generic hurt by enemy rumble
 	SetRumble $88, 8
 	rtl
 
-
+SetOdinRumble:
+	SetRumble $AA, 40
+	rtl
 
 CheckForRumble:
 
@@ -363,6 +365,8 @@ CheckForRumble:
 	beq	@Ice 		;d. breath
 	cpx #$9B
 	beq	@Ice 		;blizzard
+	cpx #$45
+	beq @Ice			;pin (edge)
 	cpx #$1f
 	bne @NotIce
 @Ice:
@@ -371,6 +375,8 @@ CheckForRumble:
 
 @NotIce:
 
+	cpx #$65
+	beq @ToadPiggy	;Charm (with hearts)
 	cpx #$18
 	beq @ToadPiggy	;toad
 	cpx #$6F
@@ -1567,7 +1573,7 @@ MagicAnim_24:
 ; [ attack animation $26: odin attack ]
 
 MagicAnim_26:
-		
+		jsl		SetOdinRumble
 @eca4:  jsr     _02c46d
         jsl     _01fcb6
         rts
@@ -2038,7 +2044,7 @@ MagicAnim_14:
 ; [ magic animation $15: odin (summon) ]
 
 MagicAnim_15:
-		SetRumble $AA, 40
+		jsl		SetOdinRumble
 @ef72:  jsl     OdinSummonAnim
         jmp     AfterMagicAnim
 

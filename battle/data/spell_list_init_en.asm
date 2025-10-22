@@ -20,8 +20,8 @@ SpellListInit_0003:
         .byte   $ff
 
 SpellListInit_0004:
-        ;.byte   $35,$7C,$7F,$84,$91,$95,$96,$97,$9B,$9D,$87,$ff
-        .byte   $35,$87,$5e,$95,$a6,$ff
+        .byte   $35,$66,$A7,$A5
+        ;.byte   $35,$87,$5e,$95,$a6,$ff
 
 SpellListInit_0005:
         .byte   $0f,$03,$04,$12,$13,$16,$ff
