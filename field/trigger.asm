@@ -17,6 +17,13 @@
 
 .pushseg
 
+
+.segment "xcd_bank_21"
+
+HurtRumble:
+	SetRumble	$88, 8
+	rtl
+
 .if LANG_EN
 .segment "world_triggers"
 .else
@@ -84,7 +91,8 @@ DoPoisonDmg:
         bcs     @97e4
         lda     #1
         sta     $1007,x
-@97e4:  lda     #0
+@97e4:  jsl		HurtRumble
+		lda     #0
         shorta
 @97e9:  jsr     NextChar
         cpx     #$0140
@@ -125,7 +133,8 @@ DoFloorDmg:
         bcs     @9835
 @982f:  lda     #1
         sta     $1007,x
-@9835:  lda     #0
+@9835:  jsl		HurtRumble
+		lda     #0
         shorta
 @983a:  jsr     NextChar
         cpx     #$0140
@@ -263,6 +272,7 @@ CheckTreasure:
         jsr     GetTreasureTiles
         lda     #$30
         jsr     PlaySfx
+		SetRumble	$88, 8
         lda     #$01
         sta     $d4
         lda     #1
@@ -272,6 +282,7 @@ CheckTreasure:
         sta     $b2
         lda     #$37
         jsr     PlaySfx
+		SetRumble	$88, 8
 @9952:  ldx     $40
         lda     f:MapTriggers1+3,x
         sta     $09
