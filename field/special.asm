@@ -315,7 +315,6 @@ Special_36:
         clc
         adc     _00c616,x
         sta     $0ad5
-		SetRumble $FF, 30
         jsr     UpdateExplosions
         jsr     DrawWorldSprites
         ldx     $89
@@ -1534,6 +1533,8 @@ Special_1f:
         cmp     #$64
         bne     @ce94
         stz     $c8
+        lda     #$01
+		sta		RumbleTimerLong
         jmp     WaitVblankEvent
 
 ; ------------------------------------------------------------------------------
@@ -1568,6 +1569,7 @@ LoadWhaleFlashPal:
 @ceef:  lda     $7a
         and     #$1e
         tay
+		SetRumble $FF, 20
         longa
         ldx     #0
 @cef9:  lda     WhaleFlashPal,y
@@ -1595,8 +1597,6 @@ WhaleFlashPal:
 
 Special_2a:
 @cf23:  jsr     _00cf98
-        lda     #$01
-		sta		RumbleTimerLong
         sta     $06c8
         ldx     #0
 @cf2e:  lda     $0ebb,x
@@ -2365,7 +2365,6 @@ Special_0e:
         jsr     FadeIn
         ldx     #$0040
         jsr     WaitSpecial
-		SetRumble $FF, $FF
         lda     #$01
         sta     $e3
         lda     #$20
@@ -2391,8 +2390,6 @@ Special_0e:
         bcs     @d54b
         txa
         sta     $2100                   ; set screen brightness
-		lda #0
-		sta RumbleTimerLong
 @d54b:  ldx     $0ad2
         bne     @d539
         plx
@@ -2451,7 +2448,6 @@ Special_04:
         jsl     ExecSound_ext
         jsr     _00e075
 @d5d1:  jsr     WaitFrame
-		SetRumble	$FF, 20
         jsr     UpdateExplosions
         ldx     $0ad2
         cpx     #$0010
@@ -2584,7 +2580,6 @@ Special_03:
         bmi     @d708
         cmp     #$06
         bcs     @d708
-		SetRumble	$FF, 20		
         jsr     DrawExplosion
         lda     $7a
         and     #$07
@@ -4019,6 +4014,7 @@ UpdateExplosions:
 ; [ draw explosion sprite ??? ]
 
 DrawExplosion:
+		SetRumble $FF, 20
 @e15a:  lda     $0a6d,x
         tay
         lda     _00e1b4,y
