@@ -2584,6 +2584,7 @@ Special_03:
         bmi     @d708
         cmp     #$06
         bcs     @d708
+		SetRumble	$FF, 20		
         jsr     DrawExplosion
         lda     $7a
         and     #$07
