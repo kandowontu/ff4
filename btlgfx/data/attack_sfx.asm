@@ -161,14 +161,14 @@ AttackSfx_0032:
 AttackSfx_0033:
         .byte   $00
 
-AttackSfx_0034:
+AttackSfx_0034:			;fire bomb (item)
         .byte   $0a
 
 AttackSfx_0035:
         .byte   $69		;ice attack (?)
 
 AttackSfx_0036:
-        .byte   $0e
+        .byte   $0e		;lit-bolt (item)
 
 AttackSfx_0037:
         .byte   $6a
@@ -273,13 +273,13 @@ AttackSfx_0058:
         .byte   $29
 
 AttackSfx_0059:
-        .byte   $1a
+        .byte   $1a		;asura's cure 2
 
 AttackSfx_005a:
-        .byte   $6e
+        .byte   $6e		;asura's cure 3
 
 AttackSfx_005b:
-        .byte   $27
+        .byte   $27		;asura's life
 
 AttackSfx_005c:
         .byte   $26

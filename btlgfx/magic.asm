@@ -21,10 +21,39 @@
 CheckForRumble:
 
 
+	cpx #$83				;remedy
+	beq @Cure
+	cpx #$0d
+	bne @NotCure
+@Cure:						;cure
+	jsl	SetCureRumble
+	rtl
+@NotCure:
+
+	cpx #$59				;asura cure2
+	beq @Cure2
+	cpx #$0e
+	bne @NotCure2			;cure 2
+@Cure2:
+	jsl	SetCure2Rumble
+	rtl
+@NotCure2:
+
+	cpx #$5a				;asura cure 3
+	beq @Cure3
+	cpx #$0f
+	bne @NotCure3			;cure 3
+@Cure3:
+	jsl	SetCure3Rumble
+	rtl
+@NotCure3:
+
 	cpx #$79
 	beq	@Beam		;Maser
 	cpx #$93
 	beq	@Beam		;Beam
+	cpx #$94
+	beq	@Beam		;Globe199
 	cpx #$9e
 	beq	@Beam		;Laser
 	cpx #$a2		;heat ray
@@ -119,10 +148,12 @@ CheckForRumble:
 	rtl
 @NotHeal:
 
+	cpx #$5b
+	beq	@Life		;asura's life
 	cpx #$12
-	beq @Life
+	beq @Life		;life
 	cpx #$13
-	bne @NotLife
+	bne @NotLife	;life 2
 
 @Life:
 	jsl	SetLifeRumble	;life/life2
@@ -225,6 +256,24 @@ CheckForRumble:
 	rtl
 @NotFire:	
 	
+	cpx #$34		;fire bomb (item)
+	bne @NotFireBomb
+@FireBomb:
+	jsl	SetFireBombRumble
+	rtl
+@NotFireBomb:
+
+	cpx #$36		;lit-bolt (item
+	bne @NotLitBolt
+@LitBolt:
+	jsl	SetLitBoltRumble
+	rtl
+@NotLitBolt:
+
+	cpx #$95		;"fire"
+	beq @Fire2
+	cpx #$96		;"blaze"
+	beq @Fire2
 	cpx #$1d
 	bne @NotFire2
 @Fire2:
@@ -286,16 +335,88 @@ CheckForRumble:
 
 @NotVenom:
 
+	cpx #$7E		;disrupt
+	beq @Disrupt
+	cpx #$7B		;demolish
+	bne	@NotDisrupt
+@Disrupt:	
+	jsl	SetDisruptRumble
+	rtl
+@NotDisrupt:
+
+
+
+@end:
 	rtl
 
 
 .segment "xcd_bank_21"
 
 
+
+CureRumble:
+	.byte   $11, $11, $11, $33, $33, $55, $55, $77, $77, $77, $00, $00, $00, $77, $77, $77
+	.byte	$77, $77, $77, $00, $00, $00, $77, $77, $77, $00, $00, $00, $77, $77, $77, $00, $00, $00, $77, $77, $77, $FE
+
+CureRumblePointer:
+	.byte	<CureRumble, >CureRumble
+
+SetCureRumble:
+	SetRumbleTable	CureRumblePointer
+	rtl
+
+
+Cure2Rumble:
+	.byte   $33, $33, $33, $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $99, $99, $99
+	.byte	$99, $99, $99, $00, $00, $00, $99, $99, $99, $00, $00, $00, $99, $99, $99, $00, $00, $00, $99, $99, $99, $FE
+
+Cure2RumblePointer:
+	.byte	<Cure2Rumble, >Cure2Rumble
+
+SetCure2Rumble:
+	SetRumbleTable	Cure2RumblePointer
+	rtl
+
+
+
+Cure3Rumble:
+	.byte   $55, $55, $55, $77, $77, $99, $99, $BB, $BB, $BB, $00, $00, $00, $99, $99, $99
+	.byte	$BB, $BB, $BB, $00, $00, $00, $BB, $BB, $BB, $00, $00, $00, $BB, $BB, $BB, $00, $00, $00, $BB, $BB, $BB, $FE
+
+Cure3RumblePointer:
+	.byte	<Cure3Rumble, >Cure3Rumble
+
+SetCure3Rumble:
+	SetRumbleTable	Cure3RumblePointer
+	rtl
+
+
+
+
+
+
+
+
+
+DisruptRumble:
+	.byte	$11, $11, $11, $11, $33, $33, $33, $33, $55, $55, $55, $55, $88, $88, $88, $88
+	.byte   $AA, $AA, $AA, $AA, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD
+	.byte   $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $AA, $AA, $AA, $AA
+	.byte	$88, $88, $88, $88, $55, $55, $55, $55, $33, $33, $33, $33, $11, $11, $11, $11
+	.byte	$11, $11, $11, $11, $33, $33, $33, $33, $55, $55, $55, $55, $88, $88, $88, $88
+	.byte   $AA, $AA, $AA, $AA, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD
 BeamRumble:
+	;fall through
 	.byte   $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $DD, $AA, $AA, $AA, $AA
 	.byte	$88, $88, $88, $88, $55, $55, $55, $55, $33, $33, $33, $33, $11, $11, $11, $11, $FE
 
+DisruptRumblePointer:
+	.byte	<DisruptRumble, >DisruptRumble
+
+SetDisruptRumble:
+	SetRumbleTable	DisruptRumblePointer
+	rtl
+	
 BeamRumblePointer:
 	.byte	<BeamRumble, >BeamRumble
 
@@ -454,6 +575,7 @@ FireRumble:
 Fire2Rumble:
 	.byte   $05, $05, $07, $07, $09, $09, $09, $0A, $0A, $0A, $0D, $0D, $0D
 	.byte   $5D, $5D, $7A, $7A, $99, $99, $99, $A7, $A7, $A7, $D5, $D5, $D5	
+FireBombRumble:
 	.byte	$D0, $D0, $A0, $A0, $90, $90, $90, $70, $70, $70, $50, $50, $50
 	.byte   $05, $05, $07, $07, $09, $09, $09, $0A, $0A, $0A, $0D, $0D, $0D
 	.byte   $5D, $5D, $7A, $7A, $99, $99, $99, $A7, $A7, $A7, $D5, $D5, $D5
@@ -475,6 +597,13 @@ SetCure4Rumble:
 	SetRumbleTable	Cure4RumblePointer
 	rtl
 
+FireBombRumblePointer:
+	.byte	<FireBombRumble, >FireBombRumble
+
+SetFireBombRumble:
+	SetRumbleTable	FireBombRumblePointer
+	rtl
+	
 FireRumblePointer:
 	.byte	<FireRumble, >FireRumble
 
@@ -510,9 +639,19 @@ SetCharmRumble:
 	rtl
 
 	
+LitBoltRumble:
+	.byte	$00, $00, $00, $88, $88, $88, $99, $99, $99, $AA, $AA, $AA, $BB, $BB, $BB, $BB, $00, $00, $00, $00, $00, $88, $88, $88, $99, $99, $99, $AA, $AA, $AA, $BB, $BB, $BB, $BB
 ThundagaRumble:
+	;fall through
 	.byte	$00, $00, $00, $88, $88, $88, $99, $99, $99, $AA, $AA, $AA, $BB, $BB, $BB, $BB, $00, $00, $00, $00, $00, $88, $88, $88, $99, $99, $99, $AA, $AA, $AA, $BB, $BB, $BB, $BB, $FE
 	
+	
+LitBoltRumblePointer:
+	.byte	<LitBoltRumble, >LitBoltRumble
+
+SetLitBoltRumble:
+	SetRumbleTable	LitBoltRumblePointer
+	rtl	
 	
 ThundagaRumblePointer:
 	.byte	<ThundagaRumble, >ThundagaRumble
@@ -1331,6 +1470,7 @@ MagicAnim_26:
 ; [ magic animation $28: fission ]
 
 MagicAnim_28:
+		jsl		SetNukeRumble
 @ecac:  ldx     $34c4
         phx
         lda     $34c2

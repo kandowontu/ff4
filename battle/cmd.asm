@@ -40,7 +40,7 @@ KickRumblePointer:
 SetKickRumble:
 	SetRumbleTable	KickRumblePointer
 	rtl
-	
+
 	
 .segment "battle_code"
 
