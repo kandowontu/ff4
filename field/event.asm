@@ -217,6 +217,17 @@ _00e2a2:
 WaitVblankEvent:
 @e35b:  jsr     WaitVblankLong
         rts
+		
+WaitVblankEvent2:
+@e35b:  jsr     WaitVblankLong
+		SetRumble  $22, $FF
+        rts		
+		
+WaitVblankEvent3:
+@e35b:  jsr     WaitVblankLong
+		lda #0
+		sta RumbleTimerLong
+        rts
 
 ; ------------------------------------------------------------------------------
 
@@ -1670,10 +1681,15 @@ _00edf6:
 ; [ event command $d0: shake screen ]
 
 EventCmd_d0:
-		SetRumble $FF, 10
 @ee1c:  lda     $e3
         eor     #$01
         sta     $e3
+		beq    @RumbleOff
+		SetRumble $22, $FF
+        jmp     WaitVblankEvent
+@RumbleOff:
+		lda #0
+		sta RumbleTimerLong
         jmp     WaitVblankEvent
 
 ; ------------------------------------------------------------------------------
