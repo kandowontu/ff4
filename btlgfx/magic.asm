@@ -28,6 +28,20 @@ SetOdinRumble:
 
 CheckForRumble:
 
+	cpx #$01
+	bne @NotMute
+@Mute:
+	jsl	SetMuteRumble
+	rtl
+@NotMute:
+
+	cpx #$15
+	bne @NotExit
+@Exit:
+	jsl	SetExitRumble
+	rtl
+@NotExit:
+
 	cpx #$a6		;needle
 	beq @Needle
 	cpx #$a7		;counter
@@ -56,6 +70,8 @@ CheckForRumble:
 	cpx #$04	;armor (protect)
 	beq	@Image
 	cpx #$05	;shell
+	beq @Image
+	cpx #$08	;berserk
 	beq @Image
 	cpx #$46
 	bne @NotImage	;image (edge)
@@ -477,9 +493,38 @@ SetCure3Rumble:
 
 
 
+ExitRumble:
+	.byte	$11, $11, $11, $11, $33, $33, $33, $33, $55, $55, $55, $55, $88, $88, $88, $88
+	.byte   $AA, $AA, $AA, $AA
+	.byte	$88, $88, $88, $88, $55, $55, $55, $55, $33, $33, $33, $33, $11, $11, $11, $11
+	.byte 	$00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+	.byte	$11, $11, $11, $11, $33, $33, $33, $33, $55, $55, $55, $55, $88, $88, $88, $88
+	.byte   $AA, $AA, $AA, $AA
+	.byte	$88, $88, $88, $88, $55, $55, $55, $55, $33, $33, $33, $33, $11, $11, $11, $11
+	.byte 	$00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+	.byte	$11, $11, $11, $11, $33, $33, $33, $33, $55, $55, $55, $55, $88, $88, $88, $88
+	.byte   $AA, $AA, $AA, $AA
+	.byte	$88, $88, $88, $88, $55, $55, $55, $55, $33, $33, $33, $33, $11, $11, $11, $11
+	.byte 	$00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+	.byte	$11, $11, $11, $11, $33, $33, $33, $33, $55, $55, $55, $55, $88, $88, $88, $88
+	.byte   $AA, $AA, $AA, $AA
+	.byte	$88, $88, $88, $88, $55, $55, $55, $55, $33, $33, $33, $33, $11, $11, $11, $11
+	.byte 	$00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+	.byte	$11, $11, $11, $11, $33, $33, $33, $33, $55, $55, $55, $55, $88, $88, $88, $88
+	.byte   $AA, $AA, $AA, $AA
+	.byte	$88, $88, $88, $88, $55, $55, $55, $55, $33, $33, $33, $33, $11, $11, $11, $11
+	.byte 	$00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+	.byte	$11, $11, $11, $11, $33, $33, $33, $33, $55, $55, $55, $55, $88, $88, $88, $88
+	.byte   $AA, $AA, $AA, $AA
+	.byte	$88, $88, $88, $88, $55, $55, $55, $55, $33, $33, $33, $33, $11, $11, $11, $11, $FE
 
 
+ExitRumblePointer:
+	.byte	<ExitRumble, >ExitRumble
 
+SetExitRumble:
+	SetRumbleTable	ExitRumblePointer
+	rtl
 
 
 DisruptRumble:
@@ -1086,6 +1131,23 @@ SetFire3Rumble:
 	SetRumbleTable	Fire3RumblePointer
 	rtl
 	
+MuteRumble:
+	.byte   $55, $55, $77, $77, $00, $00, $00
+	.byte   $55, $55, $77, $77, $00, $00, $00
+	.byte   $55, $55, $77, $77, $00, $00, $00
+	.byte   $55, $55, $77, $77, $00, $00, $00
+	.byte	$00, $00, $00, $00, $00
+	.byte   $77, $77, $77, $55, $55, $55, $33, $33, $33, $11, $11, $11
+	.byte	$00, $00, $00, $00, $00
+	.byte   $77, $77, $77, $55, $55, $55, $33, $33, $33, $11, $11, $11, $FE
+
+MuteRumblePointer:
+	.byte	<MuteRumble, >MuteRumble
+
+SetMuteRumble:
+	SetRumbleTable	MuteRumblePointer
+	rtl
+
 SmokeRumble:
 	.byte	$00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
 	.byte   $55, $55, $77, $77, $99, $99, $99, $00, $00, $00, $00 
