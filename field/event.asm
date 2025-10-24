@@ -689,6 +689,8 @@ EventCmd_ec:
 
 ; golbez and fusoya
 @e6ed:  ldx     #0
+		lda 	#0
+		sta		RumbleTimerLong
 @e6f0:  lda     $10c0,x     ; copy characters 4 and 5 to buffer
         sta     $1200,x
         inx

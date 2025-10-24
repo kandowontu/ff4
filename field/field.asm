@@ -190,7 +190,7 @@ SoftReset:
         jsl     InitSpellLists
         jsl     InitHWRegs
         jsr     UpdatePlayerSpeed
-        jsr     InitZoomHDMA
+        jsl     InitZoomHDMA
         lda     #1                      ; enable event
         sta     $b1
         lda     #1                      ; waiting for vblank
@@ -208,7 +208,7 @@ SoftReset:
         jmp     MainLoop
 
 ; restore saved game
-@808b:  jsr     InitZoomHDMA
+@808b:  jsl     InitZoomHDMA
 
 AfterBattle:
 @808e:  jsl     InitHWRegs
@@ -2637,6 +2637,22 @@ LoadPlayerGfxSub:
 .include "special.asm"
 .include "event.asm"
 
+
+
+; ------------------------------------------------------------------------------
+
+
+
+; ------------------------------------------------------------------------------
+
+.include "tilemap.asm"
+
+; ------------------------------------------------------------------------------
+
+
+
+.segment "xcd_bank_20"
+
 ; ------------------------------------------------------------------------------
 
 ; [ init mode 7 hdma zoom data ]
@@ -2748,21 +2764,8 @@ InitZoomHDMA:
         ldy     $3d
         cpy     #$00f0
         bne     @f4f0
-        rts
+        rtl
 
-; ------------------------------------------------------------------------------
-
-
-
-; ------------------------------------------------------------------------------
-
-.include "tilemap.asm"
-
-; ------------------------------------------------------------------------------
-
-
-
-.segment "xcd_bank_20"
 ; ------------------------------------------------------------------------------
 
 ; [ init new game ]
